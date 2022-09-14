@@ -3,7 +3,7 @@ import Clock from "../ui/clock";
 import { useState } from "react";
 import ShiftPayment from "../ui/shiftPayment";
 function NewShift() {
-  let [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
   const time = new Date().toISOString().slice(0, 10);
   return (
