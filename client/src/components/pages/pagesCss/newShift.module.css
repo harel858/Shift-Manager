@@ -1,0 +1,18 @@
+.clockSection {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.clockSection header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between 2rem;
+  flex-direction: column;
+  font-family: tahoma;
+  font-size: 2em;
+  font-weight: 200;
+  margin-bottom: 1em;
+}
+.clockSection header h1 {
+  margin-bottom: 0.8em;
+}

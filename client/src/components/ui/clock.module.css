@@ -1,0 +1,80 @@
+.circle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  height: 16rem;
+  width: 16rem;
+
+  border: 3px solid black;
+  border-radius: 50%;
+  background-color: #1db954;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+}
+.circlePlay {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  height: 18rem;
+  width: 18rem;
+
+  border: 3px solid black;
+  border-radius: 50%;
+  background-color: #b91d1d;
+  color: white;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+}
+.circleContinue {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  height: 16rem;
+  width: 16rem;
+
+  border: 3px solid black;
+  border-radius: 50%;
+  background: linear-gradient(120deg, #ff8c00, #d5ff18);
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+}
+.circlePlay:hover .pause {
+  transition: all 400ms ease-in-out;
+  transform: scale(1.5);
+}
+.play {
+  font-size: 3em;
+  position: absolute;
+}
+.pause {
+  font-size: 3em;
+  position: absolute;
+}
+.circleContinue:hover .play {
+  transition: all 400ms ease-in-out;
+  transform: scale(1.5);
+}
+.circle:hover .play {
+  transition: all 400ms ease-in-out;
+  transform: scale(1.5);
+}
+
+.stopWatch {
+  margin: 3em;
+  font-size: 2em;
+  font-weight: 500;
+  font-family: tahoma;
+}
+
+.clockHeader {
+  padding-top: 3em;
+}
