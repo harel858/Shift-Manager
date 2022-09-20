@@ -7,6 +7,9 @@
   border-radius: 2em;
   border: 1px solid black;
 }
+.containerSave {
+  border-radius: 2em;
+}
 
 .save {
   margin-top: 1rem;

@@ -4,20 +4,28 @@ const userModel = require("../../mongoose/userModel.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-//registar Handler
+//register Handler
 
-async function registarHandler(req, res) {
-  const { name, email, phone, password } = req.body;
-  const user = await userModel.find({ email: email });
+async function registerHandler(req, res) {
+  const { name, email, phone } = req.body;
+  const { password } = req;
+
+  const user = await operations.getUserByEmail(email);
+  console.log(user);
+  console.log([name, email, phone, password]);
 
   if (user) {
     return res
       .status(400)
-      .send(`It seems that user with this email is already registered`);
+      .json(`It seems that user with this email is already registered`);
   }
   const { error } = validateUser({ name, email, phone, password });
 
-  if (error) return res.status(400).send({ error: error.details[0].message });
+  if (error) {
+    const err = error.details[0].message;
+    console.log({ err });
+    return res.status(400).json(err);
+  }
   if (!name || !email || !phone || !password) {
     return res.status(400).send(`there are some missing values`);
   }
@@ -33,20 +41,20 @@ async function registarHandler(req, res) {
     return res.status(201).json(newUser);
   } catch (err) {
     console.log(err);
-    return res.status(500).json("somthing went wrong");
+    return res.status(500).json("something went wrong");
   }
 }
 
 //get all user Handler
 
-async function getAllUsers(req, res) {
+async function getUserDetails(req, res) {
+  const { userId } = req;
   try {
-    const users = await operations.getUsers();
-    console.log(users);
-    return res.json(users);
+    const user = await operations.getUserById(userId);
+    return res.json(user);
   } catch (err) {
     console.log(err);
-    return res.status(500).send("something went wrong");
+    return res.status(500).json("something went wrong");
   }
 }
 
@@ -110,27 +118,31 @@ async function deleteUserHandler(req, res) {
 async function signIn(req, res) {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(400).send(`email and password are required`);
+    return res.status(400).json({ err: `email and password are required` });
   }
   const user = await operations.getUserByEmail(email);
+  console.log(user);
   if (!user) {
     return res
       .status(400)
-      .send(`we couldn't find an account matching the login info`);
+      .json(`we couldn't find an account matching the login info`);
   }
   let pass = await bcrypt.compare(password, user.password);
 
   if (!pass) {
-    return res.status(400).send(`incorrect email or password`);
+    return res.status(400).json(`incorrect email or password`);
   }
 
   const token = jwt.sign({ userId: user._id }, "Harelha123");
-  return res.json(token);
+
+  req.session = { token };
+
+  res.status(200).json(user);
 }
 
 module.exports = {
-  registarHandler,
-  getAllUsers,
+  registerHandler,
+  getUserDetails,
   updateUserHandler,
   deleteUserHandler,
   signIn,

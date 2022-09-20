@@ -6,13 +6,28 @@
 .clockSection header {
   display: flex;
   align-items: center;
-  justify-content: space-between 2rem;
+  justify-content: space-between;
   flex-direction: column;
   font-family: tahoma;
   font-size: 2em;
   font-weight: 200;
-  margin-bottom: 1em;
+  margin: 0;
 }
 .clockSection header h1 {
-  margin-bottom: 0.8em;
+  margin-bottom: 0.5em;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container h3 {
+  margin: 1.5em 0 0 0;
+}
+
+.navLink {
+  font-size: 1.5em;
+  font-weight: 200;
 }

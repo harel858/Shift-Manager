@@ -4,8 +4,8 @@ const hashPassword = require("../../middleware/hashPassword.js");
 const userHandlers = require("../handlers/userHandlers.js");
 const authenticateUser = require("../../middleware/auth.js");
 
-router.route("/").get(userHandlers.getAllUsers);
-router.post("/registar", hashPassword, userHandlers.registarHandler);
+router.get("/", authenticateUser, userHandlers.getUserDetails);
+router.post("/register", hashPassword, userHandlers.registerHandler);
 router.put("/update", authenticateUser, userHandlers.updateUserHandler);
 router.delete("/delete", authenticateUser, userHandlers.deleteUserHandler);
 router.route("/login").post(userHandlers.signIn);

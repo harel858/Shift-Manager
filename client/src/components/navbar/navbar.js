@@ -40,9 +40,11 @@ function NavBar() {
                   title="Dropdown"
                   id={`offcanvasNavbarDropdown-expand-lg`}
                 >
-                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">
-                    Another action
+                  <NavDropdown.Item as={Link} to="/">
+                    signUp
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/login">
+                    log in
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action5">

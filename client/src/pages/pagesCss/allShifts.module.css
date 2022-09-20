@@ -1,0 +1,58 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 1em;
+}
+.header h1 {
+  font-weight: 200;
+  font-family: tahoma;
+  font-size: 3em;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container h3 {
+  margin: 1.5em 0 0 0;
+}
+
+.navLink {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+/* .ul {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: baseline;
+  margin: 1em;
+  border: 1px solid black;
+  width: 70rem;
+  height: 3rem;
+  background-color: #72b74aba;
+  border-radius: 3em;
+}
+.ul li {
+  font-size: 1.3em;
+  font-weight: 450;
+}
+.liStart {
+  margin-right: 15em;
+}
+.liEnd {
+  margin-right: 10em;
+}
+.liTime {
+  margin-right: 4em;
+}
+.liProfit {
+  padding-left: 3em;
+}
+ */

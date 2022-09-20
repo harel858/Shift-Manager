@@ -7,7 +7,7 @@ async function getUserShifts(req, res) {
   console.log(userShifts);
 
   if (!userShifts) {
-    return res.status(500).send(`Somthing went wrong`);
+    return res.status(500).send(`Something went wrong`);
   }
 
   if (userShifts.length <= 0) {
@@ -20,15 +20,17 @@ async function getUserShifts(req, res) {
 //create shifts
 async function createShift(req, res) {
   const { userId } = req;
-  const { start, end, date } = req.body;
+  const { start, end, date, timeSpending, totalProfit } = req.body;
   const newShift = await shiftsOperations.createShift({
     start: start,
     end: end,
     date: date,
     userId: userId,
+    timeSpending: timeSpending,
+    totalProfit: totalProfit,
   });
   if (!newShift) {
-    return res.status(500).send(`something went wrong`);
+    return res.status(500).json(`something went wrong`);
   }
   res.status(201).json(newShift);
 }
@@ -55,16 +57,16 @@ async function updateShift(req, res) {
 //delete shifts
 async function deleteShift(req, res) {
   const { userId } = req;
-  const { id } = req.query;
+  const { id } = req.body;
   if (!id) {
-    return res.status(400).send(`shift id is required`);
+    return res.status(400).json(`shift id is required`);
   }
   const shift = await shiftsOperations.getShiftById(id, userId);
   if (!shift || shift.length <= 0) {
-    return res.status(500).send(`shift has not found`);
+    return res.status(500).json(`shift has not found`);
   }
   const deletedShift = await shiftsOperations.deleteShift(id);
-  return res.status(201).send(`${deletedShift.date} shift has been deleted `);
+  return res.status(201).json(`${deletedShift.date} shift has been deleted `);
 }
 
 module.exports = { getUserShifts, createShift, updateShift, deleteShift };

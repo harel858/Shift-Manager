@@ -1,9 +1,11 @@
 const jwt = require("jsonwebtoken");
 
 async function authenticateUser(req, res, next) {
-  const { token } = req.headers;
+  const { token } = req.session;
+  console.log(token);
+
   if (!token) {
-    return res.status(400).send(`you must log in to continue`);
+    return res.status(400).json(`you must log in to continue`);
   }
   try {
     const data = jwt.verify(token, "Harelha123");

@@ -1,6 +1,6 @@
 import classes from "./clock.module.css";
 import { useEffect } from "react";
-function Timer({ play, setSeconds, seconds }) {
+function Timer({ shiftDetails, play, setSeconds, seconds }) {
   //global variables
 
   let hrs = 0;
@@ -20,17 +20,23 @@ function Timer({ play, setSeconds, seconds }) {
       interval = null;
     }
     return () => clearInterval(interval);
-  }, [play]);
+  }, [play, seconds]);
+
   hrs = Math.floor(seconds / 3600);
   mins = Math.floor((seconds - hrs * 3600) / 60);
   secs = seconds % 60;
 
+  hrs = (`0` + hrs).slice(-2);
+  mins = (`0` + mins).slice(-2);
+  secs = (`0` + secs).slice(-2);
+  if (seconds > 0) shiftDetails.current.timeSpending = `${hrs}:${mins}:${secs}`;
+
   return (
     <>
       <h6 id="time" className={classes.stopWatch}>
-        <span>{(`0` + hrs).slice(-2)}:</span>
-        <span>{(`0` + mins).slice(-2)}:</span>
-        <span>{(`0` + secs).slice(-2)}</span>
+        <span>{hrs}:</span>
+        <span>{mins}:</span>
+        <span>{secs}</span>
       </h6>
     </>
   );
