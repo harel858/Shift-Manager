@@ -1,6 +1,12 @@
 import classes from "./formLayout.module.css";
+import NavBar from "../navbar/navbar";
 const body = document.querySelector(`body`);
 body.className = classes.body;
 export default function FormLayOut(props) {
-  return <>{props.children}</>;
+  return (
+    <>
+      <NavBar />
+      {props.children}
+    </>
+  );
 }

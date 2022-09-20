@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./pagesCss/login.module.css";
+import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [userEmail, setUserEmail] = useState("");
@@ -38,27 +40,37 @@ export default function Register() {
     <div className={classes.main}>
       <form className={classes.form}>
         <h1>login user</h1>
-        <label htmlFor="mail">Enter mail: </label>
-        <input
-          value={userEmail}
-          type="text"
-          onChange={(e) => {
-            setUserEmail(e.target.value);
-          }}
-        ></input>
-        <label htmlFor="password">Enter password: </label>
-        <input
-          value={userPassword}
-          type="password"
-          onChange={(e) => {
-            setUserPassword(e.target.value);
-          }}
-        ></input>
-        <button type="button" onClick={loginHandler}>
+        <div className={classes.inputContainer}>
+          <label htmlFor="mail">Enter mail: </label>
+          <input
+            value={userEmail}
+            type="text"
+            onChange={(e) => {
+              setUserEmail(e.target.value);
+            }}
+          ></input>
+        </div>
+        <div className={classes.inputContainer}>
+          <label htmlFor="password">Enter password: </label>
+          <input
+            value={userPassword}
+            type="password"
+            onChange={(e) => {
+              setUserPassword(e.target.value);
+            }}
+          ></input>
+        </div>
+        <button type="button" className={classes.btn} onClick={loginHandler}>
           Click Here
         </button>
-        <p className={classes.error}>{error}</p>
       </form>
+      <p className={classes.error}>{error}</p>
+      <div className={classes.register}>
+        <h5>Don't have an account yet?</h5>
+        <Nav className={classes.navLink} as={Link} to="/">
+          Click here to register
+        </Nav>
+      </div>
     </div>
   );
 }

@@ -6,8 +6,8 @@
   width: 40rem;
   border: 1px solid black;
   height: 37rem;
-  margin: 4rem auto;
-  padding: 10em;
+  margin: 0 auto;
+  padding: 5em;
   box-shadow: 0 10px 100px #8888889e;
   transition: all 200ms ease-in-out;
 }
@@ -19,15 +19,25 @@ form {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
-.main:hover form h1::after {
+form h1::after {
   content: "";
   display: block;
+  position: absolute;
   background: linear-gradient(120deg, #1d61b9, #1dacb9);
-  height: 4px;
+  height: 0.1em;
   width: 6em;
-  transition: all 200ms ease-in-out;
+  margin-top: 5px;
+  transform: scale(0);
+  transform-origin: left;
+  transition: transform 200ms ease-in-out;
+}
+label {
+  font-size: 1.1em;
+}
+.main:hover form h1::after {
+  transform: scale(1);
 }
 .inputContainer {
   margin: 0.2em;
@@ -56,4 +66,7 @@ input {
   color: red;
   margin: 0;
   padding: 0;
+}
+.login {
+  margin: 1em;
 }

@@ -43,7 +43,14 @@ function App() {
             </Layout>
           }
         />
-        <Route path="/schedule" element={<Schedule />} />
+        <Route
+          path="/schedule"
+          element={
+            <Layout>
+              <Schedule />
+            </Layout>
+          }
+        />
       </Routes>
     </>
   );

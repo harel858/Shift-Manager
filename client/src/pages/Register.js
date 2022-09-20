@@ -45,7 +45,9 @@ export default function Register({ setUser }) {
     <>
       <div className={classes.main}>
         <form>
-          <h1>register user</h1>
+          <div>
+            <h1>register user</h1>
+          </div>
           <div className={classes.inputContainer}>
             <label>Enter Name: </label>
             <input

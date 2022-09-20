@@ -1,4 +1,5 @@
 import classes from "../navbar/navbar.module.css";
+import "./nav.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -9,7 +10,7 @@ import { FiClock } from "react-icons/fi";
 function NavBar() {
   return (
     <>
-      <Navbar bg="light" expand="lg" className="mb-3">
+      <Navbar expand="lg" className="mb-3">
         <Container fluid>
           <Navbar.Brand as={Link} to="/newShift" className={classes.brand}>
             Shift Manager <FiClock />
@@ -22,11 +23,11 @@ function NavBar() {
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
-                Offcanvas
+                Shift Manager
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className="justify-content-end flex-grow-1 pe-3">
+              <Nav className="justify-content-end nav flex-grow-1 pe-3">
                 <Nav.Link as={Link} to="/newShift">
                   New Shift
                 </Nav.Link>
@@ -37,7 +38,7 @@ function NavBar() {
                   My Schedule
                 </Nav.Link>
                 <NavDropdown
-                  title="Dropdown"
+                  title="More"
                   id={`offcanvasNavbarDropdown-expand-lg`}
                 >
                   <NavDropdown.Item as={Link} to="/">
@@ -48,7 +49,7 @@ function NavBar() {
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action5">
-                    Something else here
+                    Definitions
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
