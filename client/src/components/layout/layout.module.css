@@ -1,7 +1,8 @@
-.main {
+.mainShifts {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  margin: 3rem auto;
+  margin: 0 auto;
+  transition: all 500ms ease-in-out;
 }

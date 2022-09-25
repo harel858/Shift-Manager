@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import classes from "./pagesCss/login.module.css";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
+import { TextField } from "@mui/material";
 
 export default function Register() {
   const [userEmail, setUserEmail] = useState("");
@@ -27,39 +28,40 @@ export default function Register() {
         navigate("/newShift", { replace: true });
       } else {
         const res = await response.json();
-        throw res;
+        setError(res);
       }
     } catch ({ err }) {
       console.error(err);
       //handle error
-      setError(err);
     }
   }
 
   return (
     <div className={classes.main}>
-      <form className={classes.form}>
+      <form className={classes.loginForm}>
         <h1>login user</h1>
-        <div className={classes.inputContainer}>
-          <label htmlFor="mail">Enter mail: </label>
-          <input
-            value={userEmail}
-            type="text"
-            onChange={(e) => {
-              setUserEmail(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div className={classes.inputContainer}>
-          <label htmlFor="password">Enter password: </label>
-          <input
-            value={userPassword}
-            type="password"
-            onChange={(e) => {
-              setUserPassword(e.target.value);
-            }}
-          ></input>
-        </div>
+        <TextField
+          className={classes.inputContainer}
+          id="email"
+          label="Enter Email"
+          variant="filled"
+          required
+          onChange={(e) => {
+            setUserEmail(e.target.value);
+          }}
+        />
+        <TextField
+          className={classes.inputContainer}
+          id="password"
+          label="Enter Password"
+          type="password"
+          required
+          variant="filled"
+          onChange={(e) => {
+            setUserPassword(e.target.value);
+          }}
+        />
+
         <button type="button" className={classes.btn} onClick={loginHandler}>
           Click Here
         </button>

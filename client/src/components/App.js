@@ -12,7 +12,7 @@ function App() {
     <>
       <Routes>
         <Route
-          path="/"
+          path="/register"
           element={
             <FormLayOut>
               <Register />
@@ -20,7 +20,7 @@ function App() {
           }
         />
         <Route
-          path="/login"
+          path="/"
           element={
             <FormLayOut>
               <Login />

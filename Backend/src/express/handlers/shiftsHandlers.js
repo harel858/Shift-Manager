@@ -20,7 +20,7 @@ async function getUserShifts(req, res) {
 //create shifts
 async function createShift(req, res) {
   const { userId } = req;
-  const { start, end, date, timeSpending, totalProfit } = req.body;
+  const { start, end, date, timeSpending, totalProfit, seconds } = req.body;
   const newShift = await shiftsOperations.createShift({
     start: start,
     end: end,
@@ -28,6 +28,7 @@ async function createShift(req, res) {
     userId: userId,
     timeSpending: timeSpending,
     totalProfit: totalProfit,
+    seconds: seconds,
   });
   if (!newShift) {
     return res.status(500).json(`something went wrong`);

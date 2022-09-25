@@ -12,16 +12,18 @@
   transition: all 200ms ease-in-out;
 }
 
-form h1 {
+h1 {
   font-size: 3em;
+  margin: 0;
 }
-form {
+.form {
+  margin: 2em;
   display: flex;
-  flex-wrap: wrap;
-  align-content: center;
+  flex-grow: 4;
+  flex-direction: column;
   justify-content: space-between;
 }
-form h1::after {
+h1::after {
   content: "";
   display: block;
   position: absolute;
@@ -33,24 +35,18 @@ form h1::after {
   transform-origin: left;
   transition: transform 200ms ease-in-out;
 }
-label {
-  font-size: 1.1em;
-}
-.main:hover form h1::after {
-  transform: scale(1);
-}
 .inputContainer {
-  margin: 0.2em;
+  margin-bottom: 5em;
   width: 20rem;
 }
-input {
-  padding: 0.4em;
-  width: 13rem;
-  border: 1px solid black;
+
+.main:hover h1::after {
+  transform: scale(1);
 }
+
 .btn {
   width: 10rem;
-  margin-top: 1em;
+  margin: 0;
   padding: 0.3em;
   color: white;
   border: 3px solid black;

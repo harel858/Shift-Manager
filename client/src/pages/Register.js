@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import classes from "./pagesCss/register.module.css";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
+import { TextField } from "@mui/material";
 
-export default function Register({ setUser }) {
+export default function Register() {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
@@ -29,84 +30,83 @@ export default function Register({ setUser }) {
           password: userPassword,
         }),
       });
-      const user = await res.json();
       if (res.ok) {
-        setUser(user);
         history("/login", { replace: true });
       } else {
-        throw user;
+        const response = await res.json();
+        setError(response);
       }
     } catch (err) {
-      setError({ err });
+      console.error(err);
     }
   }
 
   return (
     <>
       <div className={classes.main}>
-        <form>
-          <div>
-            <h1>register user</h1>
-          </div>
-          <div className={classes.inputContainer}>
-            <label>Enter Name: </label>
-            <input
-              placeholder="Enter Name"
-              type="text"
-              onChange={(e) => {
-                setUserName(e.target.value);
-              }}
-            ></input>
-          </div>
-          <div className={classes.inputContainer}>
-            <label>Enter Email: </label>
-            <input
-              placeholder="Enter Email"
-              type="text"
-              onChange={(e) => {
-                setUserEmail(e.target.value);
-              }}
-            ></input>
-          </div>
-          <div className={classes.inputContainer}>
-            <label>Enter phone: </label>
-            <input
-              placeholder="Enter Phone"
-              type="text"
-              onChange={(e) => {
-                setUserPhone(e.target.value);
-              }}
-            ></input>
-          </div>
-          <div className={classes.inputContainer}>
-            <label>Enter password: </label>
-            <input
-              placeholder="Enter Password"
-              type="password"
-              onChange={(e) => {
-                setUserPassword(e.target.value);
-              }}
-            ></input>
-          </div>
-          <div className={classes.inputContainer}>
-            <label>Repeat Password: </label>
-            <input
-              placeholder="Repeat Password"
-              type="password"
-              onChange={(e) => {
-                setRepeatPassword(e.target.value);
-              }}
-            ></input>
-          </div>
-          <button
-            type="button"
-            className={classes.btn}
-            onClick={registerHandler}
-          >
-            Click Here
-          </button>
+        <h1>Register user</h1>
+        <form className={classes.form}>
+          <TextField
+            id="name"
+            label="Enter Name"
+            required
+            variant="filled"
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+            className={classes.inputContainer}
+          />
+
+          <TextField
+            className={classes.inputContainer}
+            id="email"
+            label="Enter Email"
+            variant="filled"
+            required
+            onChange={(e) => {
+              setUserEmail(e.target.value);
+            }}
+          />
+
+          <TextField
+            className={classes.inputContainer}
+            id="phone"
+            label="Enter Phone"
+            variant="filled"
+            required
+            onChange={(e) => {
+              setUserPhone(e.target.value);
+            }}
+          />
+
+          <TextField
+            className={classes.inputContainer}
+            id="password"
+            label="Enter Password"
+            type="password"
+            required
+            variant="filled"
+            onChange={(e) => {
+              setUserPassword(e.target.value);
+            }}
+          />
+
+          <TextField
+            className={classes.inputContainer}
+            id="Repeat-password"
+            type="password"
+            label="Repeat password"
+            variant="filled"
+            required
+            onChange={(e) => {
+              setRepeatPassword(e.target.value);
+            }}
+          />
         </form>
-        <p className={classes.error}>{error.err ? error.err : error}</p>
+        <button type="button" className={classes.btn} onClick={registerHandler}>
+          Click Here
+        </button>
+        <p className={classes.error}> {error}</p>
         <div className={classes.login}>
           <h5>Already have an account?</h5>
           <Nav className={classes.navLink} as={Link} to="/login">

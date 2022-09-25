@@ -1,0 +1,9 @@
+.listContainer {
+  display: block;
+  height: 25rem;
+  overflow: hidden;
+  overflow-y: scroll;
+  margin: 0;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}

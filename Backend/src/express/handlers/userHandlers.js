@@ -125,7 +125,7 @@ async function signIn(req, res) {
   if (!user) {
     return res
       .status(400)
-      .json(`we couldn't find an account matching the login info`);
+      .json(`we couldn't find an account matching this Email`);
   }
   let pass = await bcrypt.compare(password, user.password);
 

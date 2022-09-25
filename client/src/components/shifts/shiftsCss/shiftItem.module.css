@@ -1,22 +1,36 @@
-ul {
-  list-style-type: none;
+ul .data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: auto;
+  min-width: 90%;
+  font-size: 1.6em;
+  font-weight: 600;
+  font-family: sans-serif;
 }
-ul li {
-  font-size: 1.3em;
-  font-weight: 500;
+
+li p {
+  color: white;
+  margin: 0;
+  padding: 0;
+  width: fit-content;
 }
-span {
-  font-size: 1.1em;
-  font-weight: 350;
-}
-.btns {
-  margin-top: 0.5em;
-  cursor: pointer;
-}
-.btns:hover .trash {
-  transition: all 250ms ease-in-out;
-  transform: scale(1.3);
-}
-.trash {
-  font-size: 1.5em;
+
+@media screen and (max-width: 600px) {
+  ul .data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: auto;
+    min-width: 90%;
+    font-size: 1.4em;
+    font-weight: 300;
+    font-family: sans-serif;
+  }
+  li p {
+    color: white;
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+  }
 }

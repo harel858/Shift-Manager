@@ -15,7 +15,7 @@
   margin-top: 1rem;
   height: 3rem;
   width: 20rem;
-  background-color: #85bb65;
+  background: linear-gradient(120deg, #1d61b9, #1dacb9);
   color: black;
   border-radius: 2em;
   border: 1px solid black;
@@ -26,17 +26,17 @@
 }
 .save:hover {
   transform: scale(1.15);
-  background-color: #40841a;
+  background-color: linear-gradient(120deg, #1d61b9, #1dacb9);
 }
 
 .containerPlay {
   margin-top: 1rem;
   height: 3rem;
   width: 20rem;
-  background: linear-gradient(120deg, #1d61b9, #1dacb9);
-  color: white;
+  background: #85bb65;
+  color: black;
   border-radius: 2em;
-  border: 1px solid black;
+  border: 3px solid black;
   transition: all 400ms ease-in-out;
 }
 .text {

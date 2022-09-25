@@ -11,6 +11,7 @@ export function ShiftContextProvider(props) {
   const [shiftList, setShiftList] = useState([]);
 
   async function addShiftHandler(shift) {
+    JSON.stringify(shift);
     setShiftList((prev) => [...prev, shift]);
     try {
       const res = await fetch("http://localhost:5000/shifts/create", {
@@ -25,6 +26,7 @@ export function ShiftContextProvider(props) {
           date: shift.date,
           timeSpending: shift.timeSpending,
           totalProfit: shift.totalProfit,
+          seconds: shift.seconds,
         }),
       });
       if (res.ok) {
@@ -50,8 +52,7 @@ export function ShiftContextProvider(props) {
       });
 
       if (res.ok) {
-        const msg = await res.json();
-        alert(msg);
+        console.log(await res.json());
       }
     } catch (err) {
       throw err;

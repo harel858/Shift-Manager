@@ -5,7 +5,7 @@ function Layout(props) {
   return (
     <>
       <NavBar />
-      <main className={classes.main}>{props.children}</main>
+      <main className={classes.mainShifts}>{props.children}</main>
     </>
   );
 }

@@ -35,21 +35,17 @@ function NavBar() {
                   My Shifts
                 </Nav.Link>
                 <Nav.Link as={Link} to="/schedule">
-                  My Schedule
+                  Settings
                 </Nav.Link>
                 <NavDropdown
-                  title="More"
+                  title="User"
                   id={`offcanvasNavbarDropdown-expand-lg`}
                 >
-                  <NavDropdown.Item as={Link} to="/">
+                  <NavDropdown.Item as={Link} to="/register">
                     signUp
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/login">
+                  <NavDropdown.Item as={Link} to="/">
                     log in
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
-                    Definitions
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>

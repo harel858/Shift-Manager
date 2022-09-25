@@ -1,11 +1,17 @@
 import classes from "./shiftPayment.module.css";
 import ShiftContext from "../../context/shiftContext";
 import { useEffect, useRef, useContext } from "react";
-function ShiftPayment({ shiftDetails, seconds, play, isPlay, setSeconds }) {
+
+function ShiftPayment({
+  shiftDetails,
+  seconds,
+  play,
+  isPlay,
+  setSeconds,
+  setOpen,
+}) {
   const today = new Date();
-  const currentDate = today.toISOString().slice(0, 10);
-  const currentTimeOclock =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const currentDate = today.toLocaleString();
   const shiftCtx = useContext(ShiftContext);
   const currentPayment = useRef(0);
 
@@ -17,21 +23,23 @@ function ShiftPayment({ shiftDetails, seconds, play, isPlay, setSeconds }) {
     }
   }, [seconds, play]);
 
-  function saveHandler() {
-    shiftDetails.current.end = `${currentDate} || ${currentTimeOclock}`;
-    shiftDetails.current.totalProfit = `${currentPayment.current.toFixed(2)}$`;
-    const newObj = { ...shiftDetails.current };
-    shiftCtx.addShift(newObj);
-    setSeconds((seconds = 0));
-    currentPayment.current = 0;
-    shiftDetails.current = {
-      start: null,
-      end: null,
-      date: null,
-      timeSpending: null,
-      totalProfit: null,
-    };
-    return isPlay((play = null));
+  async function saveHandler() {
+    try {
+      shiftDetails.current.end = `${currentDate}`;
+      shiftDetails.current.totalProfit = `${currentPayment.current.toFixed(2)}`;
+      shiftDetails.current.seconds = localStorage.getItem("seconds");
+      const newObj = { ...shiftDetails.current };
+      console.log(newObj);
+      shiftCtx.addShift(newObj);
+      setOpen(true);
+      setSeconds((seconds = 0));
+      currentPayment.current = 0;
+      localStorage.removeItem("shiftDetails");
+      localStorage.removeItem("setPlay");
+      return isPlay((play = null));
+    } catch (err) {
+      console.error(err);
+    }
   }
   return (
     <div

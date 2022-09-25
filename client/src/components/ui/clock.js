@@ -5,16 +5,16 @@ import Timer from "./timer";
 
 function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
   const today = new Date();
+  const currentDateAndHour = today.toLocaleString();
   const currentDate = today.toISOString().slice(0, 10);
-  const currentTimeOclock =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
   function startToggleHandler() {
-    console.log(shiftDetails.current);
     if (seconds <= 0) {
-      shiftDetails.current.start = `${currentDate} || ${currentTimeOclock}`;
+      shiftDetails.current.start = `${currentDateAndHour} `;
       shiftDetails.current.date = `${currentDate}`;
+      shiftDetails.current.startSeconds = today.getTime();
     }
+    localStorage.setItem("setPlay", !play);
     return isPlay((prev) => !prev);
   }
   return (
@@ -25,13 +25,13 @@ function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
         className={
           play
             ? classes.circlePlay
-            : play == false
+            : play === false
             ? classes.circleContinue
             : classes.circle
         }
       >
         <h2 className={classes.clockHeader}>
-          {play ? "End Shift" : play == false ? "continue " : "Start Shift"}
+          {play ? "End Shift" : play === false ? "continue " : "Start Shift"}
         </h2>
 
         {play ? (
@@ -41,6 +41,7 @@ function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
         )}
 
         <Timer
+          isPlay={isPlay}
           shiftDetails={shiftDetails}
           seconds={seconds}
           setSeconds={setSeconds}

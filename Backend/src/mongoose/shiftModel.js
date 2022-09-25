@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
   date: String,
   timeSpending: String,
   totalProfit: String,
+  seconds: String,
   userId: { type: mongoose.Types.ObjectId, ref: "user" },
 });
 const shiftModel = mongoose.model("shift", schema);
