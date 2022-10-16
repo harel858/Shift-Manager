@@ -1,16 +1,49 @@
 .summaryContainer {
-  margin-top: 1.5em;
+  margin-top: 1em;
   list-style-type: none;
   width: 90%;
+  padding: 0 1em 6em 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  color: white;
 }
 .summaryContent {
   display: flex;
   justify-content: space-between;
 }
-.summaryContent h5 {
-  font-size: 1.5em;
+.summaryEarning {
+  display: flex;
+  justify-content: space-between;
+}
+.summaryEarning h5 {
+  font-size: 1.3em;
   font-weight: 600;
+}
+.summaryEarning h5:nth-child(2) {
+  color: #85bb65;
+}
+.tax {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tax h5 {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+.tax h5:nth-child(2) {
+  color: red;
+}
+.summaryContent h5 {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+@media screen and (max-width: 600px) {
+  .summaryContent h5,
+  .summaryEarning h5,
+  .tax h5 {
+    font-size: 1.5em;
+    font-weight: 600;
+  }
 }

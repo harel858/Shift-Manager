@@ -1,6 +1,7 @@
 import classes from "./clock.module.css";
 import { useEffect } from "react";
 function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
+  console.log(shiftDetails.current);
   //global variables
   let today = new Date();
   let currentTime = today.getTime();
@@ -15,23 +16,42 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
   //update the timer
   useEffect(() => {
     let interval = null;
+
+    //Maintains playing status continuously
     if (localStorage.getItem("setPlay")) {
       let res = JSON.parse(localStorage.getItem("setPlay"));
-      setSeconds(currentTimeInSeconds - startSeconds);
       isPlay(res);
     }
 
-    if (play) {
+    if (play === true) {
       interval = setInterval(() => {
         return setSeconds((prev) => prev + 1);
       }, 1000);
-      localStorage.setItem("seconds", seconds);
+      shiftDetails.current.seconds = seconds;
     } else {
+      const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
+      const currentShift = JSON.parse(localStorage.getItem("shiftDetails"));
+
+      // while exit and playing
+      ifPlay === true && setSeconds(currentTimeInSeconds - startSeconds);
+      // while exit and pause
+      ifPlay === false && setSeconds(currentShift.seconds);
+      // while exit and not playing
+      !localStorage.getItem("setPlay") && setSeconds(0);
+
       clearInterval(interval);
       interval = null;
     }
     return () => clearInterval(interval);
-  }, [play, seconds, setSeconds, isPlay, currentTimeInSeconds, startSeconds]);
+  }, [
+    play,
+    seconds,
+    isPlay,
+    setSeconds,
+    currentTimeInSeconds,
+    shiftDetails,
+    startSeconds,
+  ]);
 
   hrs = Math.floor(seconds / 3600);
   mins = Math.floor((seconds - hrs * 3600) / 60);
@@ -40,10 +60,7 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
   hrs = (`0` + hrs).slice(-2);
   mins = (`0` + mins).slice(-2);
   secs = (`0` + secs).slice(-2);
-  if (seconds > 0) {
-    shiftDetails.current.timeSpending = `${hrs}:${mins}:${secs}`;
-    localStorage.setItem("shiftDetails", JSON.stringify(shiftDetails.current));
-  }
+  shiftDetails.current.timeSpend = `${hrs}:${mins}:${secs}`;
 
   return (
     <>

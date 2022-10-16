@@ -1,0 +1,26 @@
+.brand {
+  margin-left: 2rem;
+  color: white !important;
+}
+.brand:hover {
+  transition: all 250ms ease-in-out;
+  transform: scale(1.15);
+}
+.navLinks,
+.navLinks a {
+  color: white !important;
+}
+.navLinks div a {
+  color: black !important;
+}
+.hamburger {
+  color: #fff !important;
+  border: 3px solid #fff !important;
+  background: rgba(250, 250, 250, 0.5) !important;
+}
+.expend {
+  background: black !important;
+}
+.closeButton {
+  background: white !important;
+}

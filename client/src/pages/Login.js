@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import classes from "./pagesCss/login.module.css";
+import classes from "./style/login.module.css";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
@@ -28,6 +28,7 @@ export default function Register() {
         navigate("/newShift", { replace: true });
       } else {
         const res = await response.json();
+        console.log(error);
         setError(res);
       }
     } catch ({ err }) {
@@ -69,7 +70,7 @@ export default function Register() {
       <p className={classes.error}>{error}</p>
       <div className={classes.register}>
         <h5>Don't have an account yet?</h5>
-        <Nav className={classes.navLink} as={Link} to="/">
+        <Nav className={classes.navLink} as={Link} to="/register">
           Click here to register
         </Nav>
       </div>

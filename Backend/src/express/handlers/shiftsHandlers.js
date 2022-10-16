@@ -20,16 +20,39 @@ async function getUserShifts(req, res) {
 //create shifts
 async function createShift(req, res) {
   const { userId } = req;
-  const { start, end, date, timeSpending, totalProfit, seconds } = req.body;
+  const {
+    start,
+    end,
+    date,
+    timeSpend,
+    totalProfit,
+    seconds,
+    basicPayment,
+    firstOverTime,
+    overTime,
+  } = req.body;
   const newShift = await shiftsOperations.createShift({
-    start: start,
-    end: end,
-    date: date,
-    userId: userId,
-    timeSpending: timeSpending,
-    totalProfit: totalProfit,
-    seconds: seconds,
+    start,
+    end,
+    date,
+    userId,
+    timeSpend,
+    totalProfit,
+    seconds,
+    basicPayment,
+    firstOverTime,
+    overTime,
   });
+  if (
+    !start ||
+    !end ||
+    !date ||
+    !timeSpend ||
+    !totalProfit ||
+    !seconds ||
+    !basicPayment
+  )
+    return res.status(400).json(`missing part`);
   if (!newShift) {
     return res.status(500).json(`something went wrong`);
   }
@@ -39,19 +62,42 @@ async function createShift(req, res) {
 //update shift
 async function updateShift(req, res) {
   const { userId } = req;
-  const { id, filter, option } = req.query;
-  let shift = await shiftsOperations.getShiftById(id, userId);
+  const {
+    _id,
+    start,
+    end,
+    date,
+    timeSpend,
+    basicPayment,
+    firstOverTime,
+    overTime,
+    totalProfit,
+    seconds,
+  } = req.body;
+  let shift = await shiftsOperations.getShiftById(_id, userId);
   if (!shift || shift.length <= 0) {
     return res.status(500).send(`shift has not found`);
   }
   console.log(shift);
 
-  let updatedShift = await shiftsOperations.updateShift(id, filter, option);
+  let updatedShift = await shiftsOperations.updateShift(
+    _id,
+    start,
+    end,
+    date,
+    timeSpend,
+    basicPayment,
+    firstOverTime,
+    overTime,
+    totalProfit,
+    seconds
+  );
+
   console.log(updatedShift);
   if (!updatedShift || updatedShift.acknowledged == false) {
-    return res.status(400).send(`someThing went wrong`);
+    return res.status(400).json(`someThing went wrong`);
   }
-  updatedShift = await shiftsOperations.getShiftById(id, userId);
+  updatedShift = await shiftsOperations.getShiftById(_id, userId);
   return res.json(updatedShift);
 }
 

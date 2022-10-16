@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.background {
+  background-image: url("./layered12.svg");
+  aspect-ratio: 900/600;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.mainSettings {
+  display: flex;
+  width: 100%;
+  max-width: 40rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  transition: all 500ms ease-in-out;
+}
+.mainSettings h1 {
+  position: relative;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  font-size: 3em;
+}
+.mainSettings h1::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 6.5em;
+  height: 0.1em;
+  margin-top: 5px;
+  transform: scale(0);
+  background: linear-gradient(120deg, #1d61b9, #1dacb9);
+  transition: all 200ms ease-in-out;
+}
+.mainSettings:hover h1::after {
+  transform: scale(1);
+}

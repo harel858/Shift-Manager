@@ -1,5 +1,5 @@
-import classes from "../navbar/navbar.module.css";
-import "./nav.css";
+import classes from "./style/navbar.module.css";
+import "./style/nav.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -15,31 +15,40 @@ function NavBar() {
           <Navbar.Brand as={Link} to="/newShift" className={classes.brand}>
             Shift Manager <FiClock />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
+          <Navbar.Toggle
+            className={classes.hamburger}
+            aria-controls={`offcanvasNavbar-expand-lg`}
+          />
           <Navbar.Offcanvas
+            className={classes.expend}
             id={`offcanvasNavbar-expand-lg`}
             aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
             placement="end"
           >
-            <Offcanvas.Header closeButton>
+            <Offcanvas.Header className={classes.closeButton} closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
                 Shift Manager
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end nav flex-grow-1 pe-3">
-                <Nav.Link as={Link} to="/newShift">
+                <Nav.Link as={Link} to="/newShift" className={classes.navLinks}>
                   New Shift
                 </Nav.Link>
-                <Nav.Link as={Link} to="/allShifts">
+                <Nav.Link
+                  as={Link}
+                  to="/allShifts"
+                  className={classes.navLinks}
+                >
                   My Shifts
                 </Nav.Link>
-                <Nav.Link as={Link} to="/schedule">
+                <Nav.Link as={Link} to="/settings" className={classes.navLinks}>
                   Settings
                 </Nav.Link>
                 <NavDropdown
+                  className={classes.navLinks}
                   title="User"
-                  id={`offcanvasNavbarDropdown-expand-lg`}
+                  id={`offcanvasNavbarDropdown-expand-lg `}
                 >
                   <NavDropdown.Item as={Link} to="/register">
                     signUp

@@ -5,5 +5,5 @@
 }
 .body {
   overflow: hidden;
-  background-color: #ffeaa7;
+  background: linear-gradient(120deg, #555, #222);
 }

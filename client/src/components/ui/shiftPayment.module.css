@@ -7,6 +7,9 @@
   border-radius: 2em;
   border: 1px solid black;
 }
+.container h3 {
+  color: black;
+}
 .containerSave {
   border-radius: 2em;
 }
@@ -15,17 +18,19 @@
   margin-top: 1rem;
   height: 3rem;
   width: 20rem;
-  background: linear-gradient(120deg, #1d61b9, #1dacb9);
+  background: #85bb65;
   color: black;
   border-radius: 2em;
-  border: 1px solid black;
+  border: 3px solid white;
+
+  box-shadow: 0 10px 50px 30px black;
   font-size: 1.6em;
   font-weight: 500;
   text-align: center;
   transition: all 250ms ease-in-out;
 }
 .save:hover {
-  transform: scale(1.15);
+  transform: scale(1.4);
   background-color: linear-gradient(120deg, #1d61b9, #1dacb9);
 }
 
@@ -33,7 +38,8 @@
   margin-top: 1rem;
   height: 3rem;
   width: 20rem;
-  background: #85bb65;
+
+  background: linear-gradient(120deg, #1d61b9, #1dacb9);
   color: black;
   border-radius: 2em;
   border: 3px solid black;

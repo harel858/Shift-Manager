@@ -1,4 +1,4 @@
-import classes from "./navigation.module.css";
+import classes from "./style/navigation.module.css";
 import { Link } from "react-router-dom";
 import { FiClock } from "react-icons/fi";
 

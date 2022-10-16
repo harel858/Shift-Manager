@@ -1,7 +1,0 @@
-.brand {
-  margin-left: 2rem;
-}
-.brand:hover {
-  transition: all 250ms ease-in-out;
-  transform: scale(1.15);
-}

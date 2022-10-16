@@ -24,7 +24,9 @@ async function getShiftById(id, userId) {
 //create shift
 async function createShift(shiftDetails) {
   try {
-    return await shiftModel(shiftDetails).save();
+    const shift = new shiftModel(shiftDetails);
+    await shift.save();
+    return shift;
   } catch (err) {
     console.log(err);
     return null;
@@ -32,18 +34,37 @@ async function createShift(shiftDetails) {
 }
 
 //update shift
-async function updateShift(id, filter, option) {
+async function updateShift(
+  _id,
+  start,
+  end,
+  date,
+  timeSpend,
+  basicPayment,
+  firstOverTime,
+  overTime,
+  totalProfit,
+  seconds
+) {
   try {
-    return await shiftModel.updateOne(
-      {
-        _id: id,
-      },
+    let update = await shiftModel.findOneAndUpdate(
+      { _id: _id },
       {
         $set: {
-          [filter]: option,
+          start: start,
+          end: end,
+          date: date,
+          timeSpend: timeSpend,
+          basicPayment: basicPayment,
+          firstOverTime: firstOverTime,
+          overTime: overTime,
+          totalProfit: totalProfit,
+          seconds: seconds,
         },
       }
     );
+
+    return update;
   } catch (err) {
     console.log(err);
     return null;

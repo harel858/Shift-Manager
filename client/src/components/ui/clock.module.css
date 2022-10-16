@@ -1,3 +1,8 @@
+.clock h1,
+.clock h3,
+.clock p {
+  color: white;
+}
 .circle {
   position: relative;
   display: flex;
@@ -7,12 +12,12 @@
 
   height: 16rem;
   width: 16rem;
-
+  box-shadow: inset 0 0px 10px rgba(0, 0, 0.8);
   border: 3px solid black;
   border-radius: 50%;
   background-color: #1db954;
   cursor: pointer;
-  transition: all 250ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 .circlePlay {
   position: relative;
@@ -20,16 +25,16 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
+  box-shadow: 0px 10px 60px 20px black;
   height: 18rem;
   width: 18rem;
 
-  border: 3px solid black;
+  border: 3px solid white;
   border-radius: 50%;
   background-color: #b91d1d;
   color: white;
   cursor: pointer;
-  transition: all 250ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 .circleContinue {
   position: relative;
@@ -45,10 +50,9 @@
   border-radius: 50%;
   background: linear-gradient(120deg, #ff8c00, #d5ff18);
   cursor: pointer;
-  transition: all 250ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 .circlePlay:hover .pause {
-  transition: all 400ms ease-in-out;
   transform: scale(1.5);
 }
 .play {
@@ -59,12 +63,14 @@
   font-size: 3em;
   position: absolute;
 }
+.play,
+.pause {
+  transition: all 200ms ease-in-out;
+}
 .circleContinue:hover .play {
-  transition: all 400ms ease-in-out;
   transform: scale(1.5);
 }
 .circle:hover .play {
-  transition: all 400ms ease-in-out;
   transform: scale(1.5);
 }
 

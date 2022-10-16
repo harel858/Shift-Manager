@@ -13,3 +13,12 @@
   padding: 9em 0;
   height: 13em;
 }
+.openEditor {
+  padding: 11em 0;
+  height: 16em;
+  background: linear-gradient(120deg, #ff8c00, #d5ff18);
+}
+.openEditor p,
+.openEditor h3 {
+  color: black;
+}

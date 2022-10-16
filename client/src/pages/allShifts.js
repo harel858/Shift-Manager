@@ -1,54 +1,75 @@
-import { useState, useEffect } from "react";
 /* import ShiftList from "../components/shifts/ShiftList.js"; */
-import classes from "./pagesCss/allShifts.module.css";
+import classes from "./style/allShifts.module.css";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import ShiftList2 from "../components/shifts/ShiftList2.js";
 import ShiftSummary from "../components/shifts/ShiftSummary.js";
+import MonthStepper from "../components/shifts/MonthStepper.js";
+import { useContext, useEffect, useState } from "react";
+import ShiftContext from "../context/shiftContext.js";
 
 function AllShifts() {
-  console.log("allShifts");
+  const byDate = (a, b) => {
+    const d1 = new Date(a.start);
+    const d2 = new Date(b.start);
+
+    if (d1.getUTCMonth() > d2.getUTCMonth()) {
+      return 1;
+    }
+    if (d1.getUTCMonth() < d2.getUTCMonth()) {
+      return -1;
+    } else {
+      return d1.getUTCDate - d2.getUTCDate();
+    }
+  };
+
+  const shiftsCtx = useContext(ShiftContext);
+  const allShiftList = shiftsCtx.shifts.sort(byDate);
+
+  console.log(allShiftList);
+  const error = shiftsCtx.error;
+  const [counter, setCounter] = useState(0);
+  const [months, setMonths] = useState([
+    null,
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ]);
   const [shiftList, setShiftList] = useState([]);
-  const [error, setError] = useState();
 
   useEffect(() => {
-    let allShifts = [];
-    async function getData() {
-      try {
-        const res = await fetch("http://localhost:5000/shifts", {
-          method: "GET",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-        });
-        if (res.ok) {
-          const shifts = await res.json();
-
-          allShifts.push(shifts);
-        } else {
-          const badRes = await res.json();
-          console.log(badRes);
-          setError(badRes);
-        }
-      } catch (err) {
-        throw err;
+    let shiftsOfMonth = [];
+    allShiftList.map((shift, i) => {
+      if (shift.date === months[counter]) {
+        shift.index = i;
+        shiftsOfMonth.push(shift);
       }
-      setShiftList(...allShifts);
-    }
-    getData();
-  }, []);
-  console.log(shiftList);
+      return shiftsOfMonth;
+    });
+    return setShiftList(shiftsOfMonth);
+  }, [counter, months, allShiftList]);
 
   if (error) {
+    console.log(error);
     return (
       <div className={classes.container}>
         <header className={classes.header}>
           <h1>{error}</h1>
         </header>
-        <Nav className={classes.navLink} as={Link} to="/login">
+        <Nav className={classes.navLink} as={Link} to="/">
           Click Here to Log In
         </Nav>
         <h3>Not registered yet?</h3>
-        <Nav className={classes.navLink} as={Link} to="/">
+        <Nav className={classes.navLink} as={Link} to="/register">
           Register Now
         </Nav>
       </div>
@@ -57,12 +78,27 @@ function AllShifts() {
 
   return (
     <>
-      <header className={classes.header}>
-        <h1> Your Shifts</h1>
-      </header>
-      {/*  <ShiftList shiftList={shiftList} forceUpdate={forceUpdate} /> */}
-      <ShiftList2 shiftList={shiftList} />
-      <ShiftSummary shiftList={shiftList} />
+      {/*  <ShiftList shiftList={shiftList} /> */}
+      <MonthStepper
+        counter={counter}
+        setCounter={setCounter}
+        months={months}
+        setMonths={setMonths}
+      />
+      <ShiftList2
+        counter={counter}
+        setCounter={setCounter}
+        months={months}
+        setMonths={setMonths}
+        shiftList={shiftList}
+      />
+      <ShiftSummary
+        counter={counter}
+        setCounter={setCounter}
+        months={months}
+        setMonths={setMonths}
+        shiftList={shiftList}
+      />
     </>
   );
 }

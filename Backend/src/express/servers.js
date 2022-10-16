@@ -3,8 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 const app = express();
-const userRouter = require("./routes/usersRoutes");
-const shiftRouter = require("./routes/shiftRouters");
+const userRouter = require("./routers/usersRouters");
+const shiftRouter = require("./routers/shiftRouters");
 
 app.use(
   cors({

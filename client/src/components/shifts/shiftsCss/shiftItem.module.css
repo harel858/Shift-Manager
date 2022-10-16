@@ -34,3 +34,9 @@ li p {
     width: fit-content;
   }
 }
+.editorInput {
+  margin: 0;
+  padding: 0em;
+  width: fit-content;
+  border-radius: 2em;
+}

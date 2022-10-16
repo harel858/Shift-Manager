@@ -4,19 +4,22 @@ import { BsPause } from "react-icons/bs";
 import Timer from "./timer";
 
 function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
-  const today = new Date();
-  const currentDateAndHour = today.toLocaleString();
-  const currentDate = today.toISOString().slice(0, 10);
-
-  function startToggleHandler() {
-    if (seconds <= 0) {
+  const startToggleHandler = () => {
+    if (seconds === 0) {
+      const today = new Date();
+      const currentDateAndHour = today.toLocaleString();
+      console.log(currentDateAndHour);
+      const currentDate = today.toLocaleString("default", { month: "long" });
       shiftDetails.current.start = `${currentDateAndHour} `;
       shiftDetails.current.date = `${currentDate}`;
       shiftDetails.current.startSeconds = today.getTime();
+      console.log(shiftDetails);
     }
+    console.log(shiftDetails);
     localStorage.setItem("setPlay", !play);
     return isPlay((prev) => !prev);
-  }
+  };
+  console.log(shiftDetails.current);
   return (
     <>
       <div

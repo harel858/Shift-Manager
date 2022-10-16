@@ -1,4 +1,4 @@
-import classes from "./pagesCss/newShift.module.css";
+import classes from "./style/newShift.module.css";
 import Clock from "../components/ui/clock.js";
 import { useState, useRef, useEffect } from "react";
 import { forwardRef } from "react";
@@ -39,7 +39,7 @@ function NewShift() {
           setUser(userData[0]);
         } else {
           const badRes = await res.json();
-          console.log(badRes);
+
           setError(badRes);
         }
       } catch (err) {
@@ -49,32 +49,40 @@ function NewShift() {
     getUserData();
   }, []);
   const [seconds, setSeconds] = useState(0);
+  console.log(seconds);
   const [play, isPlay] = useState();
-  const today = new Date();
-  const todayDate = today.toISOString().slice(0, 10);
   const shiftDetails = useRef({
     start: null,
     end: null,
     date: null,
-    timeSpending: null,
+    timeSpend: null,
     totalProfit: null,
     startSeconds: null,
-    seconds: null,
+    seconds: seconds,
+    basicPayment: null,
+    firstOverTimePay: null,
+    overTimePay: null,
   });
+  const today = new Date();
+  const todayDate = today.toISOString().slice(0, 10);
   if (localStorage.getItem("shiftDetails")) {
     shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
   }
+
+  console.log(shiftDetails.current);
+
+  console.log(seconds);
   if (!user) {
     return (
       <div className={classes.container}>
         <header className={classes.header}>
           <h1>{error}</h1>
         </header>
-        <Nav className={classes.navLink} as={Link} to="/login">
+        <Nav className={classes.navLink} as={Link} to="/">
           Click Here to Log In
         </Nav>
         <h3>Not registered yet?</h3>
-        <Nav className={classes.navLink} as={Link} to="/">
+        <Nav className={classes.navLink} as={Link} to="/register">
           Register Now
         </Nav>
       </div>
@@ -85,7 +93,7 @@ function NewShift() {
     <>
       <section className={classes.clockSection}>
         <header className={classes.header}>
-          <h1>Hello {user.name} Start Your Shift</h1>
+          <h1>Welcome {user.name}!</h1>
           <h3 className={classes.clockDate}>{todayDate}</h3>
         </header>
         <Clock

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 15rem;
+  margin-bottom: 2em;
+  color: white;
+}
+.btn {
+  font-size: 3em;
+  cursor: pointer;
+  color: white;
+}
+.btn:hover {
+  transform: scale(1.5);
+  transition: all 100ms ease-in;
+}

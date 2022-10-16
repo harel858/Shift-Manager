@@ -1,7 +1,6 @@
 import NavBar from "../navbar/navbar.js";
-import classes from "./ClockLayout.module.css";
+import classes from "./style/ClockLayout.module.css";
 function ClockLayout(props) {
-  console.log(props);
   return (
     <>
       <NavBar />

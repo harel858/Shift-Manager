@@ -7,50 +7,63 @@
   border: 1px solid black;
   height: 37rem;
   margin: 0 auto;
-  padding: 5em;
+  padding: 10em;
   box-shadow: 0 10px 100px #8888889e;
   transition: all 200ms ease-in-out;
 }
 
-h1 {
-  font-size: 3em;
-  margin: 0;
-}
-.form {
-  margin: 2em;
+.loginForm {
   display: flex;
-  flex-grow: 4;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
 }
-h1::after {
+
+form h1 {
+  font-size: 3em;
+  margin-bottom: 1em;
+}
+form h1::after {
   content: "";
   display: block;
   position: absolute;
   background: linear-gradient(120deg, #1d61b9, #1dacb9);
   height: 0.1em;
-  width: 6em;
+  width: 4.5em;
   margin-top: 5px;
   transform: scale(0);
   transform-origin: left;
   transition: transform 200ms ease-in-out;
 }
+.main:hover form h1::after {
+  transform: scale(1);
+}
 .inputContainer {
-  margin-bottom: 5em;
+  margin: 0.2em;
   width: 20rem;
 }
+.inputContainer label {
+  font-size: 1.3em;
+  font-weight: 100 !important;
+  color: rgba(255, 255, 255, 0.7);
+}
 
-.main:hover h1::after {
-  transform: scale(1);
+input {
+  padding: 0.4em;
+  width: 13rem;
+  border: 1px solid black;
+}
+input[value] {
+  color: white;
+  font-size: larger;
 }
 
 .btn {
   width: 10rem;
-  margin: 0;
+  margin-top: 3em;
   padding: 0.3em;
   color: white;
   border: 3px solid black;
-
   background: linear-gradient(120deg, #1d61b9, #1dacb9);
   transition: all 200ms ease-in-out;
 }
@@ -58,11 +71,16 @@ h1::after {
   background: linear-gradient(120deg, #093b7d, #0a838e);
   box-shadow: 0 10px 10px #8888889e;
 }
+
 .error {
   color: red;
-  margin: 0;
+  margin: 1em;
   padding: 0;
 }
-.login {
+.register {
   margin: 1em;
+}
+.register h5 {
+  color: white;
+  font-weight: 300;
 }

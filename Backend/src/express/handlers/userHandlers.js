@@ -38,6 +38,11 @@ async function registerHandler(req, res) {
       password,
       isManager: false,
     });
+    console.log(newUser);
+    const token = jwt.sign({ userId: newUser._id }, "Harelha123");
+    console.log(token);
+    req.session = { token };
+
     return res.status(201).json(newUser);
   } catch (err) {
     console.log(err);
@@ -128,13 +133,14 @@ async function signIn(req, res) {
       .json(`we couldn't find an account matching this Email`);
   }
   let pass = await bcrypt.compare(password, user.password);
+  console.log(pass);
 
   if (!pass) {
     return res.status(400).json(`incorrect email or password`);
   }
 
   const token = jwt.sign({ userId: user._id }, "Harelha123");
-
+  console.log(token);
   req.session = { token };
 
   res.status(200).json(user);
