@@ -5,10 +5,7 @@ export default function SettingsLayout(props) {
   return (
     <div className={classes.background}>
       <NavBar />
-      <main className={classes.mainSettings}>
-        <h1>Edit Settings</h1>
-        {props.children}
-      </main>
+      <main className={classes.mainSettings}>{props.children}</main>
     </div>
   );
 }

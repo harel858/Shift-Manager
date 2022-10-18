@@ -6,6 +6,11 @@
   height: 20rem;
   overflow: hidden;
   overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   margin: 0;
   border-bottom: 2px solid black;
+}
+.listContainer::-webkit-scrollbar {
+  display: none;
 }

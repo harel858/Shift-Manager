@@ -1,7 +1,9 @@
 import classes from "./shiftsCss/summary.module.css";
-import { useMemo, useState } from "react";
-
+import { useMemo, useState, useContext } from "react";
+import ShiftContext from "../../context/shiftContext";
 export default function ShiftSummary(props) {
+  const shiftCtx = useContext(ShiftContext);
+  const { currency } = shiftCtx;
   //Define A Summary Object
   const [summary, setSummary] = useState({
     totalProfit: 0,
@@ -50,15 +52,24 @@ export default function ShiftSummary(props) {
     <ul className={classes.summaryContainer}>
       <li className={classes.summaryEarning}>
         <h5>Gross Earning:</h5>
-        <h5>{summary.totalProfit}$</h5>
+        <h5>
+          {summary.totalProfit}
+          <span className={classes.currencyLabel}>{currency.label}</span>
+        </h5>
       </li>
       <li className={classes.summaryEarning}>
         <h5>Net Earning:</h5>
-        <h5>{(summary.totalProfit - incomeTax).toFixed(2)}$</h5>
+        <h5>
+          {(summary.totalProfit - incomeTax).toFixed(2)}
+          <span className={classes.currencyLabel}>{currency.label}</span>
+        </h5>
       </li>
       <li className={classes.tax}>
         <h5>Income Tax:</h5>
-        <h5>-{incomeTax}$</h5>
+        <h5>
+          -{incomeTax}
+          <span className={classes.currencyLabel}>{currency.label}</span>
+        </h5>
       </li>
       <li className={classes.summaryContent}>
         <h5>Total Work Time:</h5>

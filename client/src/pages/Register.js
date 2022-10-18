@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./style/register.module.css";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-import { TextField } from "@mui/material";
+import { TextField, Select, InputLabel } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import ShiftContext from "../context/shiftContext.js";
 
 export default function Register() {
   const [userName, setUserName] = useState("");
@@ -13,12 +15,29 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const {
+    currency,
+    setCurrency,
+    payment,
+    setPayment,
+    currencies,
+    overTime,
+    setOvertime,
+  } = useContext(ShiftContext);
 
   async function registerHandler(e) {
     e.preventDefault();
     if (userPassword !== confirmPassword)
       return setError("The entered passwords doesn't match");
-
+    console.log({
+      name: userName,
+      email: userEmail,
+      phone: userPhone,
+      currency: currency,
+      overTime,
+      payment,
+      password: userPassword,
+    });
     try {
       const res = await fetch("http://localhost:5000/user/register", {
         method: "POST",
@@ -28,13 +47,18 @@ export default function Register() {
           name: userName,
           email: userEmail,
           phone: userPhone,
+          currency: currency,
+          overTime: overTime,
+          payment: payment,
           password: userPassword,
         }),
       });
       if (res.ok) {
+        setError(null);
         navigate("/newShift", { replace: true });
       } else {
         const response = await res.json();
+
         setError(response);
       }
     } catch (err) {
@@ -42,6 +66,32 @@ export default function Register() {
     }
   }
 
+  const handleChange = (event) => {
+    console.log(currency);
+    const newCurrency = event.target.value;
+
+    setCurrency(newCurrency);
+  };
+
+  function savePaymentHandler(e) {
+    const value = e.target.value;
+    console.log(!isNaN(+value));
+    if (isNaN(+value)) {
+      return setError("Payment must be a valid number");
+    }
+    if (!isNaN(+value)) {
+      setError("");
+      return setPayment(+value);
+    }
+  }
+  function handleOverTime(e) {
+    if (e.target.value === "Calculated") {
+      return setOvertime(false);
+    }
+    if (e.target.value === "Not Calculated") {
+      return setOvertime(true);
+    }
+  }
   return (
     <>
       <div className={classes.main}>
@@ -79,6 +129,47 @@ export default function Register() {
               setUserPhone(e.target.value);
             }}
           />
+
+          <TextField
+            id="payment"
+            label={`${payment}${currency.label} Per Hour`}
+            required
+            variant="filled"
+            onChange={savePaymentHandler}
+            className={classes.inputContainer}
+          />
+
+          <div className={classes.selectInputContainer}>
+            <InputLabel id="demo-simple-select-label">
+              OverTime Calculate
+            </InputLabel>
+            <Select
+              className={classes.selectInput}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={overTime ? "Calculated" : "Not Calculated"}
+              label="overTime Calculate"
+              onChange={handleOverTime}
+            >
+              <MenuItem value={"Calculated"}>Calculated</MenuItem>
+              <MenuItem value={"Not Calculated"}>Not Calculated</MenuItem>
+            </Select>
+          </div>
+          <TextField
+            className={classes.inputContainer}
+            id="outlined-select-currency"
+            select
+            label="Select Currency"
+            value={currency}
+            onChange={handleChange}
+            helperText="Please select your currency"
+          >
+            {currencies.map((option) => (
+              <MenuItem key={option.value} value={option}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
 
           <TextField
             className={classes.inputContainer}

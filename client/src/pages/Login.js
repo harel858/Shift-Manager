@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./style/login.module.css";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
+import ShiftContext from "../context/shiftContext";
 
 export default function Register() {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [error, setError] = useState("");
+  const { setLoginError } = useContext(ShiftContext);
   const navigate = useNavigate();
 
   async function loginHandler(e) {
@@ -25,6 +27,7 @@ export default function Register() {
       });
 
       if (response.ok) {
+        setLoginError(null);
         navigate("/newShift", { replace: true });
       } else {
         const res = await response.json();

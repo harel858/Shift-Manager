@@ -4,30 +4,71 @@ const userModel = require("../../mongoose/userModel.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+//update User Payment
+async function updateUserPayment(req, res) {
+  const { payment } = req.body;
+  const { userId } = req;
+  if (isNaN(+payment))
+    return res.status(400).json(`${payment} is not a number`);
+  await operations.updatePayment(userId, payment);
+  return res.status(204).json(payment);
+}
+//overtime Update Handler
+async function overtimeUpdateHandler(req, res) {
+  try {
+    const { overTime } = req.body;
+    const { userId } = req;
+
+    const response = await operations.updateOverTime(userId, overTime);
+    console.log(response);
+    console.log(overTime);
+    return res.status(204).json(overTime);
+  } catch (err) {
+    console.log(err);
+  }
+}
+// update User Currency
+async function updateCurrencyHandler(req, res) {
+  try {
+    const { currency } = req.body;
+    const { userId } = req;
+    await operations.updateCurrency(userId, currency);
+    return res.status(204).json(currency);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //register Handler
-
 async function registerHandler(req, res) {
-  const { name, email, phone } = req.body;
+  const { name, email, phone, currency, payment, overTime } = req.body;
+  console.log(req.body);
   const { password } = req;
-
+  console.log({ name, email, phone, password, currency, payment, overTime });
   const user = await operations.getUserByEmail(email);
-  console.log(user);
-  console.log([name, email, phone, password]);
 
   if (user) {
     return res
       .status(400)
       .json(`It seems that user with this email is already registered`);
   }
-  const { error } = validateUser({ name, email, phone, password });
+  const { error } = validateUser({
+    name,
+    email,
+    phone,
+    password,
+    currency,
+    payment,
+    overTime,
+  });
 
   if (error) {
     const err = error.details[0].message;
     console.log({ err });
     return res.status(400).json(err);
   }
-  if (!name || !email || !phone || !password) {
-    return res.status(400).send(`there are some missing values`);
+  if (!name || !email || !phone || !password || !currency || !payment) {
+    return res.status(400).json(`there are some missing values`);
   }
 
   try {
@@ -35,6 +76,9 @@ async function registerHandler(req, res) {
       name,
       email,
       phone,
+      currency,
+      payment,
+      overTime,
       password,
       isManager: false,
     });
@@ -81,6 +125,7 @@ async function updateUserHandler(req, res) {
       name: value.name,
       email: value.email,
       password: value.password,
+      phone: value.phone,
     };
 
     const keys = Object.keys(userObj);
@@ -152,4 +197,7 @@ module.exports = {
   updateUserHandler,
   deleteUserHandler,
   signIn,
+  updateUserPayment,
+  updateCurrencyHandler,
+  overtimeUpdateHandler,
 };

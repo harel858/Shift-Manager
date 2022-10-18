@@ -23,15 +23,51 @@ const ShiftContext = createContext({
   payment: Number,
   setPayment: (payment) => {},
   currency: String,
+  currencies: [],
+  setCurrency: (value) => {},
   overTime: Boolean,
+  setOvertime: (value) => {},
+  setLoginError: (value) => {},
+  user: {},
+  getUserError: String,
+  updatePayment: (payment) => {},
+  updateCurrency: (obj) => {},
+  updateOvertime: (value) => {},
 });
 
 export function ShiftContextProvider(props) {
+  const [user, setUser] = useState(null);
+  const [getUserError, setGetUserError] = useState(null);
   const [shiftList, setShiftList] = useState([]);
-  const [error, setError] = useState(null);
+  const [loginError, setLoginError] = useState(null);
   const [payment, setPayment] = useState(29.17);
-  const [currency, setCurrency] = useState("Dollar$");
-  const [overTime, setOvertime] = useState(true);
+  const [currency, setCurrency] = useState({
+    value: "USD",
+    label: "$",
+  });
+  const [overTime, setOvertime] = useState();
+  const [currencies] = useState([
+    {
+      value: "USD",
+      label: "$",
+    },
+    {
+      value: "EUR",
+      label: "€",
+    },
+    {
+      value: "BTC",
+      label: "฿",
+    },
+    {
+      value: "JPY",
+      label: "¥",
+    },
+    {
+      value: "INS",
+      label: "₪",
+    },
+  ]);
 
   useEffect(() => {
     let allShifts = [];
@@ -49,16 +85,101 @@ export function ShiftContextProvider(props) {
           allShifts.push(...shifts);
         } else {
           const badRes = await res.json();
-          setError(badRes);
+          setLoginError(badRes);
         }
       } catch (err) {
         throw err;
       }
       setShiftList(allShifts);
     };
+    const getUserData = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/user", {
+          method: "GET",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (res.ok) {
+          const userData = await res.json();
+          setUser(userData[0]);
+          console.log(userData[0]);
+          setCurrency(userData[0].currency);
+          setPayment(userData[0].payment);
+          setOvertime(userData[0].overTime);
+        } else {
+          const badRes = await res.json();
+
+          setGetUserError(badRes);
+        }
+      } catch (err) {
+        throw err;
+      }
+    };
 
     getData();
+    getUserData();
   }, []);
+
+  async function updatePayment(newPayment) {
+    try {
+      const res = await fetch("http://localhost:5000/user/update-payment", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          payment: newPayment,
+        }),
+      });
+      if (res.ok) {
+        setPayment(newPayment);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function updateCurrency(newCurrency) {
+    try {
+      const res = await fetch("http://localhost:5000/user/update-currency", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currency: newCurrency,
+        }),
+      });
+      if (res.ok) {
+        setCurrency(newCurrency);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  async function updateOvertime(newOverTime) {
+    console.log(newOverTime);
+    try {
+      const res = await fetch("http://localhost:5000/user/update-overtime", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          overTime: newOverTime,
+        }),
+      });
+      if (res.ok) {
+        setOvertime(newOverTime);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   async function addShiftHandler(shift) {
     try {
@@ -173,11 +294,17 @@ export function ShiftContextProvider(props) {
     addShift: addShiftHandler,
     deleteShift: deleteShiftHandler,
     updateShift: updateShiftHandler,
-    error,
+    loginError,
+    setLoginError,
     payment,
     currency,
+    currencies,
     overTime,
-    setPayment,
+    getUserError,
+    user,
+    updatePayment,
+    updateCurrency,
+    updateOvertime,
   };
 
   return (

@@ -1,6 +1,6 @@
 import classes from "./style/newShift.module.css";
 import Clock from "../components/ui/clock.js";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useContext } from "react";
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
@@ -8,12 +8,11 @@ import ShiftPayment from "../components/ui/shiftPayment";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import ShiftContext from "../context/shiftContext.js";
 
 function NewShift() {
-  const [user, setUser] = useState();
-  const [error, setError] = useState();
   const [open, setOpen] = useState(false);
-
+  const { getUserError, user } = useContext(ShiftContext);
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -25,29 +24,7 @@ function NewShift() {
 
     setOpen(false);
   };
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/user", {
-          method: "GET",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-        });
 
-        if (res.ok) {
-          const userData = await res.json();
-          setUser(userData[0]);
-        } else {
-          const badRes = await res.json();
-
-          setError(badRes);
-        }
-      } catch (err) {
-        throw err;
-      }
-    };
-    getUserData();
-  }, []);
   const [seconds, setSeconds] = useState(0);
   console.log(seconds);
   const [play, isPlay] = useState();
@@ -74,9 +51,9 @@ function NewShift() {
   console.log(seconds);
   if (!user) {
     return (
-      <div className={classes.container}>
+      <div className={classes.errorContainer}>
         <header className={classes.header}>
-          <h1>{error}</h1>
+          <h1>{getUserError}</h1>
         </header>
         <Nav className={classes.navLink} as={Link} to="/">
           Click Here to Log In

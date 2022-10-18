@@ -24,10 +24,11 @@ function AllShifts() {
   };
 
   const shiftsCtx = useContext(ShiftContext);
+  const { loginError } = shiftsCtx;
   const allShiftList = shiftsCtx.shifts.sort(byDate);
 
   console.log(allShiftList);
-  const error = shiftsCtx.error;
+
   const [counter, setCounter] = useState(0);
   const [months, setMonths] = useState([
     null,
@@ -58,12 +59,12 @@ function AllShifts() {
     return setShiftList(shiftsOfMonth);
   }, [counter, months, allShiftList]);
 
-  if (error) {
-    console.log(error);
+  if (loginError) {
+    console.log(loginError);
     return (
-      <div className={classes.container}>
+      <div className={classes.errorContainer}>
         <header className={classes.header}>
-          <h1>{error}</h1>
+          <h1>{loginError}</h1>
         </header>
         <Nav className={classes.navLink} as={Link} to="/">
           Click Here to Log In

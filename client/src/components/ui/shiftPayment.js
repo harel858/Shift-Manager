@@ -1,6 +1,6 @@
 import classes from "./shiftPayment.module.css";
 import ShiftContext from "../../context/shiftContext";
-import { useEffect, useRef, useContext } from "react";
+import { useEffect, useRef, useContext, useCallback } from "react";
 
 function ShiftPayment({
   shiftDetails,
@@ -12,26 +12,39 @@ function ShiftPayment({
 }) {
   const shiftCtx = useContext(ShiftContext);
   const currentPayment = useRef(0);
+  const { payment, currency, overTime } = shiftCtx;
 
-  useEffect(() => {
-    // Calculation of pay
-    if (play) {
-      if (seconds < 28800) {
-        shiftDetails.current.basicPayment = ((seconds / 60) * 40) / 60;
+  const basicCalculate = useCallback(
+    (sec) => {
+      shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
+      currentPayment.current = shiftDetails.current.basicPayment;
+      shiftDetails.current.totalProfit = currentPayment.current.toFixed(2);
+      localStorage.setItem(
+        "shiftDetails",
+        JSON.stringify(shiftDetails.current)
+      );
+    },
+    [payment, shiftDetails]
+  );
+  // Calculation of pay
+  const overTimeCalculate = useCallback(
+    (sec) => {
+      if (sec < 28800) {
+        shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
       }
 
       // Calculation of pay for the first two overtime hours
 
-      if (28800 < seconds && seconds < 36000) {
+      if (28800 < sec && sec < 36000) {
         shiftDetails.current.firstOverTimePay =
-          (((seconds - 28800) / 60) * (40 * 1.25)) / 60;
+          (((sec - 28800) / 60) * (payment * 1.25)) / 60;
       }
 
       //Calculation of the remaining overtime hours
 
-      if (seconds > 36000) {
+      if (sec > 36000) {
         shiftDetails.current.overTimePay =
-          (((seconds - 36000) / 60) * (40 * 1.5)) / 60;
+          (((sec - 36000) / 60) * (payment * 1.5)) / 60;
       }
 
       currentPayment.current =
@@ -45,10 +58,24 @@ function ShiftPayment({
         "shiftDetails",
         JSON.stringify(shiftDetails.current)
       );
+    },
+    [payment, shiftDetails]
+  );
+
+  useEffect(() => {
+    if (play) {
+      !overTime ? basicCalculate(seconds) : overTimeCalculate(seconds);
     } else if (play === null) {
       currentPayment.current = 0;
     }
-  }, [seconds, shiftDetails, play]);
+  }, [
+    seconds,
+    shiftDetails,
+    play,
+    basicCalculate,
+    overTime,
+    overTimeCalculate,
+  ]);
 
   async function saveHandler() {
     const today = new Date();
@@ -86,14 +113,21 @@ function ShiftPayment({
     >
       {ifPlay && (
         <h3 className={classes.text}>
-          Current Payment: {currentPayment.current.toFixed(2)}$
+          Current Payment: {currentPayment.current.toFixed(2)}
+          <span className={classes.currencyLabel}>{currency.label}</span>
         </h3>
       )}
       {ifPlay === false && (
-        <button className={classes.save}>Save Shift {totalProfit}$</button>
+        <button className={classes.save}>
+          Save Shift {totalProfit}
+          <span className={classes.currencyLabel}>{currency.label}</span>
+        </button>
       )}
       {!localStorage.getItem("setPlay") && (
-        <h3 className={classes.text}>Current Payment: 0$</h3>
+        <h3 className={classes.text}>
+          Current Payment: 0{" "}
+          <span className={classes.currencyLabel}>{currency.label}</span>
+        </h3>
       )}
     </div>
   );

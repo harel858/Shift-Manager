@@ -48,7 +48,7 @@ export default function ShiftItem2({ shift }) {
   const inputEndRef = useRef(shift.end);
 
   const shiftCtx = useContext(ShiftContext);
-
+  const payment = shiftCtx.payment;
   function openDialog() {
     setOpen(true);
   }
@@ -72,16 +72,18 @@ export default function ShiftItem2({ shift }) {
 
     for (let i = 0; i <= seconds; i++) {
       if (i <= 28800) {
-        basicPayment = (((i / 60) * 40) / 60).toFixed(2);
+        basicPayment = (((i / 60) * payment) / 60).toFixed(2);
       }
 
       // Calculation of pay for the first two overtime hours
       if (28800 <= i && i <= 36000) {
-        firstOverTime = ((((i - 28800) / 60) * (40 * 1.25)) / 60).toFixed(2);
+        firstOverTime = ((((i - 28800) / 60) * (payment * 1.25)) / 60).toFixed(
+          2
+        );
       }
       //Calculation of the remaining overtime hours
       if (i > 36000) {
-        overTime = ((((i - 36000) / 60) * (40 * 1.5)) / 60).toFixed(2);
+        overTime = ((((i - 36000) / 60) * (payment * 1.5)) / 60).toFixed(2);
       }
     }
     firstOverTime = Math.floor(firstOverTime);
