@@ -30,13 +30,14 @@ export default function Register() {
         setLoginError(null);
         navigate("/newShift", { replace: true });
       } else {
+        //handle error
         const res = await response.json();
-        console.log(error);
+        console.log(res);
+
         setError(res);
       }
-    } catch ({ err }) {
+    } catch (err) {
       console.error(err);
-      //handle error
     }
   }
 
@@ -65,12 +66,14 @@ export default function Register() {
             setUserPassword(e.target.value);
           }}
         />
-
-        <button type="button" className={classes.btn} onClick={loginHandler}>
-          Click Here
-        </button>
+        <div className={classes.loginBtnContainer}>
+          <p className={classes.error}>{error}</p>
+          <button type="button" className={classes.btn} onClick={loginHandler}>
+            Click Here
+          </button>
+        </div>
       </form>
-      <p className={classes.error}>{error}</p>
+
       <div className={classes.register}>
         <h5>Don't have an account yet?</h5>
         <Nav className={classes.navLink} as={Link} to="/register">

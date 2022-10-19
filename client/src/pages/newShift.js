@@ -73,22 +73,24 @@ function NewShift() {
           <h1>Welcome {user.name}!</h1>
           <h3 className={classes.clockDate}>{todayDate}</h3>
         </header>
-        <Clock
-          todayDate={todayDate}
-          shiftDetails={shiftDetails}
-          play={play}
-          isPlay={isPlay}
-          seconds={seconds}
-          setSeconds={setSeconds}
-        />
-        <ShiftPayment
-          shiftDetails={shiftDetails}
-          setSeconds={setSeconds}
-          isPlay={isPlay}
-          play={play}
-          seconds={seconds}
-          setOpen={setOpen}
-        />
+        <div className={classes.clockAndEarning}>
+          <Clock
+            todayDate={todayDate}
+            shiftDetails={shiftDetails}
+            play={play}
+            isPlay={isPlay}
+            seconds={seconds}
+            setSeconds={setSeconds}
+          />
+          <ShiftPayment
+            shiftDetails={shiftDetails}
+            setSeconds={setSeconds}
+            isPlay={isPlay}
+            play={play}
+            seconds={seconds}
+            setOpen={setOpen}
+          />
+        </div>
       </section>
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

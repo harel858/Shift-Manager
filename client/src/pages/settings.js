@@ -6,7 +6,6 @@ import ShiftContext from "../context/shiftContext.js";
 import { TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Switch from "@mui/material/Switch";
-import Hamburger from "hamburger-react";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 
@@ -29,7 +28,6 @@ function Settings() {
   const [card1Open, setCard1Open] = useState(false);
   const [card2Open, setCard2Open] = useState(false);
   const [card3Open, setCard3Open] = useState(false);
-  const [isOpen] = useState(true);
   const card1 = useRef();
   const card2 = useRef();
   const card3 = useRef();
@@ -122,16 +120,15 @@ function Settings() {
           </div>
         ) : (
           <div className={classes.card1Open}>
-            <button onClick={card1Handler} className={classes.exitButton}>
-              <Hamburger toggled={isOpen} />
-            </button>
-
             <div className={classes.innerContainer}>
               <h2 className={classes.card_h2}>Overtime</h2>
               <BsFillClockFill className={classes.cardOpenIcon} />
               <Switch onChange={handelOvertime} {...label} />
             </div>
             <h3>{overTime ? "Calculated" : "Not Calculated"}</h3>
+            <button onClick={card1Handler} className={classes.btn}>
+              Save Changes
+            </button>
           </div>
         )}
         {!card2Open ? (

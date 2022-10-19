@@ -5,7 +5,11 @@
 }
 
 .mainClock {
-  margin: 3rem auto;
-  width: 90%;
-  max-width: 40rem;
+  margin: 0 auto 3em auto;
+}
+@media screen and (max-width: 900px) {
+  .mainClock {
+    margin: 0 auto 3em auto;
+    overflow: hidden;
+  }
 }

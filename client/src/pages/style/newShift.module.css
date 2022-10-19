@@ -12,16 +12,15 @@
 .clockSection {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
 }
 .clockSection header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-direction: column;
   font-family: tahoma;
   font-size: 2em;
-  font-weight: 200;
   margin: 0;
 }
 .clockSection header h1 {
@@ -50,4 +49,33 @@
 .navLink {
   font-size: 1.5em;
   font-weight: 200;
+}
+.clockAndEarning {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 1000px) {
+  .clockSection {
+    width: 100vw;
+    min-height: 100vh;
+  }
+}
+@media screen and (max-width: 500px) {
+  .clockSection {
+    width: 100vw;
+    min-height: 100vh;
+  }
+  .clockSection header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: tahoma;
+    margin: 0;
+    width: max-content;
+  }
+  .clockSection header h1 {
+    font-size: 1.3em;
+  }
 }

@@ -3,20 +3,22 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  overflow-x: hidden;
+}
 
 .background {
   background-image: url("./layered12.svg");
   aspect-ratio: 900/600;
-  width: 100%;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .mainSettings {
   display: flex;
-  width: 100%;
-  max-width: 40rem;
+  width: 60vw;
   flex-direction: column;
   justify-content: center;
   align-items: center;

@@ -98,124 +98,123 @@ export default function Register() {
       return setOvertime(false);
     }
   }
+
   return (
-    <>
-      <div className={classes.main}>
-        <h1>Register user</h1>
-        <form className={classes.form}>
-          <TextField
-            id="name"
-            label="Enter Name"
-            required
-            variant="filled"
-            onChange={(e) => {
-              setUserName(e.target.value);
-            }}
-            className={classes.inputContainer}
-          />
+    <div className={classes.main}>
+      <h1>Register user</h1>
+      <form className={classes.form}>
+        <TextField
+          id="name"
+          label="Enter Name"
+          required
+          variant="filled"
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
+          className={classes.inputContainer}
+        />
 
-          <TextField
-            className={classes.inputContainer}
-            id="email"
-            label="Enter Email"
-            variant="filled"
-            required
-            onChange={(e) => {
-              setUserEmail(e.target.value);
-            }}
-          />
+        <TextField
+          className={classes.inputContainer}
+          id="email"
+          label="Enter Email"
+          variant="filled"
+          required
+          onChange={(e) => {
+            setUserEmail(e.target.value);
+          }}
+        />
 
-          <TextField
-            className={classes.inputContainer}
-            id="phone"
-            label="Enter Phone"
-            variant="filled"
-            required
-            onChange={(e) => {
-              setUserPhone(e.target.value);
-            }}
-          />
+        <TextField
+          className={classes.inputContainer}
+          id="phone"
+          label="Enter Phone"
+          variant="filled"
+          required
+          onChange={(e) => {
+            setUserPhone(e.target.value);
+          }}
+        />
 
-          <TextField
-            id="payment"
-            label={`${payment}${currency.label} Per Hour`}
-            required
-            variant="filled"
-            onChange={savePaymentHandler}
-            className={classes.inputContainer}
-          />
+        <TextField
+          id="payment"
+          label={`${payment}${currency.label} Per Hour`}
+          required
+          variant="filled"
+          onChange={savePaymentHandler}
+          className={classes.inputContainer}
+        />
 
-          <div className={classes.selectInputContainer}>
-            <InputLabel id="demo-simple-select-label">
-              OverTime Calculate
-            </InputLabel>
-            <Select
-              className={classes.selectInput}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={overTime ? "Calculated" : "Not Calculated"}
-              label="overTime Calculate"
-              onChange={handleOverTime}
-            >
-              <MenuItem value={"Calculated"}>Calculated</MenuItem>
-              <MenuItem value={"Not Calculated"}>Not Calculated</MenuItem>
-            </Select>
-          </div>
-          <div className={classes.selectInputContainer}>
-            <InputLabel id="outlined-select-currency">
-              Select Currency
-            </InputLabel>
-            <TextField
-              className={classes.inputContainer}
-              id="outlined-select-currency"
-              select
-              value={currency}
-              onChange={handleChange}
-              helperText="Please select your currency"
-            >
-              {currencies.map((option) => (
-                <MenuItem key={option.value} value={option}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </div>
-
+        <div className={classes.selectInputContainer}>
+          <InputLabel id="demo-simple-select-label">
+            OverTime Calculate
+          </InputLabel>
+          <Select
+            className={classes.selectInput}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={overTime ? "Calculated" : "Not Calculated"}
+            label="overTime Calculate"
+            onChange={handleOverTime}
+          >
+            <MenuItem value={"Calculated"}>Calculated</MenuItem>
+            <MenuItem value={"Not Calculated"}>Not Calculated</MenuItem>
+          </Select>
+        </div>
+        <div className={classes.selectInputContainer}>
+          <InputLabel id="outlined-select-currency">Select Currency</InputLabel>
           <TextField
             className={classes.inputContainer}
-            id="password"
-            label="Enter Password"
-            type="password"
-            required
-            variant="filled"
-            onChange={(e) => {
-              setUserPassword(e.target.value);
-            }}
-          />
+            id="outlined-select-currency"
+            select
+            value={currency}
+            onChange={handleChange}
+            helperText="Please select your currency"
+          >
+            {currencies.map((option) => (
+              <MenuItem key={option.value} value={option}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
 
-          <TextField
-            className={classes.inputContainer}
-            id="Confrim-password"
-            type="password"
-            label="Confirm password"
-            variant="filled"
-            required
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-          />
-        </form>
+        <TextField
+          className={classes.inputContainer}
+          id="password"
+          label="Enter Password"
+          type="password"
+          required
+          variant="filled"
+          onChange={(e) => {
+            setUserPassword(e.target.value);
+          }}
+        />
+
+        <TextField
+          className={classes.inputContainer}
+          id="Confrim-password"
+          type="password"
+          label="Confirm password"
+          variant="filled"
+          required
+          onChange={(e) => {
+            setConfirmPassword(e.target.value);
+          }}
+        />
+      </form>
+      <div className={classes.registerBtnContainer}>
+        <p className={classes.error}>{error}</p>
         <button type="button" className={classes.btn} onClick={registerHandler}>
           Click Here
         </button>
-        <p className={classes.error}> {error}</p>
-        <div className={classes.login}>
-          <h5>Already have an account?</h5>
-          <Nav className={classes.navLink} as={Link} to="/">
-            Click Here to Log In
-          </Nav>
-        </div>
       </div>
-    </>
+      <div className={classes.login}>
+        <h5>Already have an account?</h5>
+        <Nav className={classes.navLink} as={Link} to="/">
+          Click Here to Log In
+        </Nav>
+      </div>
+    </div>
   );
 }

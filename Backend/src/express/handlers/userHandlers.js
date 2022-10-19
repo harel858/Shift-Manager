@@ -168,7 +168,7 @@ async function deleteUserHandler(req, res) {
 async function signIn(req, res) {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(400).json({ err: `email and password are required` });
+    return res.status(400).json(`email and password are required`);
   }
   const user = await operations.getUserByEmail(email);
   console.log(user);
@@ -178,9 +178,9 @@ async function signIn(req, res) {
       .json(`we couldn't find an account matching this Email`);
   }
   let pass = await bcrypt.compare(password, user.password);
-  console.log(pass);
+  console.log(`pass:${pass}`);
 
-  if (!pass) {
+  if (pass === false) {
     return res.status(400).json(`incorrect email or password`);
   }
 
