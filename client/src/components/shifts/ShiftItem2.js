@@ -47,8 +47,9 @@ export default function ShiftItem2({ shift }) {
   const inputStartRef = useRef(shift.start);
   const inputEndRef = useRef(shift.end);
 
-  const shiftCtx = useContext(ShiftContext);
-  const payment = shiftCtx.payment;
+  const { payment, currency, deleteShift, updateShift } =
+    useContext(ShiftContext);
+
   function openDialog() {
     setOpen(true);
   }
@@ -60,7 +61,7 @@ export default function ShiftItem2({ shift }) {
   const handleDelete = async () => {
     setOpen((prev) => !prev);
     try {
-      shiftCtx.deleteShift(shift);
+      deleteShift(shift);
     } catch (err) {
       console.log(err);
     }
@@ -137,7 +138,7 @@ export default function ShiftItem2({ shift }) {
     newShift.date = date;
     console.log(newShift);
 
-    shiftCtx.updateShift(
+    updateShift(
       shift.index,
       shift._id,
       newShift.start,
@@ -186,7 +187,10 @@ export default function ShiftItem2({ shift }) {
           <p>{`${shift.timeSpend}`}</p>
         </td>
         <td data-label="Total Earning">
-          <p className={classes.money}>{shift.totalProfit}$</p>
+          <p className={classes.money}>
+            {shift.totalProfit}
+            <span className={classes.currencyLabel}>{currency.label}</span>
+          </p>
         </td>
         <td data-label="Action" className={classes.btnContainer}>
           {editor ? (
