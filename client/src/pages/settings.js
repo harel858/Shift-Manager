@@ -38,7 +38,7 @@ function Settings() {
   function savePaymentHandler(e) {
     const value = e.target.value;
     console.log(!isNaN(+value));
-    if (isNaN(+value)) {
+    if (isNaN(+value) || value <= 0) {
       return setError("Payment must be a valid number");
     }
     if (!isNaN(+value)) {

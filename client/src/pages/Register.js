@@ -20,6 +20,8 @@ export default function Register() {
     setCurrency,
     payment,
     setPayment,
+    setLoginError,
+    setUser,
     currencies,
     overTime,
     setOvertime,
@@ -54,7 +56,10 @@ export default function Register() {
         }),
       });
       if (res.ok) {
+        const user = await res.json();
         setError(null);
+        setLoginError(null);
+        setUser({ ...user });
         navigate("/newShift", { replace: true });
       } else {
         const response = await res.json();
@@ -75,21 +80,22 @@ export default function Register() {
 
   function savePaymentHandler(e) {
     const value = e.target.value;
-    console.log(!isNaN(+value));
-    if (isNaN(+value)) {
+
+    if (isNaN(+value) || +value <= 0) {
       return setError("Payment must be a valid number");
     }
     if (!isNaN(+value)) {
       setError("");
-      return setPayment(+value);
+      setPayment(+value);
     }
   }
   function handleOverTime(e) {
+    console.log(e.target.value);
     if (e.target.value === "Calculated") {
-      return setOvertime(false);
+      return setOvertime(true);
     }
     if (e.target.value === "Not Calculated") {
-      return setOvertime(true);
+      return setOvertime(false);
     }
   }
   return (
@@ -155,21 +161,25 @@ export default function Register() {
               <MenuItem value={"Not Calculated"}>Not Calculated</MenuItem>
             </Select>
           </div>
-          <TextField
-            className={classes.inputContainer}
-            id="outlined-select-currency"
-            select
-            label="Select Currency"
-            value={currency}
-            onChange={handleChange}
-            helperText="Please select your currency"
-          >
-            {currencies.map((option) => (
-              <MenuItem key={option.value} value={option}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+          <div className={classes.selectInputContainer}>
+            <InputLabel id="outlined-select-currency">
+              Select Currency
+            </InputLabel>
+            <TextField
+              className={classes.inputContainer}
+              id="outlined-select-currency"
+              select
+              value={currency}
+              onChange={handleChange}
+              helperText="Please select your currency"
+            >
+              {currencies.map((option) => (
+                <MenuItem key={option.value} value={option}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
 
           <TextField
             className={classes.inputContainer}
