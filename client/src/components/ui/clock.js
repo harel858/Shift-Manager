@@ -23,7 +23,6 @@ function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
   return (
     <>
       <div
-        id="clock"
         onClick={startToggleHandler}
         className={
           play
