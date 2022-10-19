@@ -37,6 +37,7 @@ const ShiftContext = createContext({
 });
 
 export function ShiftContextProvider(props) {
+  console.log("render context");
   const [user, setUser] = useState(null);
   const [getUserError, setGetUserError] = useState(null);
   const [shiftList, setShiftList] = useState([]);
@@ -103,18 +104,18 @@ export function ShiftContextProvider(props) {
 
         if (res.ok) {
           const userData = await res.json();
+          console.log(userData);
           setUser(userData[0]);
-          console.log(userData[0]);
           setCurrency(userData[0].currency);
           setPayment(userData[0].payment);
           setOvertime(userData[0].overTime);
         } else {
           const badRes = await res.json();
-
+          console.log(badRes);
           setGetUserError(badRes);
         }
       } catch (err) {
-        throw err;
+        console.log(err);
       }
     };
 

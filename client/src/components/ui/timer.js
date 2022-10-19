@@ -1,4 +1,4 @@
-import classes from "./clock.module.css";
+import classes from "./style/clock.module.css";
 import { useEffect } from "react";
 function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
   console.log(shiftDetails.current);

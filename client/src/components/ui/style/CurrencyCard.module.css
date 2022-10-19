@@ -1,0 +1,89 @@
+.card2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(
+    120deg,
+    rgb(29, 97, 185, 0.8),
+    rgb(29, 172, 185, 0.8)
+  );
+  padding: 2em 6em;
+  margin: 1em;
+  border: 3px solid black;
+  border-radius: 2em;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+.card2:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 50px 10px black;
+  background: linear-gradient(
+    120deg,
+    rgb(29, 97, 185, 1),
+    rgb(29, 172, 185, 1)
+  );
+}
+.card2:hover h2,
+.card2:hover h3,
+.card2:hover .cardIcon {
+  font-weight: bolder;
+}
+.cardIcon {
+  font-size: 2.5em;
+
+  margin: 0.5em auto;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card_h2 {
+  width: fit-content;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 2em;
+}
+.cardOpenIcon {
+  font-size: 2em;
+  margin: 0.5em auto;
+}
+
+.card2Open {
+  grid-column: 2/3;
+  grid-row: 1/-1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(
+    120deg,
+    rgb(29, 97, 185, 1),
+    rgb(29, 172, 185, 1)
+  );
+  padding: 2em 6em;
+  margin: 1em;
+  border: 3px solid black;
+  border-radius: 2em;
+  box-shadow: 0 10px 100px 50px black;
+  cursor: pointer;
+  transform: scale(2);
+  transition: all 200ms ease-in-out;
+}
+.currencyLabel {
+  font-size: 1.2em;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 600;
+}
+
+.currencyInput label,
+.currencyInput div {
+  color: black !important;
+}
+.currencyInput p {
+  color: black;
+  text-align: justify;
+  width: max-content;
+}

@@ -1,4 +1,4 @@
-import classes from "./clock.module.css";
+import classes from "./style/clock.module.css";
 import { BiPlay } from "react-icons/bi";
 import { BsPause } from "react-icons/bs";
 import Timer from "./timer";

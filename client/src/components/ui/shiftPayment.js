@@ -1,4 +1,4 @@
-import classes from "./shiftPayment.module.css";
+import classes from "./style/shiftPayment.module.css";
 import ShiftContext from "../../context/shiftContext";
 import { useEffect, useRef, useContext, useCallback } from "react";
 
@@ -12,8 +12,9 @@ function ShiftPayment({
 }) {
   const shiftCtx = useContext(ShiftContext);
   const currentPayment = useRef(0);
-  const { payment, currency, overTime } = shiftCtx;
-
+  const { payment, currency, overTime, user } = shiftCtx;
+  console.log(currency);
+  console.log(user);
   const basicCalculate = useCallback(
     (sec) => {
       shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
