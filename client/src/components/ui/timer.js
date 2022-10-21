@@ -1,7 +1,6 @@
 import classes from "./style/clock.module.css";
 import { useEffect } from "react";
 function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
-  console.log(shiftDetails.current);
   //global variables
   let today = new Date();
   let currentTime = today.getTime();
@@ -33,11 +32,25 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
       const currentShift = JSON.parse(localStorage.getItem("shiftDetails"));
 
       // while exit and playing
-      ifPlay === true && setSeconds(currentTimeInSeconds - startSeconds);
+      if (ifPlay === true && !currentShift.pausedSeconds) {
+        setSeconds(currentTimeInSeconds - startSeconds);
+      }
+
+      if (ifPlay === true && currentShift.pausedSeconds) {
+        setSeconds(
+          currentTimeInSeconds -
+            startSeconds -
+            (currentShift.startAgain - currentShift.pausedSeconds)
+        );
+      }
+
       // while exit and pause
-      ifPlay === false && setSeconds(currentShift.seconds);
+      if (ifPlay === false) {
+        setSeconds(currentShift.seconds);
+      }
+
       // while exit and not playing
-      !localStorage.getItem("setPlay") && setSeconds(0);
+      !currentShift && setSeconds(0);
 
       clearInterval(interval);
       interval = null;

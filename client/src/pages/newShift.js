@@ -26,12 +26,14 @@ function NewShift() {
   };
 
   const [seconds, setSeconds] = useState(0);
-  console.log(seconds);
+
   const [play, isPlay] = useState();
   const shiftDetails = useRef({
     start: null,
     end: null,
     date: null,
+    pausedSeconds: 0,
+    startAgain: 0,
     timeSpend: null,
     totalProfit: null,
     startSeconds: null,
@@ -46,9 +48,6 @@ function NewShift() {
     shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
   }
 
-  console.log(shiftDetails.current);
-
-  console.log(seconds);
   if (!user) {
     return (
       <div className={classes.errorContainer}>

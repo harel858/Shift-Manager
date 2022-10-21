@@ -8,18 +8,36 @@ function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
     if (seconds === 0) {
       const today = new Date();
       const currentDateAndHour = today.toLocaleString();
-      console.log(currentDateAndHour);
+
       const currentDate = today.toLocaleString("default", { month: "long" });
       shiftDetails.current.start = `${currentDateAndHour} `;
       shiftDetails.current.date = `${currentDate}`;
       shiftDetails.current.startSeconds = today.getTime();
-      console.log(shiftDetails);
     }
-    console.log(shiftDetails);
+    if (play && seconds > 0) {
+      const nowInSeconds = new Date().getTime();
+      shiftDetails.current.pausedSeconds =
+        shiftDetails.current.pausedSeconds + Math.floor(nowInSeconds / 1000);
+      localStorage.setItem(
+        "shiftDetails",
+        JSON.stringify(shiftDetails.current)
+      );
+    }
+
+    if (!play && seconds > 0) {
+      const nowInSeconds = new Date().getTime();
+      shiftDetails.current.startAgain =
+        shiftDetails.current.startAgain + Math.floor(nowInSeconds / 1000);
+      localStorage.setItem(
+        "shiftDetails",
+        JSON.stringify(shiftDetails.current)
+      );
+    }
+
     localStorage.setItem("setPlay", !play);
     return isPlay((prev) => !prev);
   };
-  console.log(shiftDetails.current);
+
   return (
     <>
       <div

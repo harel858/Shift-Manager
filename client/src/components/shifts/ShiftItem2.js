@@ -1,6 +1,6 @@
 import { MdDelete, MdEdit } from "react-icons/md";
 import classes from "./shiftsCss/shiftItem2.module.css";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState, forwardRef } from "react";
 import ShiftContext from "../../context/shiftContext.js";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,6 +11,8 @@ import PropTypes from "prop-types";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -41,9 +43,14 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export default function ShiftItem2({ shift }) {
   const [open, setOpen] = useState(false);
   const [editor, setEditor] = useState(false);
+  const [errorOpen, setErrorOpen] = useState(false);
   const inputStartRef = useRef(shift.start);
   const inputEndRef = useRef(shift.end);
 
@@ -67,6 +74,7 @@ export default function ShiftItem2({ shift }) {
     }
   };
   const calculationFunc = (seconds) => {
+    if (seconds <= 0) return setErrorOpen(true);
     let basicPayment = 0;
     let firstOverTime = 0;
     let overTime = 0;
@@ -218,7 +226,7 @@ export default function ShiftItem2({ shift }) {
         </td>
       </tr>
 
-      {/* delete digalog */}
+      {/* delete Dialog */}
       <Dialog
         open={open}
         onClose={handleClose || handleDelete}
@@ -240,6 +248,21 @@ export default function ShiftItem2({ shift }) {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Update Snackbar */}
+      <Snackbar
+        open={errorOpen}
+        autoHideDuration={6000}
+        onClose={() => setErrorOpen(false)}
+      >
+        <Alert
+          onClose={() => setErrorOpen(false)}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Shift must be above 0 seconds!
+        </Alert>
+      </Snackbar>
     </>
   );
 }

@@ -12,9 +12,8 @@ function ShiftPayment({
 }) {
   const shiftCtx = useContext(ShiftContext);
   const currentPayment = useRef(0);
-  const { payment, currency, overTime, user } = shiftCtx;
-  console.log(currency);
-  console.log(user);
+  const { payment, currency, overTime } = shiftCtx;
+
   const basicCalculate = useCallback(
     (sec) => {
       shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
@@ -54,7 +53,7 @@ function ShiftPayment({
         +shiftDetails.current.overTimePay;
 
       shiftDetails.current.totalProfit = currentPayment.current.toFixed(2);
-      console.log(shiftDetails);
+
       localStorage.setItem(
         "shiftDetails",
         JSON.stringify(shiftDetails.current)
@@ -85,7 +84,6 @@ function ShiftPayment({
       shiftDetails.current.end = `${currentDate}`;
       localStorage.clear();
       const shiftObj = { ...shiftDetails.current };
-      console.log(shiftObj);
 
       shiftCtx.addShift(shiftObj);
       setOpen(true);
@@ -94,6 +92,8 @@ function ShiftPayment({
       shiftDetails.current.firstOverTimePay = null;
       shiftDetails.current.overTimePay = null;
       shiftDetails.current.seconds = 0;
+      shiftDetails.current.pausedSeconds = 0;
+      shiftDetails.current.startAgain = 0;
       return isPlay((play = null));
     } catch (err) {
       console.error(err);
@@ -126,7 +126,7 @@ function ShiftPayment({
       )}
       {!localStorage.getItem("setPlay") && (
         <h3 className={classes.text}>
-          Current Payment: 0{" "}
+          Current Payment: 0
           <span className={classes.currencyLabel}>{currency.label}</span>
         </h3>
       )}

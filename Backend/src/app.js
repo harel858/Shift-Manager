@@ -1,2 +1,2 @@
-require("./express/servers");
 require("./mongoose/connectToDB");
+require("./express/servers");
