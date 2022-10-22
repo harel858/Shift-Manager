@@ -12,7 +12,7 @@ import ShiftContext from "../context/shiftContext.js";
 
 function NewShift() {
   const [open, setOpen] = useState(false);
-  const { getUserError, user } = useContext(ShiftContext);
+  const { loginError, user } = useContext(ShiftContext);
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -38,9 +38,9 @@ function NewShift() {
     totalProfit: null,
     startSeconds: null,
     seconds: seconds,
-    basicPayment: null,
-    firstOverTimePay: null,
-    overTimePay: null,
+    basicPayment: 0,
+    firstOverTimePay: 0,
+    overTimePay: 0,
   });
   const today = new Date();
   const todayDate = today.toISOString().slice(0, 10);
@@ -52,7 +52,7 @@ function NewShift() {
     return (
       <div className={classes.errorContainer}>
         <header className={classes.header}>
-          <h1>{getUserError}</h1>
+          <h1>{loginError}</h1>
         </header>
         <Nav className={classes.navLink} as={Link} to="/">
           Click Here to Log In

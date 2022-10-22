@@ -40,6 +40,7 @@ export default function Register() {
       payment,
       password: userPassword,
     });
+
     try {
       const res = await fetch("http://localhost:5000/user/register", {
         method: "POST",
@@ -55,6 +56,7 @@ export default function Register() {
           password: userPassword,
         }),
       });
+
       if (res.ok) {
         const user = await res.json();
         setError(null);
@@ -63,7 +65,6 @@ export default function Register() {
         navigate("/newShift", { replace: true });
       } else {
         const response = await res.json();
-
         setError(response);
       }
     } catch (err) {

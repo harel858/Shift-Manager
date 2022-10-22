@@ -10,13 +10,15 @@ export default function Register() {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [error, setError] = useState("");
-  const { setLoginError } = useContext(ShiftContext);
+
+  const { setLoginError, setUser, setCurrency, setPayment, setOvertime } =
+    useContext(ShiftContext);
   const navigate = useNavigate();
 
   async function loginHandler(e) {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/user/login", {
+      const res = await fetch("http://localhost:5000/user/login", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -26,15 +28,20 @@ export default function Register() {
         }),
       });
 
-      if (response.ok) {
+      if (res.ok) {
+        const userData = await res.json();
+        console.log(userData);
+        setUser(userData);
+        setCurrency(userData.currency);
+        setPayment(userData.payment);
+        setOvertime(userData.overTime);
         setLoginError(null);
         navigate("/newShift", { replace: true });
       } else {
         //handle error
-        const res = await response.json();
-        console.log(res);
-
-        setError(res);
+        const resError = await res.json();
+        console.log(resError);
+        setError(resError);
       }
     } catch (err) {
       console.error(err);

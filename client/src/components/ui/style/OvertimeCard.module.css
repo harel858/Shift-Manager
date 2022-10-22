@@ -63,7 +63,7 @@
   margin: 1em;
   border: 3px solid black;
   border-radius: 2em;
-  box-shadow: 0 10px 100px 50px black;
+  box-shadow: 0 10px 100px 100px black;
   transform: scale(2);
   transition: all 200ms ease-in-out;
 }

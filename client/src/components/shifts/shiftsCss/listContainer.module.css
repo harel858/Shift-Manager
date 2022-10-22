@@ -9,8 +9,11 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   margin: 0;
-  border-bottom: 2px solid black;
+  border-bottom: 3px solid white;
 }
 .listContainer::-webkit-scrollbar {
   display: none;
+}
+.noShifts h1 {
+  color: white;
 }

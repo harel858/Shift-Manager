@@ -15,9 +15,14 @@ export default function ShiftSummary(props) {
     const getData = () => {
       // sum of earning and work seconds
       let totalProfit = 0;
+      let firstOvertimeEarn = 0;
+      let overtimeEarn = 0;
       let totalSeconds = 0;
       for (let i = 0; i < props.shiftList.length; i++) {
         totalProfit = totalProfit + +props.shiftList[i].totalProfit;
+        firstOvertimeEarn =
+          firstOvertimeEarn + +props.shiftList[i].firstOverTime;
+        overtimeEarn = overtimeEarn + +props.shiftList[i].overTime;
         totalSeconds = totalSeconds + parseInt(props.shiftList[i].seconds);
       }
       //Calculation income Tax of Internal Revenue Service
@@ -42,25 +47,41 @@ export default function ShiftSummary(props) {
       return setSummary({
         totalProfit: totalProfit.toFixed(2),
         amountOfShifts: props.shiftList.length,
+        firstOvertime: firstOvertimeEarn.toFixed(2),
+        overtimeEarn: overtimeEarn.toFixed(2),
         totalTimeSpending: totalTimeSpending,
       });
     };
     getData();
   }, [props.shiftList]);
-
+  console.log(summary);
   return (
     <ul className={classes.summaryContainer}>
       <li className={classes.summaryEarning}>
+        <h5>Net Earning:</h5>
+        <h5 className={classes.net}>
+          {(summary.totalProfit - incomeTax).toFixed(2)}
+          <span className={classes.currencyLabel}>{currency.label}</span>
+        </h5>
+      </li>
+      <li className={classes.summaryEarning}>
         <h5>Gross Earning:</h5>
-        <h5>
+        <h5 className={classes.gross}>
           {summary.totalProfit}
           <span className={classes.currencyLabel}>{currency.label}</span>
         </h5>
       </li>
       <li className={classes.summaryEarning}>
-        <h5>Net Earning:</h5>
+        <h5>125% Earning:</h5>
         <h5>
-          {(summary.totalProfit - incomeTax).toFixed(2)}
+          {summary.firstOvertime}
+          <span className={classes.currencyLabel}>{currency.label}</span>
+        </h5>
+      </li>
+      <li className={classes.summaryEarning}>
+        <h5>150% Earning:</h5>
+        <h5>
+          {summary.overtimeEarn}
           <span className={classes.currencyLabel}>{currency.label}</span>
         </h5>
       </li>

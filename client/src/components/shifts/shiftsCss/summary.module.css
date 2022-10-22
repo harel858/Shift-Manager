@@ -20,6 +20,14 @@
   font-size: 1.3em;
   font-weight: 600;
 }
+.gross {
+  text-decoration-line: line-through;
+  text-decoration-color: white;
+  text-decoration-thickness: 2px;
+}
+.net {
+  font-size: 1.6em !important;
+}
 .summaryEarning h5:nth-child(2) {
   color: #85bb65;
 }

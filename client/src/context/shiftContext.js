@@ -30,7 +30,7 @@ const ShiftContext = createContext({
   setLoginError: (value) => {},
   user: {},
   setUser: () => {},
-  getUserError: String,
+
   updatePayment: (payment) => {},
   updateCurrency: (obj) => {},
   updateOvertime: (value) => {},
@@ -39,7 +39,6 @@ const ShiftContext = createContext({
 export function ShiftContextProvider(props) {
   console.log("render context");
   const [user, setUser] = useState(null);
-  const [getUserError, setGetUserError] = useState(null);
   const [shiftList, setShiftList] = useState([]);
   const [loginError, setLoginError] = useState(null);
   const [payment, setPayment] = useState(29.17);
@@ -72,28 +71,6 @@ export function ShiftContextProvider(props) {
   ]);
 
   useEffect(() => {
-    let allShifts = [];
-
-    const getData = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/shifts", {
-          method: "GET",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-        });
-        if (res.ok) {
-          const shifts = await res.json();
-
-          allShifts.push(...shifts);
-        } else {
-          const badRes = await res.json();
-          setLoginError(badRes);
-        }
-      } catch (err) {
-        throw err;
-      }
-      setShiftList(allShifts);
-    };
     const getUserData = async () => {
       try {
         const res = await fetch("http://localhost:5000/user", {
@@ -108,20 +85,45 @@ export function ShiftContextProvider(props) {
           setUser(userData[0]);
           setCurrency(userData[0].currency);
           setPayment(userData[0].payment);
-          setOvertime(userData[0].overTime);
+          return setOvertime(userData[0].overTime);
         } else {
-          const badRes = await res.json();
-          console.log(badRes);
-          setGetUserError(badRes);
+          const resError = await res.json();
+          console.log(resError);
+          setLoginError(resError);
         }
       } catch (err) {
         console.log(err);
       }
     };
 
-    getData();
     getUserData();
   }, []);
+  useEffect(() => {
+    let allShifts = [];
+
+    const getShiftData = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/shifts", {
+          method: "GET",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+        });
+        if (res.ok) {
+          const shifts = await res.json();
+          allShifts.push(...shifts);
+        } else {
+          const resError = await res.json();
+          setLoginError(resError);
+          console.log(resError);
+        }
+      } catch (err) {
+        setShiftList(allShifts);
+        throw err;
+      }
+      setShiftList(allShifts);
+    };
+    getShiftData();
+  }, [user, setUser]);
 
   async function updatePayment(newPayment) {
     try {
@@ -303,7 +305,7 @@ export function ShiftContextProvider(props) {
     currency,
     currencies,
     overTime,
-    getUserError,
+
     user,
     setUser,
     setPayment,

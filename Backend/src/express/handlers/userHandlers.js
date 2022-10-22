@@ -187,7 +187,7 @@ async function signIn(req, res) {
   const token = jwt.sign({ userId: user._id }, "Harelha123");
   console.log(token);
   req.session = { token };
-
+  console.log(user);
   res.status(200).json(user);
 }
 

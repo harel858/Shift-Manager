@@ -40,7 +40,7 @@
   margin: 1em;
   border: 3px solid black;
   border-radius: 2em;
-  box-shadow: 0 10px 100px 50px black;
+  box-shadow: 0 10px 100px 100px black;
   transform: scale(2);
   transition: all 200ms ease-in-out;
 }
@@ -54,6 +54,10 @@
   width: fit-content;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 2em;
+}
+.cardOpenIcon {
+  font-size: 2em;
+  margin: 0.5em auto;
 }
 
 .currencyLabel {

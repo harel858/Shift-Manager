@@ -27,8 +27,6 @@ function AllShifts() {
   const { loginError } = shiftsCtx;
   const allShiftList = shiftsCtx.shifts.sort(byDate);
 
-  console.log(allShiftList);
-
   const [counter, setCounter] = useState(0);
   const [months, setMonths] = useState([
     null,
@@ -60,7 +58,6 @@ function AllShifts() {
   }, [counter, months, allShiftList]);
 
   if (loginError) {
-    console.log(loginError);
     return (
       <div className={classes.errorContainer}>
         <header className={classes.header}>

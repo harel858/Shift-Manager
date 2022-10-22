@@ -1,4 +1,4 @@
-.h1Settings {
+.headerSettings h1 {
   position: relative;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -6,7 +6,7 @@
   font-size: 3em;
   color: white;
 }
-.mainSettings h1::after {
+.headerSettings h1::after {
   content: "";
   position: absolute;
   display: block;
@@ -16,9 +16,6 @@
   transform: scale(0);
   background: linear-gradient(120deg, #1d61b9, #1dacb9);
   transition: all 200ms ease-in-out;
-}
-.mainSettings:hover h1::after {
-  transform: scale(1);
 }
 
 .btnContainer {
@@ -71,8 +68,9 @@
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
 }
-.errorContainer .header h1 {
+.header h2 {
   color: white;
+  font-size: 3em;
 }
 .errorContainer h3 {
   color: white;

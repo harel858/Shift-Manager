@@ -36,7 +36,7 @@ function Settings() {
     return (
       <div className={classes.errorContainer}>
         <header className={classes.header}>
-          <h1>{loginError}</h1>
+          <h2>{loginError}</h2>
         </header>
         <Nav className={classes.navLink} as={Link} to="/">
           Click Here to Log In
@@ -51,7 +51,9 @@ function Settings() {
   console.log(currency);
   return (
     <>
-      <h1 className={classes.h1Settings}>Edit Settings</h1>
+      <header className={classes.headerSettings}>
+        <h1>Edit Settings</h1>
+      </header>
       <div className={classes.btnContainer}>
         <OvertimeCard
           overTime={overTime}

@@ -88,9 +88,9 @@ function ShiftPayment({
       shiftCtx.addShift(shiftObj);
       setOpen(true);
       setSeconds(0);
-      shiftDetails.current.basicPayment = null;
-      shiftDetails.current.firstOverTimePay = null;
-      shiftDetails.current.overTimePay = null;
+      shiftDetails.current.basicPayment = 0;
+      shiftDetails.current.firstOverTimePay = 0;
+      shiftDetails.current.overTimePay = 0;
       shiftDetails.current.seconds = 0;
       shiftDetails.current.pausedSeconds = 0;
       shiftDetails.current.startAgain = 0;
