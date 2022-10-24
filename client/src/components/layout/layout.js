@@ -1,9 +1,9 @@
-import NavBar from "../navbar/navbar.js";
+import NavigationBar from "../navbar/NavigationBar.js";
 import classes from "./style/layout.module.css";
 function Layout(props) {
   return (
     <>
-      <NavBar />
+      <NavigationBar />
       <main className={classes.mainShifts}>{props.children}</main>
     </>
   );

@@ -5,15 +5,6 @@ import Timer from "./timer";
 
 function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
   const startToggleHandler = () => {
-    if (seconds === 0) {
-      const today = new Date();
-      const currentDateAndHour = today.toLocaleString();
-
-      const currentDate = today.toLocaleString("default", { month: "long" });
-      shiftDetails.current.start = `${currentDateAndHour} `;
-      shiftDetails.current.date = `${currentDate}`;
-      shiftDetails.current.startSeconds = today.getTime();
-    }
     if (play && seconds > 0) {
       const nowInSeconds = new Date().getTime();
       shiftDetails.current.pausedSeconds =

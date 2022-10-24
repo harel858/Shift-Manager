@@ -17,6 +17,7 @@ function ShiftPayment({
   const basicCalculate = useCallback(
     (sec) => {
       shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
+
       currentPayment.current = shiftDetails.current.basicPayment;
       shiftDetails.current.totalProfit = currentPayment.current.toFixed(2);
       localStorage.setItem(

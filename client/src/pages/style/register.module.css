@@ -51,6 +51,7 @@ h1::after {
   width: 20em;
   padding: 0;
   margin-bottom: 2em;
+  color: white;
 }
 
 .inputContainer {

@@ -21,32 +21,38 @@ function NewShift() {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
   const [seconds, setSeconds] = useState(0);
-
   const [play, isPlay] = useState();
-  const shiftDetails = useRef({
-    start: null,
-    end: null,
-    date: null,
-    pausedSeconds: 0,
-    startAgain: 0,
-    timeSpend: null,
-    totalProfit: null,
-    startSeconds: null,
-    seconds: seconds,
-    basicPayment: 0,
-    firstOverTimePay: 0,
-    overTimePay: 0,
-  });
+  const shiftDetails = useRef();
   const today = new Date();
   const todayDate = today.toISOString().slice(0, 10);
-  if (localStorage.getItem("shiftDetails")) {
-    shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
+
+  if (!localStorage.getItem("shiftDetails")) {
+    const today = new Date();
+    const currentDateAndHour = today.toLocaleString();
+    const currentDate = today.toLocaleString("default", { month: "long" });
+
+    shiftDetails.current = {
+      start: `${currentDateAndHour} `,
+      end: null,
+      date: `${currentDate}`,
+      startSeconds: today.getTime(),
+      pausedSeconds: 0,
+      startAgain: 0,
+      timeSpend: null,
+      totalProfit: null,
+      seconds: seconds,
+      basicPayment: 0,
+      firstOverTimePay: 0,
+      overTimePay: 0,
+    };
   }
+
+  if (localStorage.getItem("shiftDetails"))
+    shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
 
   if (!user) {
     return (

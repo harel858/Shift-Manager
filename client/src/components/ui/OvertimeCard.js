@@ -1,4 +1,5 @@
 import classes from "./style/OvertimeCard.module.css";
+import { useState } from "react";
 import Switch from "@mui/material/Switch";
 import { BsFillClockFill } from "react-icons/bs";
 
@@ -24,10 +25,8 @@ export default function OvertimeCard({
     }
     return setCard1Open((prev) => !prev);
   };
-  const handelOvertime = () => {
-    return updateOvertime(!overTime);
-  };
-  const label = { inputProps: { "aria-label": "Switch demo" } };
+  const handelOvertime = () => updateOvertime(!overTime);
+
   return (
     <>
       {!card1Open ? (
@@ -43,7 +42,11 @@ export default function OvertimeCard({
           <div className={classes.innerContainer}>
             <h2 className={classes.card_h2}>Overtime</h2>
             <BsFillClockFill className={classes.cardOpenIcon} />
-            <Switch onChange={handelOvertime} {...label} />
+            <Switch
+              checked={overTime}
+              onChange={handelOvertime}
+              inputProps={{ "aria-label": "controlled" }}
+            />
           </div>
           <h3>{overTime ? "Calculated" : "Not Calculated"}</h3>
           <button onClick={card1Handler} className={classes.btn}>
