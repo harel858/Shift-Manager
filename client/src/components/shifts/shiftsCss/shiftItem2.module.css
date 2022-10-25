@@ -43,6 +43,7 @@
   font-size: 1.2em;
 }
 .editorInput {
+  width: max-content;
   margin: 0;
   padding: 0.5em 0;
   border-radius: 2em;

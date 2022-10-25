@@ -86,7 +86,7 @@
   transition: all 200ms ease-in-out;
 }
 .btn:hover {
-  background: linear-gradient(120deg, #093b7d, #0a838e);
+  background: linear-gradient(120deg, #093b7d, #1dacb9);
   box-shadow: 0 10px 10px black;
   transform: scale(1.3);
 }

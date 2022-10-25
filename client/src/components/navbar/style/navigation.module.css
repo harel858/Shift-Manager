@@ -51,6 +51,12 @@
   transition: all 200ms ease-in-out;
 }
 
+.ul li a:hover {
+  color: #29a6ff;
+}
+.ul li button:hover {
+  color: #29a6ff;
+}
 .dropDown {
   display: inline-block;
 }
@@ -84,8 +90,11 @@
 }
 .dropDownContent a:hover {
   cursor: pointer;
-  background-color: #f1f1f1;
+  background-color: #666;
+  color: white !important;
 }
 .dropDown:hover .dropDownContent {
   display: block;
+}
+@media screen and (max-width: 1200px) {
 }

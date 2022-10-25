@@ -38,14 +38,13 @@ function ShiftPayment({
 
       if (28800 < sec && sec < 36000) {
         shiftDetails.current.firstOverTimePay =
-          (((sec - 28800) / 60) * (payment * 1.25)) / 60;
+          ((sec / 60) * (payment * 1.25)) / 60;
       }
 
       //Calculation of the remaining overtime hours
 
       if (sec > 36000) {
-        shiftDetails.current.overTimePay =
-          (((sec - 36000) / 60) * (payment * 1.5)) / 60;
+        shiftDetails.current.overTimePay = ((sec / 60) * (payment * 1.5)) / 60;
       }
 
       currentPayment.current =
