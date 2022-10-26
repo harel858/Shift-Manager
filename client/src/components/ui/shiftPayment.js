@@ -36,7 +36,7 @@ function ShiftPayment({
 
       // Calculation of pay for the first two overtime hours
 
-      if (28800 < sec && sec < 36000) {
+      if (sec > 28800 && sec < 36000) {
         shiftDetails.current.firstOverTimePay =
           ((sec / 60) * (payment * 1.25)) / 60;
       }

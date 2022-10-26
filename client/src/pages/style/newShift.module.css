@@ -21,7 +21,7 @@
   flex-direction: column;
   font-family: tahoma;
   font-size: 2em;
-  margin: 0;
+  margin: 3em auto 1em auto;
 }
 .clockSection header h1 {
   margin-bottom: 0.5em;

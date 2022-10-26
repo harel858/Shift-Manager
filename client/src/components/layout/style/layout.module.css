@@ -1,3 +1,7 @@
+* {
+  -ms-overflow-style: none;
+}
+
 .mainShifts {
   display: flex;
   flex-direction: column;

@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 15rem;
-  margin-bottom: 2em;
+  margin: 6em auto 2em auto;
   color: white;
 }
 .btn {

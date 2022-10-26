@@ -51,7 +51,7 @@ h1::after {
   width: 20em;
   padding: 0;
   margin-bottom: 2em;
-  color: white;
+  color: white !important;
 }
 
 .inputContainer {
@@ -123,6 +123,10 @@ input[value] {
 .login h5 {
   color: white;
   font-weight: 300;
+}
+.navLink {
+  font-size: 1.2em;
+  font-weight: 400;
 }
 @media screen and (max-width: 1000px) {
   .main {

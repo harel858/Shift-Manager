@@ -7,6 +7,9 @@ table {
   color: white;
   font-size: 1.2em;
 }
+table thead {
+  position: static;
+}
 tr {
   width: 100%;
 }

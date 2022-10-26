@@ -1,3 +1,7 @@
+.headerSettings {
+  margin: 6em auto 2em auto;
+}
+
 .headerSettings h1 {
   position: relative;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -24,7 +28,7 @@
   width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(6em, 1fr));
   gap: 5rem;
-  margin: 2em auto;
+  margin: 0 auto;
 }
 .btnContainer h3 {
   font-size: 1em;

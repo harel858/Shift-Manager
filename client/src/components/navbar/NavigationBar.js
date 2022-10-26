@@ -1,15 +1,45 @@
 import classes from "./style/navigation.module.css";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiClock } from "react-icons/fi";
 import { AiFillCaretDown } from "react-icons/ai";
+import { Squash as Hamburger } from "hamburger-react";
 
 export default function NavigationBar() {
+  const [isOpen, setOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState(false);
+
+  const changeBackground = () => {
+    if (window.scrollY > 22) {
+      setActiveNav(true);
+    }
+    if (window.scrollY === 0) {
+      setActiveNav(false);
+    }
+  };
+  useEffect(() => {
+    function handleResize() {
+      setOpen(false);
+    }
+
+    window.addEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    changeBackground();
+    // adding the event when scroll change background
+    window.addEventListener("scroll", changeBackground);
+  }, []);
+
   return (
-    <nav className={classes.nav}>
-      <Link className={classes.brand} to="/newShift">
+    <nav className={!activeNav ? classes.nav : classes.activeNav}>
+      <Link
+        className={!isOpen ? classes.brand : classes.brandActive}
+        to="/newShift"
+      >
         Shift Manager <FiClock />
       </Link>
-      <ul className={classes.ul}>
+      <ul className={!isOpen ? classes.ul : classes.ulActive}>
         <li>
           <Link to="/newShift">New Shift</Link>
         </li>
@@ -31,6 +61,9 @@ export default function NavigationBar() {
           </div>
         </li>
       </ul>
+      <button className={classes.hamburger}>
+        <Hamburger toggled={isOpen} toggle={setOpen} />
+      </button>
     </nav>
   );
 }
