@@ -1,11 +1,12 @@
 import classes from "./style/navigation.module.css";
-import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FiClock } from "react-icons/fi";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Squash as Hamburger } from "hamburger-react";
 
 export default function NavigationBar() {
+  const navigate = useNavigate();
   const [isOpen, setOpen] = useState(false);
   const [activeNav, setActiveNav] = useState(false);
 
@@ -31,6 +32,20 @@ export default function NavigationBar() {
     window.addEventListener("scroll", changeBackground);
   }, []);
 
+  const logOutHandler = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/user/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      if (res.ok) {
+        console.log(res);
+        navigate("/", { replace: true });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <nav className={!activeNav ? classes.nav : classes.activeNav}>
       <Link
@@ -56,8 +71,10 @@ export default function NavigationBar() {
           </button>
 
           <div className={classes.dropDownContent}>
-            <Link to="/register">switch account</Link>
-            <Link to="/">login</Link>
+            <Link to="/register">Add Account</Link>
+            <Link onClick={logOutHandler} to="/">
+              Log Out
+            </Link>
           </div>
         </li>
       </ul>

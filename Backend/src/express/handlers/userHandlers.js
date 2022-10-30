@@ -1,6 +1,7 @@
 const operations = require("../../mongoose/userOperations");
 const validateUser = require("../../joi/userValidation");
 const userModel = require("../../mongoose/userModel.js");
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -27,6 +28,20 @@ async function overtimeUpdateHandler(req, res) {
     console.log(err);
   }
 }
+//workPlace update
+async function updateWorkPlaces(req, res) {
+  try {
+    const { workPlaces } = req.body;
+    const { userId } = req;
+    const response = await operations.updateWorkPlaces(userId, workPlaces);
+    if (!response || response.acknowledged == false) {
+      return res.status(500).json(`someThing went wrong`);
+    }
+    return res.status(204).json(workPlaces);
+  } catch (err) {
+    console.log(err);
+  }
+}
 // update User Currency
 async function updateCurrencyHandler(req, res) {
   try {
@@ -41,10 +56,29 @@ async function updateCurrencyHandler(req, res) {
 
 //register Handler
 async function registerHandler(req, res) {
-  const { name, email, phone, currency, payment, overTime } = req.body;
+  const {
+    name,
+    lastName,
+    workPlace,
+    email,
+    phone,
+    currency,
+    payment,
+    overTime,
+  } = req.body;
   console.log(req.body);
   const { password } = req;
-  console.log({ name, email, phone, password, currency, payment, overTime });
+  console.log({
+    name,
+    lastName,
+    workPlace,
+    email,
+    phone,
+    password,
+    currency,
+    payment,
+    overTime,
+  });
   const user = await operations.getUserByEmail(email);
 
   if (user) {
@@ -54,11 +88,13 @@ async function registerHandler(req, res) {
   }
   const { error } = validateUser({
     name,
+    lastName,
     email,
     phone,
     password,
     currency,
     payment,
+    workPlace,
     overTime,
   });
 
@@ -67,13 +103,25 @@ async function registerHandler(req, res) {
     console.log({ err });
     return res.status(400).json(err);
   }
-  if (!name || !email || !phone || !password || !currency || !payment) {
+  if (
+    !name ||
+    !lastName ||
+    !workPlace ||
+    !email ||
+    !phone ||
+    !password ||
+    !workPlace ||
+    !currency ||
+    !payment
+  ) {
     return res.status(400).json(`there are some missing values`);
   }
 
   try {
     const newUser = await operations.addUser({
       name,
+      lastName,
+      workPlaces: [workPlace],
       email,
       phone,
       currency,
@@ -190,6 +238,14 @@ async function signIn(req, res) {
   console.log(user);
   res.status(200).json(user);
 }
+async function logOut(req, res) {
+  try {
+    req.session = null;
+    res.status(204).end();
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 module.exports = {
   registerHandler,
@@ -200,4 +256,6 @@ module.exports = {
   updateUserPayment,
   updateCurrencyHandler,
   overtimeUpdateHandler,
+  updateWorkPlaces,
+  logOut,
 };

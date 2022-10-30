@@ -1,9 +1,9 @@
 import classes from "./shiftsCss/summary.module.css";
 import { useMemo, useState, useContext } from "react";
-import ShiftContext from "../../context/shiftContext";
+import UserContext from "../../context/userContext.js";
 export default function ShiftSummary(props) {
-  const shiftCtx = useContext(ShiftContext);
-  const { currency } = shiftCtx;
+  const { currency } = useContext(UserContext);
+
   //Define A Summary Object
   const [summary, setSummary] = useState({
     totalProfit: 0,

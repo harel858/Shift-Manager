@@ -8,11 +8,11 @@ import ShiftPayment from "../components/ui/shiftPayment";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import ShiftContext from "../context/shiftContext.js";
+import UserContext from "../context/userContext.js";
 
 function NewShift() {
   const [open, setOpen] = useState(false);
-  const { loginError, user } = useContext(ShiftContext);
+  const { loginError, user } = useContext(UserContext);
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });

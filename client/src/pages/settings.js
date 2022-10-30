@@ -7,9 +7,9 @@ import Nav from "react-bootstrap/Nav";
 import OvertimeCard from "../components/ui/OvertimeCard.js";
 import CurrencyCard from "../components/ui/CurrencyCard.js";
 import PaymentCard from "../components/ui/PaymentCard.js";
+import UserContext from "../context/userContext.js";
 
 function Settings() {
-  const shiftCtx = useContext(ShiftContext);
   const {
     payment,
     currencies,
@@ -20,7 +20,7 @@ function Settings() {
     updateOvertime,
     loginError,
     user,
-  } = shiftCtx;
+  } = useContext(UserContext);
 
   const [card1Open, setCard1Open] = useState(false);
   const [card2Open, setCard2Open] = useState(false);

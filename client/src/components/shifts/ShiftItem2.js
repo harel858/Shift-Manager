@@ -13,6 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import UserContext from "../../context/userContext.js";
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -54,8 +55,8 @@ export default function ShiftItem2({ shift }) {
   const inputStartRef = useRef(shift.start);
   const inputEndRef = useRef(shift.end);
 
-  const { payment, currency, deleteShift, updateShift } =
-    useContext(ShiftContext);
+  const { deleteShift, updateShift } = useContext(ShiftContext);
+  const { payment, currency } = useContext(UserContext);
 
   function openDialog() {
     setOpen(true);

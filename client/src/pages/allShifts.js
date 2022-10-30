@@ -7,6 +7,7 @@ import ShiftSummary from "../components/shifts/ShiftSummary.js";
 import MonthStepper from "../components/shifts/MonthStepper.js";
 import { useContext, useEffect, useState } from "react";
 import ShiftContext from "../context/shiftContext.js";
+import UserContext from "../context/userContext.js";
 
 function AllShifts() {
   const byDate = (a, b) => {
@@ -24,7 +25,7 @@ function AllShifts() {
   };
 
   const shiftsCtx = useContext(ShiftContext);
-  const { loginError } = shiftsCtx;
+  const { loginError } = useContext(UserContext);
   const allShiftList = shiftsCtx.shifts.sort(byDate);
 
   const [counter, setCounter] = useState(0);

@@ -3,7 +3,8 @@ const shiftsOperations = require("../../mongoose/shiftOperations.js");
 //get all shifts
 async function getUserShifts(req, res) {
   const { userId } = req;
-  const userShifts = await shiftsOperations.getAllUserShifts(userId);
+  const { workPlace } = req.body;
+  const userShifts = await shiftsOperations.getAllUserShifts(userId, workPlace);
   console.log(userShifts);
 
   if (!userShifts) {
@@ -21,6 +22,7 @@ async function getUserShifts(req, res) {
 async function createShift(req, res) {
   const { userId } = req;
   const {
+    workPlace,
     start,
     end,
     date,
@@ -32,6 +34,7 @@ async function createShift(req, res) {
     overTime,
   } = req.body;
   const newShift = await shiftsOperations.createShift({
+    workPlace,
     start,
     end,
     date,
@@ -44,6 +47,7 @@ async function createShift(req, res) {
     overTime,
   });
   if (
+    !workPlace ||
     !start ||
     !end ||
     !date ||
@@ -64,6 +68,7 @@ async function updateShift(req, res) {
   const { userId } = req;
   const {
     _id,
+    workPlace,
     start,
     end,
     date,
@@ -82,6 +87,7 @@ async function updateShift(req, res) {
 
   let updatedShift = await shiftsOperations.updateShift(
     _id,
+    workPlace,
     start,
     end,
     date,
@@ -95,7 +101,7 @@ async function updateShift(req, res) {
 
   console.log(updatedShift);
   if (!updatedShift || updatedShift.acknowledged == false) {
-    return res.status(400).json(`someThing went wrong`);
+    return res.status(500).json(`someThing went wrong`);
   }
   updatedShift = await shiftsOperations.getShiftById(_id, userId);
   return res.json(updatedShift);

@@ -19,6 +19,21 @@ async function updateOverTime(id, overTime) {
     console.log(err);
   }
 }
+
+// update workplaces
+async function updateWorkPlaces(_id, workPlaces) {
+  try {
+    const newWorkPlaces = await userModel.findOneAndUpdate(
+      { _id },
+      { $set: { workPlaces } }
+    );
+    console.log(newOvertime);
+    return newWorkPlaces;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function updateCurrency(id, currency) {
   return await userModel.findOneAndUpdate({ _id: id }, { $set: { currency } });
 }
@@ -118,4 +133,5 @@ module.exports = {
   updatePayment,
   updateCurrency,
   updateOverTime,
+  updateWorkPlaces,
 };

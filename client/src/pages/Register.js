@@ -5,12 +5,14 @@ import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import { TextField, Select, InputLabel } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import ShiftContext from "../context/shiftContext.js";
+import UserContext from "../context/userContext.js";
 
 export default function Register() {
   const [userName, setUserName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
+  const [workPlace, setWorkPlace] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,7 +27,7 @@ export default function Register() {
     currencies,
     overTime,
     setOvertime,
-  } = useContext(ShiftContext);
+  } = useContext(UserContext);
 
   async function registerHandler(e) {
     e.preventDefault();
@@ -47,7 +49,9 @@ export default function Register() {
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          workPlace,
           name: userName,
+          lastName: userLastName,
           email: userEmail,
           phone: userPhone,
           currency: currency,
@@ -114,6 +118,16 @@ export default function Register() {
           }}
           className={classes.inputContainer}
         />
+        <TextField
+          id="lastName"
+          label="Enter Last Name"
+          required
+          variant="filled"
+          onChange={(e) => {
+            setUserLastName(e.target.value);
+          }}
+          className={classes.inputContainer}
+        />
 
         <TextField
           className={classes.inputContainer}
@@ -136,7 +150,16 @@ export default function Register() {
             setUserPhone(e.target.value);
           }}
         />
-
+        <TextField
+          id="workPlace"
+          label="Enter your work place name"
+          required
+          variant="filled"
+          onChange={(e) => {
+            setWorkPlace(e.target.value);
+          }}
+          className={classes.inputContainer}
+        />
         <TextField
           id="payment"
           label={`${payment}${currency.label} Per Hour`}

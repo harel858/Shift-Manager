@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
+  workPlace: String,
   start: String,
   end: String,
   date: String,

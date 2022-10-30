@@ -1,9 +1,12 @@
 const shiftModel = require("./shiftModel.js");
 
 //get all user shifts
-async function getAllUserShifts(userId) {
+async function getAllUserShifts(userId, workPlace) {
   try {
-    return await shiftModel.find({ userId: userId });
+    return await shiftModel
+      .find({ userId: userId })
+      .where("workPlace")
+      .equals(workPlace);
   } catch (err) {
     console.log(err);
     return null;
@@ -36,6 +39,7 @@ async function createShift(shiftDetails) {
 //update shift
 async function updateShift(
   _id,
+  workPlace,
   start,
   end,
   date,
@@ -51,6 +55,7 @@ async function updateShift(
       { _id: _id },
       {
         $set: {
+          workPlace: workPlace,
           start: start,
           end: end,
           date: date,

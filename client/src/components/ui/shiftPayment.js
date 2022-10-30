@@ -1,6 +1,7 @@
 import classes from "./style/shiftPayment.module.css";
-import ShiftContext from "../../context/shiftContext";
 import { useEffect, useRef, useContext, useCallback } from "react";
+import UserContext from "../../context/userContext.js";
+import ShiftContext from "../../context/shiftContext.js";
 
 function ShiftPayment({
   shiftDetails,
@@ -10,9 +11,9 @@ function ShiftPayment({
   setSeconds,
   setOpen,
 }) {
-  const shiftCtx = useContext(ShiftContext);
+  const { payment, currency, overTime } = useContext(UserContext);
+  const { addShift } = useContext(ShiftContext);
   const currentPayment = useRef(0);
-  const { payment, currency, overTime } = shiftCtx;
 
   const basicCalculate = useCallback(
     (sec) => {
@@ -30,21 +31,43 @@ function ShiftPayment({
   // Calculation of pay
   const overTimeCalculate = useCallback(
     (sec) => {
-      if (sec < 28800) {
+      const EIGHT_HOURS_BY_MILLISECONDS = 28800;
+      const TEN_HOURS_BY_MILLISECONDS = 36000;
+
+      if (localStorage.getItem("shiftDetails")) {
+        let paymentObj = {
+          basicPayment: JSON.parse(localStorage.getItem("shiftDetails"))
+            .basicPayment,
+          firstOverTimePay: JSON.parse(localStorage.getItem("shiftDetails"))
+            .firstOverTimePay,
+          overTimePay: JSON.parse(localStorage.getItem("shiftDetails"))
+            .overTimePay,
+        };
+
+        shiftDetails.current.basicPayment = paymentObj.basicPayment;
+        shiftDetails.current.firstOverTimePay = paymentObj.firstOverTimePay;
+        shiftDetails.current.overTimePay = paymentObj.overTimePay;
+      }
+
+      if (sec < EIGHT_HOURS_BY_MILLISECONDS) {
         shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
       }
 
       // Calculation of pay for the first two overtime hours
 
-      if (sec > 28800 && sec < 36000) {
+      if (
+        sec > EIGHT_HOURS_BY_MILLISECONDS &&
+        sec < TEN_HOURS_BY_MILLISECONDS
+      ) {
         shiftDetails.current.firstOverTimePay =
-          ((sec / 60) * (payment * 1.25)) / 60;
+          (((sec - EIGHT_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.25)) / 60;
       }
 
       //Calculation of the remaining overtime hours
 
-      if (sec > 36000) {
-        shiftDetails.current.overTimePay = ((sec / 60) * (payment * 1.5)) / 60;
+      if (sec > TEN_HOURS_BY_MILLISECONDS) {
+        shiftDetails.current.overTimePay =
+          (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
       }
 
       currentPayment.current =
@@ -84,8 +107,7 @@ function ShiftPayment({
       shiftDetails.current.end = `${currentDate}`;
       localStorage.clear();
       const shiftObj = { ...shiftDetails.current };
-
-      shiftCtx.addShift(shiftObj);
+      addShift(shiftObj);
       setOpen(true);
       setSeconds(0);
       shiftDetails.current.basicPayment = 0;

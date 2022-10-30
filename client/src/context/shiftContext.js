@@ -1,5 +1,5 @@
-import { useState, createContext, useEffect } from "react";
-
+import { useState, useContext, createContext, useEffect } from "react";
+import UserContext from "./userContext.js";
 const ShiftContext = createContext({
   shifts: [],
   totalShifts: 0,
@@ -20,25 +20,11 @@ const ShiftContext = createContext({
     date,
     setEditor
   ) => {},
-  payment: Number,
-  setPayment: (payment) => {},
-  currency: String,
-  currencies: [],
-  setCurrency: (value) => {},
-  overTime: Boolean,
-  setOvertime: (value) => {},
-  setLoginError: (value) => {},
-  user: {},
-  setUser: () => {},
-
-  updatePayment: (payment) => {},
-  updateCurrency: (obj) => {},
-  updateOvertime: (value) => {},
 });
 
 export function ShiftContextProvider(props) {
+  const { user, setUser } = useContext(UserContext);
   console.log("render context");
-  const [user, setUser] = useState(null);
   const [shiftList, setShiftList] = useState([]);
   const [loginError, setLoginError] = useState(null);
   const [payment, setPayment] = useState(29.17);
@@ -70,34 +56,6 @@ export function ShiftContextProvider(props) {
     },
   ]);
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/user", {
-          method: "GET",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-        });
-
-        if (res.ok) {
-          const userData = await res.json();
-          console.log(userData);
-          setUser(userData[0]);
-          setCurrency(userData[0].currency);
-          setPayment(userData[0].payment);
-          return setOvertime(userData[0].overTime);
-        } else {
-          const resError = await res.json();
-          console.log(resError);
-          setLoginError(resError);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getUserData();
-  }, []);
   useEffect(() => {
     let allShifts = [];
 
@@ -195,6 +153,7 @@ export function ShiftContextProvider(props) {
         },
 
         body: JSON.stringify({
+          workPlace: shift.workPlace,
           start: shift.start,
           end: shift.end,
           date: shift.date,
@@ -245,6 +204,7 @@ export function ShiftContextProvider(props) {
   const updateShiftHandler = async (
     index,
     _id,
+    workPlace,
     start,
     end,
     timeSpend,
@@ -264,6 +224,7 @@ export function ShiftContextProvider(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           _id,
+          workPlace,
           start,
           end,
           date,
@@ -298,21 +259,6 @@ export function ShiftContextProvider(props) {
     addShift: addShiftHandler,
     deleteShift: deleteShiftHandler,
     updateShift: updateShiftHandler,
-    loginError,
-    setLoginError,
-    setOvertime,
-    payment,
-    currency,
-    currencies,
-    overTime,
-
-    user,
-    setUser,
-    setPayment,
-    setCurrency,
-    updatePayment,
-    updateCurrency,
-    updateOvertime,
   };
 
   return (

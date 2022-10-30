@@ -4,7 +4,7 @@ import classes from "./style/login.module.css";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
-import ShiftContext from "../context/shiftContext";
+import UserContext from "../context/userContext.js";
 
 export default function Register() {
   const [userEmail, setUserEmail] = useState("");
@@ -12,7 +12,7 @@ export default function Register() {
   const [error, setError] = useState("");
 
   const { setLoginError, setUser, setCurrency, setPayment, setOvertime } =
-    useContext(ShiftContext);
+    useContext(UserContext);
   const navigate = useNavigate();
 
   async function loginHandler(e) {
