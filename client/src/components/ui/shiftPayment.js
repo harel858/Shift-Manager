@@ -34,21 +34,6 @@ function ShiftPayment({
       const EIGHT_HOURS_BY_MILLISECONDS = 28800;
       const TEN_HOURS_BY_MILLISECONDS = 36000;
 
-      if (localStorage.getItem("shiftDetails")) {
-        let paymentObj = {
-          basicPayment: JSON.parse(localStorage.getItem("shiftDetails"))
-            .basicPayment,
-          firstOverTimePay: JSON.parse(localStorage.getItem("shiftDetails"))
-            .firstOverTimePay,
-          overTimePay: JSON.parse(localStorage.getItem("shiftDetails"))
-            .overTimePay,
-        };
-
-        shiftDetails.current.basicPayment = paymentObj.basicPayment;
-        shiftDetails.current.firstOverTimePay = paymentObj.firstOverTimePay;
-        shiftDetails.current.overTimePay = paymentObj.overTimePay;
-      }
-
       if (sec < EIGHT_HOURS_BY_MILLISECONDS) {
         shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
       }

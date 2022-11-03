@@ -1,6 +1,25 @@
 import classes from "./style/clock.module.css";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import UserContext from "../../context/userContext.js";
 function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
+  const { payment } = useContext(UserContext);
+
+  const setEarning = (sec) => {
+    const EIGHT_HOURS_BY_MILLISECONDS = 28800;
+    const TEN_HOURS_BY_MILLISECONDS = 36000;
+    if (sec < EIGHT_HOURS_BY_MILLISECONDS) {
+      shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
+    }
+    if (sec >= EIGHT_HOURS_BY_MILLISECONDS) {
+      shiftDetails.current.firstOverTimePay =
+        (((sec - EIGHT_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.25)) / 60;
+    }
+    if (sec > TEN_HOURS_BY_MILLISECONDS) {
+      shiftDetails.current.overTimePay =
+        (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
+    }
+    localStorage.setItem("shiftDetails", JSON.stringify(shiftDetails?.current));
+  };
   //global variables
   let today = new Date();
   let currentTime = today.getTime();
@@ -34,6 +53,7 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
       // while exit and playing
       if (ifPlay === true && !currentShift.pausedSeconds) {
         setSeconds(currentTimeInSeconds - startSeconds);
+        setEarning(currentTimeInSeconds - startSeconds);
       }
 
       if (ifPlay === true && currentShift.pausedSeconds) {
@@ -42,11 +62,16 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
             startSeconds -
             (currentShift.startAgain - currentShift.pausedSeconds)
         );
+        setEarning(
+          currentTimeInSeconds -
+            startSeconds -
+            (currentShift.startAgain - currentShift.pausedSeconds)
+        );
       }
-
       // while exit and pause
       if (ifPlay === false) {
         setSeconds(currentShift.seconds);
+        setEarning(currentShift.seconds);
       }
 
       // while exit and not playing
