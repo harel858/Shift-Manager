@@ -126,7 +126,7 @@ async function registerHandler(req, res) {
 
     return res.status(201).json(newUser);
   } catch (err) {
-    throw Error({ message: err });
+    return res.status(500).json(err);
   }
 }
 
