@@ -66,7 +66,7 @@ export default function Register() {
         throw Error(response);
       }
     } catch (err) {
-      throw Error({ message: err });
+      throw Error({ err });
     }
   }
 
