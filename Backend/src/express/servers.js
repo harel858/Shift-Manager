@@ -9,7 +9,7 @@ const shiftRouter = require("./routers/shiftRouters");
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: "https://shift-manager-production.up.railway.app/",
   })
 );
 app.use(json());
