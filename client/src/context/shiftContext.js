@@ -35,7 +35,7 @@ export function ShiftContextProvider(props) {
     const getShiftData = async () => {
       try {
         const res = await fetch(
-          "https://shift-manager-production.up.railway.app//shifts",
+          "https://shift-manager-production.up.railway.app/shifts",
           {
             method: "GET",
             credentials: "include",
