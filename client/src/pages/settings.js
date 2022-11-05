@@ -1,7 +1,7 @@
 import classes from "./style/settings.module.css";
 
 import { useState, useContext, useRef } from "react";
-import ShiftContext from "../context/shiftContext.js";
+
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import OvertimeCard from "../components/ui/OvertimeCard.js";
@@ -19,7 +19,6 @@ function Settings() {
     overTime,
     updateOvertime,
     loginError,
-    user,
   } = useContext(UserContext);
 
   const [card1Open, setCard1Open] = useState(false);
@@ -29,10 +28,7 @@ function Settings() {
   const card2Ref = useRef();
   const card3Ref = useRef();
 
-  console.log(user);
-
   if (loginError) {
-    console.log(loginError);
     return (
       <div className={classes.errorContainer}>
         <header className={classes.header}>
@@ -48,7 +44,7 @@ function Settings() {
       </div>
     );
   }
-  console.log(currency);
+
   return (
     <>
       <header className={classes.headerSettings}>

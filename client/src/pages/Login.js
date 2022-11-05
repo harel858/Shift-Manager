@@ -30,7 +30,6 @@ export default function Register() {
 
       if (res.ok) {
         const userData = await res.json();
-        console.log(userData);
         setUser(userData);
         setCurrency(userData.currency);
         setPayment(userData.payment);
@@ -40,7 +39,6 @@ export default function Register() {
       } else {
         //handle error
         const resError = await res.json();
-        console.log(resError);
         setError(resError);
       }
     } catch (err) {

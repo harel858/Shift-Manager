@@ -14,8 +14,6 @@ export default function CurrencyCard({
   updateCurrency,
   currencies,
 }) {
-  console.log("render");
-  console.log(currency);
   const card2Handler = (e) => {
     setCard1Open(false);
     setCard3Open(false);
@@ -25,7 +23,7 @@ export default function CurrencyCard({
       card1Ref.current.style.pointerEvents = "auto";
       card3Ref.current.style.pointerEvents = "auto";
     }
-    console.log(card2Open);
+
     return setCard2Open((prev) => !prev);
   };
   const handleChange = (event) => {

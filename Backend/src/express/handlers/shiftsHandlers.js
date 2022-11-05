@@ -5,7 +5,6 @@ async function getUserShifts(req, res) {
   const { userId } = req;
   const { workPlace } = req.body;
   const userShifts = await shiftsOperations.getAllUserShifts(userId, workPlace);
-  console.log(userShifts);
 
   if (!userShifts) {
     return res.status(500).send(`Something went wrong`);
@@ -83,7 +82,6 @@ async function updateShift(req, res) {
   if (!shift || shift.length <= 0) {
     return res.status(500).send(`shift has not found`);
   }
-  console.log(shift);
 
   let updatedShift = await shiftsOperations.updateShift(
     _id,
@@ -99,7 +97,6 @@ async function updateShift(req, res) {
     seconds
   );
 
-  console.log(updatedShift);
   if (!updatedShift || updatedShift.acknowledged == false) {
     return res.status(500).json(`someThing went wrong`);
   }

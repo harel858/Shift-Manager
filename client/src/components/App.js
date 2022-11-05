@@ -1,58 +1,64 @@
-import Layout from "./layout/layout.js";
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import NewShift from "../pages/newShift.js";
-import AllShifts from "../pages/allShifts.js";
-import Settings from "../pages/settings.js";
-import Register from "../pages/Register.js";
-import Login from "../pages/Login.js";
-import ClockLayout from "./layout/clockLayout.js";
+import LinearColor from "./ui/loading.js";
 import FormLayOut from "./layout/formLayOut.js";
+import Layout from "./layout/layout.js";
 import SettingsLayout from "./layout/settingsLayout.js";
+
+const Register = lazy(() => import("../pages/Register.js"));
+const Login = lazy(() => import("../pages/Login.js"));
+const ClockLayout = lazy(() => import("./layout/clockLayout.js"));
+const NewShift = lazy(() => import("../pages/newShift.js"));
+const AllShifts = lazy(() => import("../pages/allShifts.js"));
+const Settings = lazy(() => import("../pages/settings.js"));
+
 function App() {
   return (
     <>
-      <Routes>
-        <Route
-          path="/register"
-          element={
-            <FormLayOut>
-              <Register />
-            </FormLayOut>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <FormLayOut>
-              <Login />
-            </FormLayOut>
-          }
-        />
-        <Route
-          path="/newShift"
-          element={
-            <ClockLayout>
-              <NewShift />
-            </ClockLayout>
-          }
-        />
-        <Route
-          path="/allShifts"
-          element={
-            <Layout>
-              <AllShifts />
-            </Layout>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <SettingsLayout>
-              <Settings />
-            </SettingsLayout>
-          }
-        />
-      </Routes>
+      <Suspense fallback={<LinearColor />}>
+        <Routes>
+          <Route
+            path="/register"
+            element={
+              <FormLayOut>
+                <Register />
+              </FormLayOut>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <FormLayOut>
+                <Login />
+              </FormLayOut>
+            }
+          />
+          <Route
+            path="/newShift"
+            element={
+              <ClockLayout>
+                <NewShift />
+              </ClockLayout>
+            }
+          />
+          <Route
+            path="/allShifts"
+            element={
+              <Layout>
+                <AllShifts />
+              </Layout>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <SettingsLayout>
+                <Settings />
+              </SettingsLayout>
+            }
+          />
+        </Routes>
+      </Suspense>
     </>
   );
 }

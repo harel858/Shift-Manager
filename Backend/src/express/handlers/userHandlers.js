@@ -21,8 +21,7 @@ async function overtimeUpdateHandler(req, res) {
     const { userId } = req;
 
     const response = await operations.updateOverTime(userId, overTime);
-    console.log(response);
-    console.log(overTime);
+
     return res.status(204).json(overTime);
   } catch (err) {
     console.log(err);
@@ -66,19 +65,9 @@ async function registerHandler(req, res) {
     payment,
     overTime,
   } = req.body;
-  console.log(req.body);
+
   const { password } = req;
-  console.log({
-    name,
-    lastName,
-    workPlace,
-    email,
-    phone,
-    password,
-    currency,
-    payment,
-    overTime,
-  });
+
   const user = await operations.getUserByEmail(email);
 
   if (user) {
@@ -100,7 +89,7 @@ async function registerHandler(req, res) {
 
   if (error) {
     const err = error.details[0].message;
-    console.log({ err });
+
     return res.status(400).json(err);
   }
   if (
@@ -132,7 +121,7 @@ async function registerHandler(req, res) {
     });
     console.log(newUser);
     const token = jwt.sign({ userId: newUser._id }, "Harelha123");
-    console.log(token);
+
     req.session = { token };
 
     return res.status(201).json(newUser);
@@ -168,7 +157,7 @@ async function updateUserHandler(req, res) {
 
   try {
     const [value] = user;
-    console.log(value);
+
     const userObj = {
       name: value.name,
       email: value.email,
@@ -204,7 +193,7 @@ async function updateUserHandler(req, res) {
 async function deleteUserHandler(req, res) {
   const { id } = req;
   const result = await operations.deleteUser(id);
-  console.log(result);
+
   if (!result) {
     return res.status(500).send(`something went wrong`);
   }
@@ -226,16 +215,15 @@ async function signIn(req, res) {
       .json(`we couldn't find an account matching this Email`);
   }
   let pass = await bcrypt.compare(password, user.password);
-  console.log(`pass:${pass}`);
 
   if (pass === false) {
     return res.status(400).json(`incorrect email or password`);
   }
 
   const token = jwt.sign({ userId: user._id }, "Harelha123");
-  console.log(token);
+
   req.session = { token };
-  console.log(user);
+
   res.status(200).json(user);
 }
 async function logOut(req, res) {

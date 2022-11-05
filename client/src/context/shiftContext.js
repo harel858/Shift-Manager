@@ -24,37 +24,10 @@ const ShiftContext = createContext({
 
 export function ShiftContextProvider(props) {
   const { user, setUser } = useContext(UserContext);
-  console.log("render context");
+
   const [shiftList, setShiftList] = useState([]);
-  const [loginError, setLoginError] = useState(null);
-  const [payment, setPayment] = useState(29.17);
-  const [currency, setCurrency] = useState({
-    value: "USD",
-    label: "$",
-  });
-  const [overTime, setOvertime] = useState();
-  const [currencies] = useState([
-    {
-      value: "USD",
-      label: "$",
-    },
-    {
-      value: "EUR",
-      label: "€",
-    },
-    {
-      value: "BTC",
-      label: "฿",
-    },
-    {
-      value: "JPY",
-      label: "¥",
-    },
-    {
-      value: "INS",
-      label: "₪",
-    },
-  ]);
+
+  const { setLoginError } = useContext(UserContext);
 
   useEffect(() => {
     let allShifts = [];
@@ -72,7 +45,6 @@ export function ShiftContextProvider(props) {
         } else {
           const resError = await res.json();
           setLoginError(resError);
-          console.log(resError);
         }
       } catch (err) {
         setShiftList(allShifts);
@@ -81,67 +53,7 @@ export function ShiftContextProvider(props) {
       setShiftList(allShifts);
     };
     getShiftData();
-  }, [user, setUser]);
-
-  async function updatePayment(newPayment) {
-    try {
-      const res = await fetch("http://localhost:5000/user/update-payment", {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          payment: newPayment,
-        }),
-      });
-      if (res.ok) {
-        setPayment(newPayment);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  async function updateCurrency(newCurrency) {
-    try {
-      const res = await fetch("http://localhost:5000/user/update-currency", {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          currency: newCurrency,
-        }),
-      });
-      if (res.ok) {
-        setCurrency(newCurrency);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-  async function updateOvertime(newOverTime) {
-    console.log(newOverTime);
-    try {
-      const res = await fetch("http://localhost:5000/user/update-overtime", {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          overTime: newOverTime,
-        }),
-      });
-      if (res.ok) {
-        setOvertime(newOverTime);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  }, [user, setUser, setLoginError]);
 
   async function addShiftHandler(shift) {
     try {
@@ -217,7 +129,6 @@ export function ShiftContextProvider(props) {
     setEditor
   ) => {
     try {
-      console.log(0);
       let res = await fetch("http://localhost:5000/shifts/update", {
         method: "PUT",
         credentials: "include",
@@ -239,7 +150,6 @@ export function ShiftContextProvider(props) {
       if (res.ok) {
         const response = await res.json();
         let [updatedShift] = response;
-        console.log(updatedShift);
         setShiftList((prev) => {
           prev[index] = updatedShift;
           return [...prev];

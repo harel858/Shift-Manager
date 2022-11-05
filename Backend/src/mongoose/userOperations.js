@@ -13,7 +13,7 @@ async function updateOverTime(id, overTime) {
       { _id: id },
       { $set: { overTime: overTime } }
     );
-    console.log(newOvertime);
+
     return newOvertime;
   } catch (err) {
     console.log(err);
@@ -27,7 +27,7 @@ async function updateWorkPlaces(_id, workPlaces) {
       { _id },
       { $set: { workPlaces } }
     );
-    console.log(newOvertime);
+
     return newWorkPlaces;
   } catch (err) {
     console.log(err);
@@ -64,7 +64,6 @@ async function updateUserHandler(id, filter, option) {
 }
 
 function updateValidation(key, obj, option, filter) {
-  console.log(`keys: ${key[1]} filter: ${filter}`);
   switch (key) {
     case filter == key[0]:
       const nameError = validateUser({
@@ -73,7 +72,6 @@ function updateValidation(key, obj, option, filter) {
         password: obj.password,
       });
       if (nameError.error) {
-        console.log(nameError.error.details[0].message);
         return `${nameError.error.details[0].message}`;
       }
       break;
@@ -84,7 +82,6 @@ function updateValidation(key, obj, option, filter) {
         password: obj.password,
       });
       if (emailError.error) {
-        console.log(emailError.error.details[0].message);
         return `${emailError.error.details[0].message}`;
       }
       break;
@@ -95,7 +92,6 @@ function updateValidation(key, obj, option, filter) {
         password: option,
       });
       if (passwordError.error) {
-        console.log(passwordError.error.details[0].message);
         return `${passwordError.error.details[0].message}`;
       }
       break;

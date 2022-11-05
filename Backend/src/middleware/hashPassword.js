@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 async function hashPassword(req, res, next) {
   //hashed password
   const { password } = req.body;
-  console.log(password);
 
   if (!password) {
     return res.status(400).json(`password is required`);
@@ -11,7 +10,7 @@ async function hashPassword(req, res, next) {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
+
     req.password = hashedPassword;
   } catch (err) {
     console.log(err);

@@ -54,7 +54,6 @@ export default function ShiftSummary(props) {
     };
     getData();
   }, [props.shiftList]);
-  console.log(summary);
   return (
     <ul className={classes.summaryContainer}>
       <li className={classes.summaryEarning}>

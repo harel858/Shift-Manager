@@ -39,7 +39,6 @@ h1::after {
 .selectInputContainer {
   color: white;
   width: 15em;
-  margin-bottom: 2em;
 }
 .selectInputContainer value {
   color: white;

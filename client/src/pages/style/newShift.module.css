@@ -72,7 +72,6 @@
     align-items: center;
     flex-direction: column;
     font-family: tahoma;
-    margin: 0;
     width: max-content;
   }
   .clockSection header h1 {

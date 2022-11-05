@@ -87,3 +87,26 @@
   text-align: justify;
   width: max-content;
 }
+
+@media screen and (max-width: 1200px) {
+  .card2Open {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(
+      120deg,
+      rgb(29, 97, 185, 1),
+      rgb(29, 172, 185, 1)
+    );
+    padding: 2em 6em;
+    margin: 1em;
+    border: 3px solid black;
+    border-radius: 2em;
+    max-width: 70vw;
+    min-height: 50vh;
+    box-shadow: 0 10px 100px 100px black;
+    transform: scale(1.2);
+    transition: all 200ms ease-in-out;
+  }
+}

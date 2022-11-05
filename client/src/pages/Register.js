@@ -33,15 +33,6 @@ export default function Register() {
     e.preventDefault();
     if (userPassword !== confirmPassword)
       return setError("The entered passwords doesn't match");
-    console.log({
-      name: userName,
-      email: userEmail,
-      phone: userPhone,
-      currency: currency,
-      overTime,
-      payment,
-      password: userPassword,
-    });
 
     try {
       const res = await fetch("http://localhost:5000/user/register", {
@@ -77,7 +68,6 @@ export default function Register() {
   }
 
   const handleChange = (event) => {
-    console.log(currency);
     const newCurrency = event.target.value;
 
     setCurrency(newCurrency);
@@ -95,7 +85,6 @@ export default function Register() {
     }
   }
   function handleOverTime(e) {
-    console.log(e.target.value);
     if (e.target.value === "Calculated") {
       return setOvertime(true);
     }

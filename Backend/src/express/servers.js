@@ -5,7 +5,9 @@ const cookieSession = require("cookie-session");
 const app = express();
 const userRouter = require("./routers/usersRouters");
 const shiftRouter = require("./routers/shiftRouters");
-
+app.get("/", (req, res) => {
+  res.send("app is running");
+});
 app.use(
   cors({
     credentials: true,

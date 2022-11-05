@@ -1,5 +1,6 @@
 .headerSettings {
-  margin: 6em auto 2em auto;
+  margin: 5em 0;
+  width: max-content;
 }
 
 .headerSettings h1 {
@@ -9,6 +10,7 @@
   font-weight: 500;
   font-size: 3em;
   color: white;
+  width: max-content;
 }
 .headerSettings h1::after {
   content: "";

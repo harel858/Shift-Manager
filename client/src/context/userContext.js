@@ -17,7 +17,6 @@ const UserContext = createContext({
 });
 
 export function UserContextProvider(props) {
-  console.log("render context");
   const [user, setUser] = useState(null);
   const [loginError, setLoginError] = useState(null);
   const [payment, setPayment] = useState(29.17);
@@ -60,14 +59,13 @@ export function UserContextProvider(props) {
 
         if (res.ok) {
           const userData = await res.json();
-          console.log(userData);
+
           setUser(userData[0]);
           setCurrency(userData[0].currency);
           setPayment(userData[0].payment);
           return setOvertime(userData[0].overTime);
         } else {
           const resError = await res.json();
-          console.log(resError);
           setLoginError(resError);
         }
       } catch (err) {
@@ -118,7 +116,6 @@ export function UserContextProvider(props) {
     }
   }
   async function updateOvertime(newOverTime) {
-    console.log(newOverTime);
     try {
       const res = await fetch("http://localhost:5000/user/update-overtime", {
         method: "PUT",

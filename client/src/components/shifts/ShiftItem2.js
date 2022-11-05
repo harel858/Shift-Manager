@@ -145,7 +145,6 @@ export default function ShiftItem2({ shift }) {
     newShift.start = startTime;
     newShift.end = endTime;
     newShift.date = date;
-    console.log(newShift);
 
     updateShift(
       shift.index,

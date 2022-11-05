@@ -1,5 +1,4 @@
 import classes from "./style/OvertimeCard.module.css";
-import { useState } from "react";
 import Switch from "@mui/material/Switch";
 import { BsFillClockFill } from "react-icons/bs";
 
