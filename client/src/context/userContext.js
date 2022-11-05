@@ -51,11 +51,14 @@ export function UserContextProvider(props) {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/user", {
-          method: "GET",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-        });
+        const res = await fetch(
+          "https://shift-manager-production.up.railway.app/user",
+          {
+            method: "GET",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
         if (res.ok) {
           const userData = await res.json();
@@ -78,16 +81,19 @@ export function UserContextProvider(props) {
 
   async function updatePayment(newPayment) {
     try {
-      const res = await fetch("http://localhost:5000/user/update-payment", {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          payment: newPayment,
-        }),
-      });
+      const res = await fetch(
+        "https://shift-manager-production.up.railway.app/user/update-payment",
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            payment: newPayment,
+          }),
+        }
+      );
       if (res.ok) {
         setPayment(newPayment);
       }
@@ -98,16 +104,19 @@ export function UserContextProvider(props) {
 
   async function updateCurrency(newCurrency) {
     try {
-      const res = await fetch("http://localhost:5000/user/update-currency", {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          currency: newCurrency,
-        }),
-      });
+      const res = await fetch(
+        "https://shift-manager-production.up.railway.app/user/update-currency",
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            currency: newCurrency,
+          }),
+        }
+      );
       if (res.ok) {
         setCurrency(newCurrency);
       }
@@ -117,16 +126,19 @@ export function UserContextProvider(props) {
   }
   async function updateOvertime(newOverTime) {
     try {
-      const res = await fetch("http://localhost:5000/user/update-overtime", {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          overTime: newOverTime,
-        }),
-      });
+      const res = await fetch(
+        "https://shift-manager-production.up.railway.app/user/update-overtime",
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            overTime: newOverTime,
+          }),
+        }
+      );
       if (res.ok) {
         setOvertime(newOverTime);
       }

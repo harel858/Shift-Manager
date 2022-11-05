@@ -35,22 +35,25 @@ export default function Register() {
       return setError("The entered passwords doesn't match");
 
     try {
-      const res = await fetch("http://localhost:5000/user/register", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          workPlace,
-          name: userName,
-          lastName: userLastName,
-          email: userEmail,
-          phone: userPhone,
-          currency: currency,
-          overTime: overTime,
-          payment: payment,
-          password: userPassword,
-        }),
-      });
+      const res = await fetch(
+        "https://shift-manager-production.up.railway.app/user/register",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            workPlace,
+            name: userName,
+            lastName: userLastName,
+            email: userEmail,
+            phone: userPhone,
+            currency: currency,
+            overTime: overTime,
+            payment: payment,
+            password: userPassword,
+          }),
+        }
+      );
 
       if (res.ok) {
         const user = await res.json();

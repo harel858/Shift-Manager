@@ -18,15 +18,18 @@ export default function Register() {
   async function loginHandler(e) {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/user/login", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: userEmail,
-          password: userPassword,
-        }),
-      });
+      const res = await fetch(
+        "https://shift-manager-production.up.railway.app/user/login",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: userEmail,
+            password: userPassword,
+          }),
+        }
+      );
 
       if (res.ok) {
         const userData = await res.json();

@@ -34,11 +34,14 @@ export function ShiftContextProvider(props) {
 
     const getShiftData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/shifts", {
-          method: "GET",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-        });
+        const res = await fetch(
+          "https://shift-manager-production.up.railway.app//shifts",
+          {
+            method: "GET",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
         if (res.ok) {
           const shifts = await res.json();
           allShifts.push(...shifts);
@@ -57,26 +60,29 @@ export function ShiftContextProvider(props) {
 
   async function addShiftHandler(shift) {
     try {
-      const res = await fetch("http://localhost:5000/shifts/create", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const res = await fetch(
+        "https://shift-manager-production.up.railway.app/shifts/create",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-        body: JSON.stringify({
-          workPlace: shift.workPlace,
-          start: shift.start,
-          end: shift.end,
-          date: shift.date,
-          timeSpend: shift.timeSpend,
-          totalProfit: shift.totalProfit,
-          seconds: shift.seconds,
-          basicPayment: shift.basicPayment,
-          firstOverTime: shift.firstOverTimePay,
-          overTime: shift.overTimePay,
-        }),
-      });
+          body: JSON.stringify({
+            workPlace: shift.workPlace,
+            start: shift.start,
+            end: shift.end,
+            date: shift.date,
+            timeSpend: shift.timeSpend,
+            totalProfit: shift.totalProfit,
+            seconds: shift.seconds,
+            basicPayment: shift.basicPayment,
+            firstOverTime: shift.firstOverTimePay,
+            overTime: shift.overTimePay,
+          }),
+        }
+      );
 
       if (res.ok) {
         const newShift = await res.json();
@@ -93,14 +99,17 @@ export function ShiftContextProvider(props) {
 
   const deleteShiftHandler = async (shift) => {
     try {
-      const res = await fetch("http://localhost:5000/shifts/delete", {
-        method: "DELETE",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: shift._id,
-        }),
-      });
+      const res = await fetch(
+        "https://shift-manager-production.up.railway.app/shifts/delete",
+        {
+          method: "DELETE",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: shift._id,
+          }),
+        }
+      );
 
       if (res.ok) {
         setShiftList((prev) => {
@@ -129,24 +138,27 @@ export function ShiftContextProvider(props) {
     setEditor
   ) => {
     try {
-      let res = await fetch("http://localhost:5000/shifts/update", {
-        method: "PUT",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          _id,
-          workPlace,
-          start,
-          end,
-          date,
-          timeSpend,
-          basicPayment,
-          firstOverTime,
-          overTime,
-          totalProfit,
-          seconds,
-        }),
-      });
+      let res = await fetch(
+        "https://shift-manager-production.up.railway.app/shifts/update",
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            _id,
+            workPlace,
+            start,
+            end,
+            date,
+            timeSpend,
+            basicPayment,
+            firstOverTime,
+            overTime,
+            totalProfit,
+            seconds,
+          }),
+        }
+      );
       if (res.ok) {
         const response = await res.json();
         let [updatedShift] = response;
