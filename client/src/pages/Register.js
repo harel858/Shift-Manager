@@ -63,10 +63,10 @@ export default function Register() {
         navigate("/newShift", { replace: true });
       } else {
         const response = await res.json();
-        throw Error(response);
+        setError(response);
       }
     } catch (err) {
-      throw Error({ err });
+      throw { err };
     }
   }
 
