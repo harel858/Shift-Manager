@@ -33,7 +33,7 @@ function NewShift() {
   if (!localStorage.getItem("shiftDetails")) {
     const today = new Date();
     const currentDateAndHour = today.toLocaleString();
-    const currentDate = today.toLocaleString("default", { month: "long" });
+    const currentDate = today.toLocaleString("en-US", { month: "long" });
 
     shiftDetails.current = {
       start: `${currentDateAndHour} `,

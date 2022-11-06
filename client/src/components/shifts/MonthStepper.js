@@ -4,7 +4,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 export default function MonthStepper(props) {
-  const currentMonth = new Date().toLocaleString("default", { month: "long" });
+  const currentMonth = new Date().toLocaleString("en-US", { month: "long" });
   useEffect(() => {
     if (props.counter === 0) {
       for (let i = 0; i < props.months.length; i++) {
