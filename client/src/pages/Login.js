@@ -25,7 +25,7 @@ export default function Register() {
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            email: userEmail,
+            email: userEmail.toLocaleLowerCase(),
             password: userPassword,
           }),
         }

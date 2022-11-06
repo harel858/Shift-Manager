@@ -45,7 +45,7 @@ export default function Register() {
             workPlace,
             name: userName,
             lastName: userLastName,
-            email: userEmail,
+            email: userEmail.toLocaleLowerCase(),
             phone: userPhone,
             currency: currency,
             overTime: overTime,

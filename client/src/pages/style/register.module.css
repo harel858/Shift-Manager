@@ -14,7 +14,7 @@
 
 .main h1 {
   font-size: 3em;
-  margin: 0.3em 0 1em 0;
+  margin: 1em 0;
   color: white;
 }
 .form {
@@ -91,11 +91,11 @@ input[value] {
 }
 .btn {
   width: fit-content;
-  padding: 0.5em 3em;
+  font-size: 1.3em;
+  padding: 0.3em 3em;
   color: white;
   border-radius: 5em;
   border: 3px solid black;
-  font-size: 1.3em;
   background: linear-gradient(120deg, #1d61b9, #1dacb9);
   transition: all 200ms ease-in-out;
 }
@@ -163,10 +163,13 @@ input[value] {
     text-align: center;
   }
   .login {
-    font-size: 1.5em;
+    font-size: 1.1em;
+    width: max-content;
   }
   .login h5 {
-    font-size: 1.5em;
+    font-size: 1.05em;
+    font-weight: 300;
+    width: max-content;
   }
 }
 @media screen and (max-width: 470px) {
@@ -191,11 +194,12 @@ input[value] {
     text-align: center;
   }
   .login {
-    font-size: 1.5em;
+    font-size: 1.1em;
     width: max-content;
   }
   .login h5 {
-    font-size: 1.3em;
+    font-size: 1.05em;
+    font-weight: 300;
     width: max-content;
   }
 }
