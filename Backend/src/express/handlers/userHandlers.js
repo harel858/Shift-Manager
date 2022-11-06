@@ -124,7 +124,7 @@ async function registerHandler(req, res) {
 
     req.session = { token };
 
-    return res.status(400).json(newUser);
+    return res.status(201).json(newUser);
   } catch (err) {
     return res.status(500).json({ err });
   }
