@@ -131,7 +131,7 @@ export default function ShiftItem2({ shift }) {
         new Date(inputStartRef.current.value).getTime() / 1000
       );
       startTime = new Date(inputStartRef.current.value).toLocaleString();
-      date = new Date(inputStartRef.current.value).toLocaleString("default", {
+      date = new Date(inputStartRef.current.value).toLocaleString("en-US", {
         month: "long",
       });
     }
