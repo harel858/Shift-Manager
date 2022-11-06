@@ -12,6 +12,6 @@ const schema = new mongoose.Schema({
   password: { type: String, require: true },
   isManager: Boolean,
 });
-const userModel = mongoose.model("user", schema);
+const userModel = mongoose.model("users", schema);
 
 module.exports = userModel;

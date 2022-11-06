@@ -13,6 +13,6 @@ const schema = new mongoose.Schema({
   seconds: String,
   userId: { type: mongoose.Types.ObjectId, ref: "user" },
 });
-const shiftModel = mongoose.model("shift", schema);
+const shiftModel = mongoose.model("shifts", schema);
 
 module.exports = shiftModel;
