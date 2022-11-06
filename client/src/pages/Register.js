@@ -64,6 +64,7 @@ export default function Register() {
       } else {
         const response = await res.json();
         console.log(response);
+        setError(response);
       }
     } catch (err) {
       throw err;
