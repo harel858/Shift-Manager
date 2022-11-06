@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
   overTime: String,
   totalProfit: String,
   seconds: String,
-  userId: { type: mongoose.Types.ObjectId, ref: "user" },
+  userId: { type: mongoose.Types.ObjectId, ref: "users" },
 });
 const shiftModel = mongoose.model("shifts", schema);
 
