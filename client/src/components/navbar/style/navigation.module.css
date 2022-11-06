@@ -200,6 +200,7 @@
     justify-content: center;
     min-width: 100vw;
     padding: 0;
+    padding-top: 3em;
     background: linear-gradient(120deg, #1d61b9, #1dacb9);
     transition: all 200ms ease-in-out;
   }
