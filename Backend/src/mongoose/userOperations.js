@@ -2,7 +2,11 @@ const userModel = require("./userModel");
 const validateUser = require("../joi/userValidation");
 
 async function addUser(userDetails) {
-  return await new userModel(userDetails).save();
+  try {
+    return await new userModel(userDetails).save();
+  } catch (err) {
+    return err;
+  }
 }
 async function updatePayment(id, payment) {
   return await userModel.findOneAndUpdate({ _id: id }, { $set: { payment } });
