@@ -16,8 +16,9 @@
 
 .save {
   margin-top: 1rem;
+  padding: 0 1.5em;
   height: 3rem;
-  width: 20rem;
+  width: max-content;
   background: #85bb65;
   color: black;
   border-radius: 2em;
