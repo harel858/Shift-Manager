@@ -1,12 +1,9 @@
 const shiftModel = require("./shiftModel.js");
 
 //get all user shifts
-async function getAllUserShifts(userId, workPlace) {
+async function getAllUserShifts(userId) {
   try {
-    return await shiftModel
-      .find({ userId: userId })
-      .where("workPlace")
-      .equals(workPlace);
+    return await shiftModel.find({ userId: userId });
   } catch (err) {
     console.log(err);
     return null;
