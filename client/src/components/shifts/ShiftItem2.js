@@ -130,6 +130,7 @@ export default function ShiftItem2({ shift }) {
     let date = shift.date;
     let startSeconds = Math.floor(new Date(startTime).getTime() / 1000);
     let endSeconds = Math.floor(new Date(endTime).getTime() / 1000);
+    console.log(startTime);
     console.log(endTime);
     if (newStart) {
       startTime = new Date(newStart).toLocaleString();
