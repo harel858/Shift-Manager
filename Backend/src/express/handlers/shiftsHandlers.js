@@ -3,8 +3,7 @@ const shiftsOperations = require("../../mongoose/shiftOperations.js");
 //get all shifts
 async function getUserShifts(req, res) {
   const { userId } = req;
-  const { workPlace } = req.body;
-  const userShifts = await shiftsOperations.getAllUserShifts(userId, workPlace);
+  const userShifts = await shiftsOperations.getAllUserShifts(userId);
 
   if (!userShifts) {
     return res.status(500).send(`Something went wrong`);
