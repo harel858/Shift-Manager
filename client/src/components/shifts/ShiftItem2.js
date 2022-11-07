@@ -145,12 +145,7 @@ export default function ShiftItem2({ shift }) {
     }
     console.log(endSeconds);
     console.log(startSeconds);
-    let newShift = calculationFunc(
-      endSeconds - startSeconds,
-      startTime,
-      endTime,
-      date
-    );
+    calculationFunc(endSeconds - startSeconds, startTime, endTime, date);
     console.log(newShift);
 
     updateShift(
