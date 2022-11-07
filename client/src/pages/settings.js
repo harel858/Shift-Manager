@@ -50,7 +50,14 @@ function Settings() {
       <header className={classes.headerSettings}>
         <h1>Edit Settings</h1>
       </header>
-      <div className={classes.btnContainer}>
+      <div
+        onClick={() => {
+          setCard1Open(false);
+          setCard2Open(false);
+          setCard3Open(false);
+        }}
+        className={classes.btnContainer}
+      >
         <OvertimeCard
           overTime={overTime}
           cardRef={card1Ref}
