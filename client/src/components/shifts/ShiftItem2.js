@@ -1,6 +1,6 @@
 import { MdDelete, MdEdit } from "react-icons/md";
 import classes from "./shiftsCss/shiftItem2.module.css";
-import { useContext, useState, forwardRef } from "react";
+import { useContext, useState, useMemo, forwardRef } from "react";
 import ShiftContext from "../../context/shiftContext.js";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -75,54 +75,57 @@ export default function ShiftItem2({ shift }) {
       console.log(err);
     }
   };
-  const calculationFunc = (seconds, start, end, date) => {
-    if (seconds <= 0) return setErrorOpen(true);
-    let basicPayment = 0;
-    let firstOverTime = 0;
-    let overTime = 0;
+  const calculationFunc = useMemo(
+    (seconds, start, end, date) => {
+      if (seconds <= 0) return setErrorOpen(true);
+      let basicPayment = 0;
+      let firstOverTime = 0;
+      let overTime = 0;
 
-    for (let i = 0; i <= seconds; i++) {
-      if (i <= 28800) {
-        basicPayment = (((i / 60) * payment) / 60).toFixed(2);
+      for (let i = 0; i <= seconds; i++) {
+        if (i <= 28800) {
+          basicPayment = (((i / 60) * payment) / 60).toFixed(2);
+        }
+
+        // Calculation of pay for the first two overtime hours
+        if (28800 <= i && i <= 36000) {
+          firstOverTime = (
+            (((i - 28800) / 60) * (payment * 1.25)) /
+            60
+          ).toFixed(2);
+        }
+        //Calculation of the remaining overtime hours
+        if (i > 36000) {
+          overTime = ((((i - 36000) / 60) * (payment * 1.5)) / 60).toFixed(2);
+        }
       }
+      firstOverTime = Math.floor(firstOverTime);
+      overTime = Math.floor(overTime);
 
-      // Calculation of pay for the first two overtime hours
-      if (28800 <= i && i <= 36000) {
-        firstOverTime = ((((i - 28800) / 60) * (payment * 1.25)) / 60).toFixed(
-          2
-        );
-      }
-      //Calculation of the remaining overtime hours
-      if (i > 36000) {
-        overTime = ((((i - 36000) / 60) * (payment * 1.5)) / 60).toFixed(2);
-      }
-    }
-    firstOverTime = Math.floor(firstOverTime);
-    overTime = Math.floor(overTime);
+      let totalProfit = +basicPayment + +firstOverTime + +overTime;
 
-    let totalProfit = +basicPayment + +firstOverTime + +overTime;
+      let hrs = Math.floor(seconds / 3600);
+      let mins = Math.floor((seconds - hrs * 3600) / 60);
+      let secs = seconds % 60;
+      hrs = (`0` + hrs).slice(-2);
+      mins = (`0` + mins).slice(-2);
+      secs = (`0` + secs).slice(-2);
+      let timeSpend = `${hrs}:${mins}:${secs}`;
 
-    let hrs = Math.floor(seconds / 3600);
-    let mins = Math.floor((seconds - hrs * 3600) / 60);
-    let secs = seconds % 60;
-    hrs = (`0` + hrs).slice(-2);
-    mins = (`0` + mins).slice(-2);
-    secs = (`0` + secs).slice(-2);
-    let timeSpend = `${hrs}:${mins}:${secs}`;
-
-    let newShiftObj = {
-      basicPayment,
-      firstOverTime,
-      overTime,
-      totalProfit,
-      timeSpend,
-      seconds,
-      start,
-      end,
-      date,
-    };
-    setNewShift(newShiftObj);
-  };
+      setNewShift({
+        basicPayment,
+        firstOverTime,
+        overTime,
+        totalProfit,
+        timeSpend,
+        seconds,
+        start,
+        end,
+        date,
+      });
+    },
+    [seconds, start, end, date]
+  );
 
   const saveChanges = () => {
     let startTime = shift.start;
@@ -134,6 +137,7 @@ export default function ShiftItem2({ shift }) {
     console.log(endTime);
     if (newStart) {
       startTime = new Date(newStart).toLocaleString();
+      startSeconds = Math.floor(new Date(newStart).getTime() / 1000);
       date = new Date(newStart).toLocaleString("en-US", {
         month: "long",
       });
@@ -142,6 +146,7 @@ export default function ShiftItem2({ shift }) {
     if (newEnd) {
       console.log(newEnd);
       endTime = new Date(newEnd).toLocaleString();
+      endSeconds = Math.floor(new Date(newEnd).getTime() / 1000);
       console.log(endTime);
     }
     console.log(endSeconds);
