@@ -31,6 +31,8 @@
 }
 
 .errorContainer {
+  position: relative;
+  top: 10em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -13,6 +13,8 @@
 }
 
 .errorContainer {
+  position: relative;
+  top: 10em;
   width: max-content;
   display: flex;
   flex-direction: column;
