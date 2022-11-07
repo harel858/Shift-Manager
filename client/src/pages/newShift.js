@@ -36,7 +36,7 @@ function NewShift() {
     const currentDate = today.toLocaleString("en-US", { month: "long" });
 
     shiftDetails.current = {
-      workPlace: user.workPlace[0],
+      workPlace: user.workPlace,
       start: `${currentDateAndHour} `,
       end: null,
       date: `${currentDate}`,
