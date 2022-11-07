@@ -169,7 +169,7 @@ export default function ShiftItem2({ shift }) {
             <input
               type="text"
               onFocus={(e) => (e.target.type = "datetime-local")}
-              onChange={setNewStart(e.target.value)}
+              onChange={(e) => setNewStart(e.target.value)}
               className={classes.editorInput}
               placeholder={`${shift.start}`}
             />
@@ -182,7 +182,7 @@ export default function ShiftItem2({ shift }) {
             <input
               type="text"
               onFocus={(e) => (e.target.type = "datetime-local")}
-              onChange={setNewEnd(e.target.value)}
+              onChange={(e) => setNewEnd(e.target.value)}
               className={classes.editorInput}
               placeholder={`${shift.end}`}
             />
