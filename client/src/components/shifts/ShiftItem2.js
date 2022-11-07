@@ -1,12 +1,6 @@
 import { MdDelete, MdEdit } from "react-icons/md";
 import classes from "./shiftsCss/shiftItem2.module.css";
-import {
-  useContext,
-  useState,
-  useCallback,
-  forwardRef,
-  useCallback,
-} from "react";
+import { useContext, useState, forwardRef, useCallback } from "react";
 import ShiftContext from "../../context/shiftContext.js";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
