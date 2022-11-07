@@ -52,8 +52,8 @@ export default function ShiftItem2({ shift }) {
   const [open, setOpen] = useState(false);
   const [editor, setEditor] = useState(false);
   const [errorOpen, setErrorOpen] = useState(false);
-  const inputStartRef = useRef(shift.start);
-  const inputEndRef = useRef(shift.end);
+  const [startChange, setStartChange] = useState();
+  const [endChange, setEndChange] = useState();
 
   const { deleteShift, updateShift } = useContext(ShiftContext);
   const { payment, currency } = useContext(UserContext);
@@ -168,9 +168,8 @@ export default function ShiftItem2({ shift }) {
           {editor ? (
             <input
               type="text"
-              ref={inputStartRef}
               onFocus={(e) => (e.target.type = "datetime-local")}
-              value={inputStartRef.current.value}
+              onChange={setStartChange(e.target.value)}
               className={classes.editorInput}
               placeholder={`${shift.start}`}
             />
@@ -182,9 +181,8 @@ export default function ShiftItem2({ shift }) {
           {editor ? (
             <input
               type="text"
-              ref={inputEndRef}
               onFocus={(e) => (e.target.type = "datetime-local")}
-              value={inputStartRef.current.value}
+              onChange={setEndChange(e.target.value)}
               className={classes.editorInput}
               placeholder={`${shift.end}`}
             />
