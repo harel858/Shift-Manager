@@ -112,17 +112,18 @@ export default function ShiftItem2({ shift }) {
       secs = (`0` + secs).slice(-2);
       let timeSpend = `${hrs}:${mins}:${secs}`;
 
-      return setNewShift({
-        basicPayment,
-        firstOverTime,
-        overTime,
-        totalProfit,
-        timeSpend,
-        seconds,
-        start,
-        end,
-        date,
-      });
+      return () =>
+        setNewShift({
+          basicPayment,
+          firstOverTime,
+          overTime,
+          totalProfit,
+          timeSpend,
+          seconds,
+          start,
+          end,
+          date,
+        });
     },
     [payment]
   );
