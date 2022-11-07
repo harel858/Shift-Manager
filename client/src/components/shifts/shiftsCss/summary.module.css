@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  font-size: 0.74em;
   color: white;
 }
 .summaryContent {
@@ -49,6 +48,9 @@
   font-weight: 600;
 }
 @media screen and (max-width: 600px) {
+  .summaryContainer {
+    font-size: 0.8em;
+  }
   .summaryContent h5,
   .summaryEarning h5,
   .tax h5 {
