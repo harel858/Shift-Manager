@@ -139,7 +139,8 @@ export default function ShiftItem2({ shift }) {
       endTime = new Date(newEnd).toLocaleString();
       console.log(endTime);
     }
-
+    console.log(endSeconds);
+    console.log(startSeconds);
     let newShift = calculationFunc(endSeconds - startSeconds);
     console.log(newShift);
     newShift.start = startTime;
