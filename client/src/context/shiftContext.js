@@ -17,8 +17,7 @@ const ShiftContext = createContext({
     firstOverTime,
     overTime,
     seconds,
-    date,
-    setEditor
+    date
   ) => {},
 });
 
@@ -134,8 +133,7 @@ export function ShiftContextProvider(props) {
     firstOverTime,
     overTime,
     seconds,
-    date,
-    setEditor
+    date
   ) => {
     try {
       let res = await fetch(
@@ -166,7 +164,6 @@ export function ShiftContextProvider(props) {
           prev[index] = updatedShift;
           return [...prev];
         });
-        setEditor((prev) => !prev);
       } else {
         throw await res.json();
       }

@@ -156,9 +156,9 @@ export default function ShiftItem2({ shift }) {
       newShift.firstOverTime,
       newShift.overTime,
       newShift.seconds,
-      newShift.date,
-      setEditor
+      newShift.date
     );
+    setEditor((prev) => !prev);
   };
 
   return (
@@ -168,8 +168,9 @@ export default function ShiftItem2({ shift }) {
           {editor ? (
             <input
               type="text"
-              onFocus={(e) => (e.target.type = "datetime-local")}
               ref={inputStartRef}
+              onFocus={(e) => (e.target.type = "datetime-local")}
+              value={inputStartRef.current.value}
               className={classes.editorInput}
               placeholder={`${shift.start}`}
             />
@@ -181,8 +182,9 @@ export default function ShiftItem2({ shift }) {
           {editor ? (
             <input
               type="text"
-              onFocus={(e) => (e.target.type = "datetime-local")}
               ref={inputEndRef}
+              onFocus={(e) => (e.target.type = "datetime-local")}
+              value={inputStartRef.current.value}
               className={classes.editorInput}
               placeholder={`${shift.end}`}
             />
