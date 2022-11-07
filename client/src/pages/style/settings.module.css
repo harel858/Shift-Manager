@@ -69,6 +69,7 @@
 .errorContainer {
   position: relative;
   top: 10em;
+  z-index: 9;
   width: max-content;
   display: flex;
   flex-direction: column;
