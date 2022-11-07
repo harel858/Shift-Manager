@@ -121,7 +121,7 @@ export default function ShiftItem2({ shift }) {
       end,
       date,
     };
-    setNewShift({ ...newShiftObj });
+    setNewShift(newShiftObj);
   };
 
   const saveChanges = () => {
