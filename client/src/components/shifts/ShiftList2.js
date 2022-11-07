@@ -14,7 +14,8 @@ export default function ShiftList2({
     return (
       <Alert severity="error">
         <AlertTitle>Error</AlertTitle>
-        This is an error alert — <strong>check it out!</strong>
+        You have no shifts for {months[counter]} yet —
+        <strong>KEEP ON GRINDING!</strong>
       </Alert>
     );
   }
