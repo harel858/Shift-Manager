@@ -54,7 +54,6 @@ export default function ShiftItem2({ shift }) {
   const [errorOpen, setErrorOpen] = useState(false);
   const [newStart, setNewStart] = useState();
   const [newEnd, setNewEnd] = useState();
-  const [newShift, setNewShift] = useState();
 
   const { deleteShift, updateShift } = useContext(ShiftContext);
   const { payment, currency } = useContext(UserContext);
@@ -152,9 +151,14 @@ export default function ShiftItem2({ shift }) {
     }
     console.log(endSeconds);
     console.log(startSeconds);
-    setNewShift(
-      calculationFunc(endSeconds - startSeconds, startTime, endTime, date)
+
+    let newShift = calculationFunc(
+      endSeconds - startSeconds,
+      startTime,
+      endTime,
+      date
     );
+
     console.log(newShift);
 
     updateShift(
