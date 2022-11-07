@@ -75,57 +75,53 @@ export default function ShiftItem2({ shift }) {
       console.log(err);
     }
   };
-  const calculationFunc = useMemo(
-    (seconds, start, end, date) => {
-      if (seconds <= 0) return setErrorOpen(true);
-      let basicPayment = 0;
-      let firstOverTime = 0;
-      let overTime = 0;
+  const calculationFunc = useMemo((seconds, start, end, date) => {
+    if (seconds <= 0) return setErrorOpen(true);
+    let basicPayment = 0;
+    let firstOverTime = 0;
+    let overTime = 0;
 
-      for (let i = 0; i <= seconds; i++) {
-        if (i <= 28800) {
-          basicPayment = (((i / 60) * payment) / 60).toFixed(2);
-        }
-
-        // Calculation of pay for the first two overtime hours
-        if (28800 <= i && i <= 36000) {
-          firstOverTime = (
-            (((i - 28800) / 60) * (payment * 1.25)) /
-            60
-          ).toFixed(2);
-        }
-        //Calculation of the remaining overtime hours
-        if (i > 36000) {
-          overTime = ((((i - 36000) / 60) * (payment * 1.5)) / 60).toFixed(2);
-        }
+    for (let i = 0; i <= seconds; i++) {
+      if (i <= 28800) {
+        basicPayment = (((i / 60) * payment) / 60).toFixed(2);
       }
-      firstOverTime = Math.floor(firstOverTime);
-      overTime = Math.floor(overTime);
 
-      let totalProfit = +basicPayment + +firstOverTime + +overTime;
+      // Calculation of pay for the first two overtime hours
+      if (28800 <= i && i <= 36000) {
+        firstOverTime = ((((i - 28800) / 60) * (payment * 1.25)) / 60).toFixed(
+          2
+        );
+      }
+      //Calculation of the remaining overtime hours
+      if (i > 36000) {
+        overTime = ((((i - 36000) / 60) * (payment * 1.5)) / 60).toFixed(2);
+      }
+    }
+    firstOverTime = Math.floor(firstOverTime);
+    overTime = Math.floor(overTime);
 
-      let hrs = Math.floor(seconds / 3600);
-      let mins = Math.floor((seconds - hrs * 3600) / 60);
-      let secs = seconds % 60;
-      hrs = (`0` + hrs).slice(-2);
-      mins = (`0` + mins).slice(-2);
-      secs = (`0` + secs).slice(-2);
-      let timeSpend = `${hrs}:${mins}:${secs}`;
+    let totalProfit = +basicPayment + +firstOverTime + +overTime;
 
-      setNewShift({
-        basicPayment,
-        firstOverTime,
-        overTime,
-        totalProfit,
-        timeSpend,
-        seconds,
-        start,
-        end,
-        date,
-      });
-    },
-    [seconds, start, end, date]
-  );
+    let hrs = Math.floor(seconds / 3600);
+    let mins = Math.floor((seconds - hrs * 3600) / 60);
+    let secs = seconds % 60;
+    hrs = (`0` + hrs).slice(-2);
+    mins = (`0` + mins).slice(-2);
+    secs = (`0` + secs).slice(-2);
+    let timeSpend = `${hrs}:${mins}:${secs}`;
+
+    setNewShift({
+      basicPayment,
+      firstOverTime,
+      overTime,
+      totalProfit,
+      timeSpend,
+      seconds,
+      start,
+      end,
+      date,
+    });
+  }, []);
 
   const saveChanges = () => {
     let startTime = shift.start;
