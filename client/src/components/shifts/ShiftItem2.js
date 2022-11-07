@@ -52,8 +52,8 @@ export default function ShiftItem2({ shift }) {
   const [open, setOpen] = useState(false);
   const [editor, setEditor] = useState(false);
   const [errorOpen, setErrorOpen] = useState(false);
-  const [startChange, setStartChange] = useState();
-  const [endChange, setEndChange] = useState();
+  const [newStart, setNewStart] = useState();
+  const [newEnd, setNewEnd] = useState();
 
   const { deleteShift, updateShift } = useContext(ShiftContext);
   const { payment, currency } = useContext(UserContext);
@@ -127,16 +127,16 @@ export default function ShiftItem2({ shift }) {
     let startSeconds = Math.floor(new Date(startTime).getTime() / 1000);
     let endSeconds = Math.floor(new Date(endTime).getTime() / 1000);
     console.log(endTime);
-    if (inputStartRef?.current?.value) {
-      startTime = new Date(inputStartRef.current.value).toLocaleString();
-      date = new Date(inputStartRef.current.value).toLocaleString("en-US", {
+    if (newStart) {
+      startTime = new Date(newStart).toLocaleString();
+      date = new Date(newStart).toLocaleString("en-US", {
         month: "long",
       });
     }
-
-    if (inputEndRef?.current?.value) {
-      console.log(inputEndRef?.current?.value);
-      endTime = new Date(inputEndRef.current.value).toLocaleString();
+    console.log(newEnd);
+    if (newEnd) {
+      console.log(newEnd);
+      endTime = new Date(newEnd).toLocaleString();
       console.log(endTime);
     }
 
@@ -169,7 +169,7 @@ export default function ShiftItem2({ shift }) {
             <input
               type="text"
               onFocus={(e) => (e.target.type = "datetime-local")}
-              onChange={setStartChange(e.target.value)}
+              onChange={setNewStart(e.target.value)}
               className={classes.editorInput}
               placeholder={`${shift.start}`}
             />
@@ -182,7 +182,7 @@ export default function ShiftItem2({ shift }) {
             <input
               type="text"
               onFocus={(e) => (e.target.type = "datetime-local")}
-              onChange={setEndChange(e.target.value)}
+              onChange={setNewEnd(e.target.value)}
               className={classes.editorInput}
               placeholder={`${shift.end}`}
             />
