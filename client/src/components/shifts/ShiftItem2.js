@@ -1,6 +1,12 @@
 import { MdDelete, MdEdit } from "react-icons/md";
 import classes from "./shiftsCss/shiftItem2.module.css";
-import { useContext, useState, useMemo, forwardRef } from "react";
+import {
+  useContext,
+  useState,
+  useCallback,
+  forwardRef,
+  useCallback,
+} from "react";
 import ShiftContext from "../../context/shiftContext.js";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -75,7 +81,7 @@ export default function ShiftItem2({ shift }) {
       console.log(err);
     }
   };
-  const calculationFunc = useMemo(
+  const calculationFunc = useCallback(
     (seconds, start, end, date) => {
       if (seconds <= 0) return setErrorOpen(true);
       let basicPayment = 0;
