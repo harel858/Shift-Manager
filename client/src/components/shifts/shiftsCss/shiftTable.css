@@ -70,7 +70,7 @@ tr:nth-child(even) {
     left: 0;
     width: max-content;
     padding-left: 1em;
-    font-size: 0.9em;
+    font-size: 1em;
     font-weight: 400;
     text-align: left;
   }
