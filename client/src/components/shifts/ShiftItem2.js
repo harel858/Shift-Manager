@@ -121,26 +121,25 @@ export default function ShiftItem2({ shift }) {
   };
 
   const saveChanges = () => {
-    let startTime = inputStartRef?.current?.placeholder;
-    let endTime = inputEndRef?.current?.placeholder;
+    let startTime = shift.start;
+    let endTime = shift.end;
     let date = shift.date;
     let startSeconds = Math.floor(new Date(startTime).getTime() / 1000);
     let endSeconds = Math.floor(new Date(endTime).getTime() / 1000);
+    console.log(endTime);
     if (inputStartRef?.current?.value) {
-      startSeconds = Math.floor(
-        new Date(inputStartRef.current.value).getTime() / 1000
-      );
       startTime = new Date(inputStartRef.current.value).toLocaleString();
       date = new Date(inputStartRef.current.value).toLocaleString("en-US", {
         month: "long",
       });
     }
+
     if (inputEndRef?.current?.value) {
-      endSeconds = Math.floor(
-        new Date(inputEndRef.current.value).getTime() / 1000
-      );
+      console.log(inputEndRef?.current?.value);
       endTime = new Date(inputEndRef.current.value).toLocaleString();
+      console.log(endTime);
     }
+
     let newShift = calculationFunc(endSeconds - startSeconds);
     newShift.start = startTime;
     newShift.end = endTime;
