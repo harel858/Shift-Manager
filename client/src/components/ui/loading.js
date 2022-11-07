@@ -8,7 +8,7 @@ export default function LinearColor() {
         width: "100%",
         color: "grey.500",
         position: "absolute",
-        top: "2rem",
+        top: "50%",
       }}
       spacing={2}
     >
