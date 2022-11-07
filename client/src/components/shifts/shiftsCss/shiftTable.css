@@ -60,20 +60,18 @@ tr:nth-child(even) {
     margin-bottom: 1em;
   }
   tbody td {
-    padding-left: 50%;
     text-align: right;
     position: relative;
-    font-size: 1.1em;
-    padding-bottom: 1.5em;
+    font-size: 0.8em;
   }
   td::before {
     content: attr(data-label);
     position: absolute;
     left: 0;
-    width: 50%;
+    width: max-content;
     padding-left: 1em;
-    font-size: 1.15em;
-    font-weight: bold;
+    font-size: 0.9em;
+    font-weight: 400;
     text-align: left;
   }
   .money {
