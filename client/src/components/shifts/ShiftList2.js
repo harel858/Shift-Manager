@@ -13,8 +13,7 @@ export default function ShiftList2({
   if (shiftList.length <= 0) {
     return (
       <Alert className={classes.noShiftAlert} severity="error">
-        <AlertTitle>Error</AlertTitle>
-        You have no shifts for {months[counter]} yet —
+        <AlertTitle> You have no shifts for {months[counter]} yet </AlertTitle>
         <strong>KEEP ON GRINDING!</strong>
       </Alert>
     );

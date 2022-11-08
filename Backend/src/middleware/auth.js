@@ -7,7 +7,7 @@ async function authenticateUser(req, res, next) {
     return res.status(400).json(`you must log in to continue`);
   }
   try {
-    const data = jwt.verify(token, "Harelha123");
+    const data = jwt.verify(token, process.env.SECRET_KEY);
     req.userId = data.userId;
 
     next();
