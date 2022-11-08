@@ -7,7 +7,10 @@ const cookieSession = require("cookie-session");
 const app = express();
 const userRouter = require("./routers/usersRouters");
 const shiftRouter = require("./routers/shiftRouters");
-const currentShift = require("../mongoose/mongoDBSession.js");
+const currentShift = new MongoDBSession({
+  uri: process.env.MONGODB_URI,
+  collection: "mySession",
+});
 
 app.use(
   cors({
@@ -23,11 +26,6 @@ app.use(
     maxAge: 3600 * 10,
   })
 );
-
-const currentShift = new MongoDBSession({
-  uri: process.env.MONGODB_URI,
-  collection: "mySession",
-});
 
 app.use(
   session({
