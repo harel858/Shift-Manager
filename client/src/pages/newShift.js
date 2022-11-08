@@ -10,18 +10,6 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import UserContext from "../context/userContext.js";
 
-const [open, setOpen] = useState(false);
-const Alert = forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-const handleClose = (_event, reason) => {
-  if (reason === "clickaway") {
-    return;
-  }
-  setOpen(false);
-};
-
 function NewShift() {
   const { loginError, user } = useContext(UserContext);
   if (!user) {
@@ -40,6 +28,18 @@ function NewShift() {
       </div>
     );
   }
+
+  const [open, setOpen] = useState(false);
+  const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleClose = (_event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
