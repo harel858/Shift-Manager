@@ -2,6 +2,7 @@ const { json } = require("express");
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+const MongoDBSession = require("connect-mongodb-session")(session);
 const cookieSession = require("cookie-session");
 const app = express();
 const userRouter = require("./routers/usersRouters");
@@ -22,6 +23,12 @@ app.use(
     maxAge: 3600 * 10,
   })
 );
+
+const currentShift = new MongoDBSession({
+  uri: process.env.MONGODB_URI,
+  collection: "mySession",
+});
+
 app.use(
   session({
     secret: process.env.SECRET_KEY,
