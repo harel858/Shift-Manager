@@ -19,6 +19,7 @@ app.use(
   cookieSession({
     signed: false,
     secure: false,
+    maxAge: 3600 * 10,
   })
 );
 app.use(

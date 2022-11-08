@@ -9,6 +9,9 @@ async function authenticateUser(req, res, next) {
   try {
     const data = jwt.verify(token, process.env.SECRET_KEY);
     req.userId = data.userId;
+    req.session.currentShiftData = {
+      message: "shalom world",
+    };
 
     next();
   } catch {
