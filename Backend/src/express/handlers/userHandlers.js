@@ -221,11 +221,12 @@ async function signIn(req, res) {
   }
 
   const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
-  const currentShiftData = {
+
+  req.session = { token };
+  re.session.currentShiftData = {
     userId: user._id,
     message: "shalom world",
   };
-  req.session = { token, currentShiftData };
   res.status(200).json(user);
 }
 async function logOut(req, res) {
