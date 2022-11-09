@@ -226,7 +226,7 @@ async function signIn(req, res) {
     message: "shalom world",
   };
   req.session = { token, currentShiftData };
-  req.session.res.status(200).json(user);
+  res.status(200).json(user);
 }
 async function logOut(req, res) {
   try {
