@@ -223,7 +223,7 @@ async function signIn(req, res) {
   const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
 
   req.session = { token };
-  re.session.currentShiftData = {
+  req.session.currentShiftData = {
     userId: user._id,
     message: "shalom world",
   };
