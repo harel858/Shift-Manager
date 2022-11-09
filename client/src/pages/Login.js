@@ -32,6 +32,7 @@ export default function Register() {
       );
 
       if (res.ok) {
+        console.log(document.cookie);
         const userData = await res.json();
         setUser(userData);
         setCurrency(userData.currency);
