@@ -15,7 +15,7 @@ const currentShift = new MongoDBSession({
 app.use(
   cors({
     credentials: true,
-    origin: "https://kindly-mint-production.up.railway.app",
+    origin: process.env.CLIENT,
   })
 );
 app.use(json());
