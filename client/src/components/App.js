@@ -1,10 +1,9 @@
-import { lazy, Suspense, useContext } from "react";
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import LinearColor from "./ui/loading.js";
 import FormLayOut from "./layout/formLayOut.js";
 import Layout from "./layout/layout.js";
 import SettingsLayout from "./layout/settingsLayout.js";
-import UserContext from "../context/userContext.js";
 const Register = lazy(() => import("../pages/Register.js"));
 const Login = lazy(() => import("../pages/Login.js"));
 const ClockLayout = lazy(() => import("./layout/clockLayout.js"));

@@ -1,6 +1,7 @@
 import classes from "./style/newShift.module.css";
 import Clock from "../components/ui/clock.js";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import UserContext from "../context/userContext.js";
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
