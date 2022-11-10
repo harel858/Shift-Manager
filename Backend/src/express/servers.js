@@ -1,17 +1,17 @@
 const { json } = require("express");
 const express = require("express");
 const cors = require("cors");
-const session = require("express-session");
-const MongoDBSession = require("connect-mongodb-session")(session);
+/* const session = require("express-session");
+const MongoDBSession = require("connect-mongodb-session")(session); */
 const cookieSession = require("cookie-session");
 const app = express();
 const userRouter = require("./routers/usersRouters");
 const shiftRouter = require("./routers/shiftRouters");
-const currentShift = new MongoDBSession({
+/* const store = new MongoDBSession({
   uri: process.env.MONGODB_URI,
   collection: "mySession",
 });
-
+ */
 app.use(
   cors({
     credentials: true,
@@ -26,15 +26,15 @@ app.use(
     maxAge: 3600 * 10,
   })
 );
-
+/* 
 app.use(
   session({
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
-    store: currentShift,
+    store: store,
   })
-);
+); */
 
 app.use("/user", userRouter);
 app.use("/shifts", shiftRouter);
