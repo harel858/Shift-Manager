@@ -13,7 +13,6 @@ const AllShifts = lazy(() => import("../pages/allShifts.js"));
 const Settings = lazy(() => import("../pages/settings.js"));
 
 function App() {
-  const { loginError, user, loading } = useContext(UserContext);
   return (
     <>
       <Suspense fallback={<LinearColor />}>
@@ -38,11 +37,7 @@ function App() {
             path="/newShift"
             element={
               <ClockLayout>
-                <NewShift
-                  loading={loading}
-                  user={user}
-                  loginError={loginError}
-                />
+                <NewShift />
               </ClockLayout>
             }
           />

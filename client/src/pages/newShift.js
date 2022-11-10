@@ -11,6 +11,7 @@ import MuiAlert from "@mui/material/Alert";
 import LinearColor from "../components/ui/loading.js";
 
 function NewShift({ user, loginError, loading }) {
+  const { loginError, user, loading } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
