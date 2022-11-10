@@ -1,7 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 
 const UserContext = createContext({
-  getUserData: () => {},
   payment: Number,
   setPayment: (payment) => {},
   currency: String,
@@ -159,7 +158,7 @@ export function UserContextProvider(props) {
     currency,
     currencies,
     overTime,
-    getUserData,
+    loading,
     user,
     setUser,
     setPayment,
