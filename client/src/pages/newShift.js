@@ -11,12 +11,34 @@ import MuiAlert from "@mui/material/Alert";
 import UserContext from "../context/userContext.js";
 
 function NewShift() {
-  const [open, setOpen] = useState(false);
   const { loginError, user } = useContext(UserContext);
+  if (!user) {
+    return (
+      <div className={classes.errorContainer}>
+        <header className={classes.header}>
+          <h1>{loginError}</h1>
+        </header>
+        <Nav className={classes.navLink} as={Link} to="/">
+          Click Here to Log In
+        </Nav>
+        <h3>Not registered yet?</h3>
+        <Nav className={classes.navLink} as={Link} to="/register">
+          Register Now
+        </Nav>
+      </div>
+    );
+  }
+
+  const [open, setOpen] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const [play, isPlay] = useState();
+  const shiftDetails = useRef();
+  const today = new Date();
+  const todayDate = today.toISOString().slice(0, 10);
+
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
   const handleClose = (_event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -24,33 +46,10 @@ function NewShift() {
     setOpen(false);
   };
 
-  const [seconds, setSeconds] = useState(0);
-  const [play, isPlay] = useState();
-  const shiftDetails = useRef();
-  const today = new Date();
-  const todayDate = today.toISOString().slice(0, 10);
-
   if (!localStorage.getItem("shiftDetails")) {
     const today = new Date();
     const currentDateAndHour = today.toLocaleString();
     const currentDate = today.toLocaleString("en-US", { month: "long" });
-
-    if (!user) {
-      return (
-        <div className={classes.errorContainer}>
-          <header className={classes.header}>
-            <h1>{loginError}</h1>
-          </header>
-          <Nav className={classes.navLink} as={Link} to="/">
-            Click Here to Log In
-          </Nav>
-          <h3>Not registered yet?</h3>
-          <Nav className={classes.navLink} as={Link} to="/register">
-            Register Now
-          </Nav>
-        </div>
-      );
-    }
 
     shiftDetails.current = {
       workPlace: user.workPlaces[0],
