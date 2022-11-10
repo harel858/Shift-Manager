@@ -1,10 +1,10 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import LinearColor from "./ui/loading.js";
 import FormLayOut from "./layout/formLayOut.js";
 import Layout from "./layout/layout.js";
 import SettingsLayout from "./layout/settingsLayout.js";
-
+import UserContext from "../context/userContext.js";
 const Register = lazy(() => import("../pages/Register.js"));
 const Login = lazy(() => import("../pages/Login.js"));
 const ClockLayout = lazy(() => import("./layout/clockLayout.js"));
@@ -13,6 +13,7 @@ const AllShifts = lazy(() => import("../pages/allShifts.js"));
 const Settings = lazy(() => import("../pages/settings.js"));
 
 function App() {
+  const { loginError, user } = useContext(UserContext);
   return (
     <>
       <Suspense fallback={<LinearColor />}>
@@ -37,7 +38,7 @@ function App() {
             path="/newShift"
             element={
               <ClockLayout>
-                <NewShift />
+                <NewShift user={user} loginError={loginError} />
               </ClockLayout>
             }
           />

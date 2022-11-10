@@ -8,12 +8,8 @@ import ShiftPayment from "../components/ui/shiftPayment";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import UserContext from "../context/userContext.js";
 
-function NewShift() {
-  const { loginError, user, getUserData } = useContext(UserContext);
-  getUserData();
-  const { name } = user;
+function NewShift({ user, loginError }) {
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
@@ -76,7 +72,7 @@ function NewShift() {
     <>
       <section className={classes.clockSection}>
         <header className={classes.header}>
-          <h1>Welcome {name}!</h1>
+          <h1>Welcome {user.name}!</h1>
           <h3 className={classes.clockDate}>{todayDate}</h3>
         </header>
         <div className={classes.clockAndEarning}>
