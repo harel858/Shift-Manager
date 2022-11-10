@@ -4,7 +4,13 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import LinearColor from "../ui/loading.js";
 
-export default function ShiftTable({ counter, months, shiftList, error }) {
+export default function ShiftTable({
+  counter,
+  months,
+  shiftList,
+  error,
+  loading,
+}) {
   if (loading) return <LinearColor />;
 
   if (error) {
