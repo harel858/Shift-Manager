@@ -72,7 +72,6 @@ export function UserContextProvider(props) {
         setCurrency(userData.currency);
         setPayment(userData.payment);
         setOvertime(userData.overTime);
-        return setLoading(false);
       } else {
         const resError = await res.json();
         setLoginError(resError);
@@ -80,6 +79,7 @@ export function UserContextProvider(props) {
     } catch (err) {
       console.log(err);
     }
+    setLoading(false);
   }
 
   async function updatePayment(newPayment) {
