@@ -26,7 +26,8 @@ function AllShifts() {
 
   const shiftsCtx = useContext(ShiftContext);
   const { loginError } = useContext(UserContext);
-  const allShiftList = shiftsCtx.shifts.sort(byDate);
+  const { error, loading, shifts } = shiftsCtx;
+  const allShiftList = shifts.sort(byDate);
 
   const [counter, setCounter] = useState(0);
   const [months, setMonths] = useState([
@@ -85,6 +86,8 @@ function AllShifts() {
           setMonths={setMonths}
         />
         <ShiftList2
+          loading={loading}
+          error={error}
           counter={counter}
           setCounter={setCounter}
           months={months}

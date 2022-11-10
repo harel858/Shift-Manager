@@ -7,11 +7,15 @@ export default function ShiftList2({
   months,
   setMonths,
   shiftList,
+  error,
+  loading,
 }) {
   return (
     <>
       <div className={classes.listContainer}>
         <ShiftTable
+          loading={loading}
+          error={error}
           counter={counter}
           setCounter={setCounter}
           months={months}

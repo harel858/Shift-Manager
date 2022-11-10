@@ -14,6 +14,7 @@ const UserContext = createContext({
   updatePayment: (payment) => {},
   updateCurrency: (obj) => {},
   updateOvertime: (value) => {},
+  loading: Boolean,
 });
 
 export function UserContextProvider(props) {

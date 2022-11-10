@@ -11,7 +11,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import LinearColor from "../components/ui/loading.js";
 
-function NewShift({ user, loginError, loading }) {
+function NewShift() {
   const { loginError, user, loading } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
