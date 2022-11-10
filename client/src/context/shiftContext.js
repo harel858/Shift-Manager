@@ -57,9 +57,9 @@ export function ShiftContextProvider(props) {
         throw err;
       }
       setShiftList(allShifts);
-      setLoading(false);
     };
     getShiftData();
+    setLoading(false);
   }, [user, setUser, setLoginError]);
 
   async function addShiftHandler(shift) {
