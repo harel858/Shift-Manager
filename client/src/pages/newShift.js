@@ -12,6 +12,7 @@ import UserContext from "../context/userContext.js";
 
 function NewShift() {
   const { loginError, user } = useContext(UserContext);
+  const { name } = user;
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
@@ -74,7 +75,7 @@ function NewShift() {
     <>
       <section className={classes.clockSection}>
         <header className={classes.header}>
-          <h1>Welcome {user.name}!</h1>
+          <h1>Welcome {name}!</h1>
           <h3 className={classes.clockDate}>{todayDate}</h3>
         </header>
         <div className={classes.clockAndEarning}>
