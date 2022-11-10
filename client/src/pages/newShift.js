@@ -11,7 +11,8 @@ import MuiAlert from "@mui/material/Alert";
 import UserContext from "../context/userContext.js";
 
 function NewShift() {
-  const { loginError, user } = useContext(UserContext);
+  const { loginError, user, getUserData } = useContext(UserContext);
+  getUserData();
   const { name } = user;
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);

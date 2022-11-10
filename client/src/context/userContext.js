@@ -1,6 +1,7 @@
 import { useState, createContext, useEffect } from "react";
 
 const UserContext = createContext({
+  getUserData: () => {},
   payment: Number,
   setPayment: (payment) => {},
   currency: String,
@@ -49,35 +50,35 @@ export function UserContextProvider(props) {
   ]);
 
   useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const res = await fetch(
-          "https://shift-manager-production.up.railway.app/user",
-          {
-            method: "GET",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-
-        if (res.ok) {
-          const [userData] = await res.json();
-          console.log(userData);
-          setUser(userData);
-          setCurrency(userData.currency);
-          setPayment(userData.payment);
-          return setOvertime(userData.overTime);
-        } else {
-          const resError = await res.json();
-          setLoginError(resError);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
     getUserData();
   }, []);
+
+  async function getUserData() {
+    try {
+      const res = await fetch(
+        "https://shift-manager-production.up.railway.app/user",
+        {
+          method: "GET",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (res.ok) {
+        const [userData] = await res.json();
+        console.log(userData);
+        setUser(userData);
+        setCurrency(userData.currency);
+        setPayment(userData.payment);
+        return setOvertime(userData.overTime);
+      } else {
+        const resError = await res.json();
+        setLoginError(resError);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   async function updatePayment(newPayment) {
     try {
@@ -155,6 +156,7 @@ export function UserContextProvider(props) {
     currency,
     currencies,
     overTime,
+    getUserData,
     user,
     setUser,
     setPayment,
