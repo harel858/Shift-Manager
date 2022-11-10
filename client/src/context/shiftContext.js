@@ -20,7 +20,6 @@ const ShiftContext = createContext({
     date
   ) => {},
   loading: Boolean,
-  error: String,
 });
 
 export function ShiftContextProvider(props) {
