@@ -51,10 +51,10 @@ export function ShiftContextProvider(props) {
           allShifts.push(...shifts);
         } else {
           const resError = await res.json();
-          setLoginError(resError);
+          setError(resError);
         }
       } catch (err) {
-        setError(allShifts);
+        setError(err);
         throw err;
       }
       setShiftList(allShifts);
