@@ -12,7 +12,8 @@ import UserContext from "../context/userContext.js";
 
 function NewShift() {
   const [open, setOpen] = useState(false);
-  const { loginError, user } = useContext(UserContext);
+  const userCtx = useContext(UserContext);
+  const { loginError, user } = userCtx;
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
