@@ -8,6 +8,7 @@ import ShiftPayment from "../components/ui/shiftPayment";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import LinearColor from "../components/ui/loading.js";
 
 function NewShift({ user, loginError, loading }) {
   const [open, setOpen] = useState(false);
@@ -51,8 +52,10 @@ function NewShift({ user, loginError, loading }) {
 
   if (localStorage.getItem("shiftDetails"))
     shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
-
-  if (!user && !loading) {
+  if (loading) {
+    return <LinearColor />;
+  }
+  if (loginError) {
     return (
       <div className={classes.errorContainer}>
         <header className={classes.header}>
