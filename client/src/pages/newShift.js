@@ -12,23 +12,6 @@ import UserContext from "../context/userContext.js";
 
 function NewShift() {
   const { loginError, user } = useContext(UserContext);
-  if (!user) {
-    return (
-      <div className={classes.errorContainer}>
-        <header className={classes.header}>
-          <h1>{loginError}</h1>
-        </header>
-        <Nav className={classes.navLink} as={Link} to="/">
-          Click Here to Log In
-        </Nav>
-        <h3>Not registered yet?</h3>
-        <Nav className={classes.navLink} as={Link} to="/register">
-          Register Now
-        </Nav>
-      </div>
-    );
-  }
-
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
@@ -71,6 +54,22 @@ function NewShift() {
   if (localStorage.getItem("shiftDetails"))
     shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
 
+  if (!user) {
+    return (
+      <div className={classes.errorContainer}>
+        <header className={classes.header}>
+          <h1>{loginError}</h1>
+        </header>
+        <Nav className={classes.navLink} as={Link} to="/">
+          Click Here to Log In
+        </Nav>
+        <h3>Not registered yet?</h3>
+        <Nav className={classes.navLink} as={Link} to="/register">
+          Register Now
+        </Nav>
+      </div>
+    );
+  }
   return (
     <>
       <section className={classes.clockSection}>
