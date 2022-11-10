@@ -18,6 +18,7 @@ const UserContext = createContext({
 });
 
 export function UserContextProvider(props) {
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState();
   const [loginError, setLoginError] = useState();
   const [payment, setPayment] = useState(29.17);
@@ -54,6 +55,7 @@ export function UserContextProvider(props) {
   }, []);
 
   async function getUserData() {
+    setLoading(true);
     try {
       const res = await fetch(
         "https://shift-manager-production.up.railway.app/user",
@@ -70,7 +72,8 @@ export function UserContextProvider(props) {
         setUser(userData);
         setCurrency(userData.currency);
         setPayment(userData.payment);
-        return setOvertime(userData.overTime);
+        setOvertime(userData.overTime);
+        setLoading(false);
       } else {
         const resError = await res.json();
         setLoginError(resError);

@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-function NewShift({ user, loginError }) {
+function NewShift({ user, loginError, loading }) {
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
@@ -52,7 +52,7 @@ function NewShift({ user, loginError }) {
   if (localStorage.getItem("shiftDetails"))
     shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
 
-  if (!user) {
+  if (!user && !loading) {
     return (
       <div className={classes.errorContainer}>
         <header className={classes.header}>
