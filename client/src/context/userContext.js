@@ -66,7 +66,7 @@ export function UserContextProvider(props) {
           setUser(userData);
           setCurrency(userData.currency);
           setPayment(userData.payment);
-          setOvertime(userData.overTime);
+          return setOvertime(userData.overTime);
         } else {
           const resError = await res.json();
           setLoginError(resError);
