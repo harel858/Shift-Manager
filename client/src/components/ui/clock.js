@@ -6,14 +6,29 @@ import Timer from "./timer";
 import CurrentShift from "../../context/currentShiftContext.js";
 
 function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
-  const { updatePaused, updateStartAgain } = useContext(CurrentShift);
+  const { createCurrentShift, updatePaused, updateStartAgain, currentShift } =
+    useContext(CurrentShift);
+
   const startToggleHandler = () => {
-    if (play && seconds > 0) {
+    if (!play && !currentShift) {
+      const today = new Date();
+      const currentDateAndHour = today.toLocaleString();
+      const currentDate = today.toLocaleString("en-US", { month: "long" });
+      createCurrentShift(
+        user.workPlaces[0],
+        `${currentDateAndHour} `,
+        `${currentDate}`,
+        today.getTime(),
+        0,
+        0
+      );
+    }
+    if (play && currentShift) {
       const nowInSeconds = new Date().getTime();
       updatePaused(Math.floor(nowInSeconds / 1000));
     }
 
-    if (!play && seconds > 0) {
+    if (!play && currentShift) {
       const nowInSeconds = new Date().getTime();
       updateStartAgain(Math.floor(nowInSeconds / 1000));
     }

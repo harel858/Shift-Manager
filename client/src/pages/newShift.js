@@ -10,12 +10,9 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import LinearColor from "../components/ui/loading.js";
-import CurrentShift from "../context/currentShiftContext";
 
 function NewShift() {
   const { loginError, user, loading } = useContext(UserContext);
-  const { currentShift, createCurrentShift } = useContext(CurrentShift);
-  console.log(currentShift);
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
@@ -33,21 +30,6 @@ function NewShift() {
     setOpen(false);
   };
 
-  if (!currentShift) {
-    const today = new Date();
-    const currentDateAndHour = today.toLocaleString();
-    const currentDate = today.toLocaleString("en-US", { month: "long" });
-    createCurrentShift(
-      user.workPlaces[0],
-      `${currentDateAndHour} `,
-      `${currentDate}`,
-      today.getTime(),
-      0,
-      0
-    );
-  }
-
-  if (currentShift) shiftDetails.current = currentShift;
   if (loading) {
     return <LinearColor />;
   }
