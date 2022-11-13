@@ -10,7 +10,12 @@ async function getCurrentShift(userId) {
 }
 
 async function addCurrentShift(details) {
-  return await new currentShift(details).save();
+  try {
+    return await new currentShift(details).save();
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 }
 
 async function updatePaused(id, date) {
