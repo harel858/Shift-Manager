@@ -1,7 +1,7 @@
 import classes from "./style/clock.module.css";
 import { useEffect, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
-function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
+function Timer({ currentShift, play, setSeconds, seconds, isPlay }) {
   const { payment } = useContext(UserContext);
 
   const setEarning = useCallback(
@@ -33,7 +33,7 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
   let today = new Date();
   let currentTime = today.getTime();
   let currentTimeInSeconds = Math.floor(currentTime / 1000);
-  let startSeconds = shiftDetails.current.startSeconds;
+  let startSeconds = currentShift.startSeconds;
   startSeconds = Math.floor(startSeconds / 1000);
 
   let hrs = 0;

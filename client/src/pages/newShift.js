@@ -16,7 +16,6 @@ function NewShift() {
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
-  const shiftDetails = useRef();
   const today = new Date();
   const todayDate = today.toISOString().slice(0, 10);
 
@@ -59,14 +58,12 @@ function NewShift() {
         <div className={classes.clockAndEarning}>
           <Clock
             todayDate={todayDate}
-            shiftDetails={shiftDetails}
             play={play}
             isPlay={isPlay}
             seconds={seconds}
             setSeconds={setSeconds}
           />
           <ShiftPayment
-            shiftDetails={shiftDetails}
             setSeconds={setSeconds}
             isPlay={isPlay}
             play={play}
