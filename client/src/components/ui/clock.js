@@ -13,6 +13,7 @@ function Clock({ shiftEarnings, setSeconds, seconds, play, isPlay }) {
   console.log(currentShift);
 
   const startToggleHandler = () => {
+    console.log(play);
     if (!play && !currentShift) {
       const today = new Date();
       const currentDateAndHour = today.toLocaleString();

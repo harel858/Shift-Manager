@@ -77,14 +77,14 @@ export function CurrentShiftContextProvider(props) {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: {
+          body: JSON.stringify({
             workPlace,
             start,
             date,
             startSeconds,
             pausedSeconds,
             startAgain,
-          },
+          }),
         }
       );
       if (res.ok) {
