@@ -23,7 +23,7 @@ app.use(
 
 app.use("/user", userRouter);
 app.use("/shifts", shiftRouter);
-app.use("currentShift", currentShiftRouter);
+app.use("/currentShift", currentShiftRouter);
 app.get("/", (req, res) => {
   res.status(200).send("app is running");
 });
