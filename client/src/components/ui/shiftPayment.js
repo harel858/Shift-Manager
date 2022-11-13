@@ -1,7 +1,7 @@
 import classes from "./style/shiftPayment.module.css";
 import { useEffect, useRef, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
-import ShiftContext from "../../context/shiftContext.js";
+/* import ShiftContext from "../../context/shiftContext.js"; */
 import CurrentShift from "../../context/currentShiftContext.js";
 
 function ShiftPayment({
