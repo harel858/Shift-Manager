@@ -87,7 +87,7 @@ function Timer({
       }
       // while exit and pause
       if (ifPlay === false) {
-        currentShift.startAgain &&
+        currentShift?.startAgain &&
           setSeconds(currentShift?.startAgain - currentShift?.pausedSeconds);
         setEarning(currentShift?.startAgain - currentShift?.pausedSeconds);
       }
