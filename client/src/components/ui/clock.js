@@ -8,6 +8,7 @@ import CurrentShift from "../../context/currentShiftContext.js";
 function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
   const { createCurrentShift, updatePaused, updateStartAgain, currentShift } =
     useContext(CurrentShift);
+  console.log(currentShift);
 
   const startToggleHandler = () => {
     if (!play && !currentShift) {
