@@ -14,7 +14,7 @@ function ShiftPayment({
 }) {
   const { deleteShift, currentShift } = useContext(CurrentShift);
   const { payment, currency, overTime } = useContext(UserContext);
-  const { addShift } = useContext(ShiftContext);
+  /* const { addShift } = useContext(ShiftContext); */
   const currentPayment = useRef(0);
 
   const basicCalculate = useCallback(
