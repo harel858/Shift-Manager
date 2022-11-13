@@ -2,6 +2,7 @@ import classes from "./style/shiftPayment.module.css";
 import { useEffect, useRef, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
 import ShiftContext from "../../context/shiftContext.js";
+import CurrentShift from "../../context/currentShiftContext.js";
 
 function ShiftPayment({
   shiftDetails,
@@ -11,6 +12,7 @@ function ShiftPayment({
   setSeconds,
   setOpen,
 }) {
+  const { deleteShift, currentShift } = useContext(CurrentShift);
   const { payment, currency, overTime } = useContext(UserContext);
   const { addShift } = useContext(ShiftContext);
   const currentPayment = useRef(0);
@@ -95,12 +97,7 @@ function ShiftPayment({
       addShift(shiftObj);
       setOpen(true);
       setSeconds(0);
-      shiftDetails.current.basicPayment = 0;
-      shiftDetails.current.firstOverTimePay = 0;
-      shiftDetails.current.overTimePay = 0;
-      shiftDetails.current.seconds = 0;
-      shiftDetails.current.pausedSeconds = 0;
-      shiftDetails.current.startAgain = 0;
+      deleteShift(currentShift);
       return isPlay((play = null));
     } catch (err) {
       console.error(err);

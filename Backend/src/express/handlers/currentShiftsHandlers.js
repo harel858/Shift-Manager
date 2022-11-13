@@ -38,11 +38,13 @@ async function createShift(req, res) {
 
 async function updateStartAgain(req, res) {
   try {
-    const { startAgain } = req.body;
+    const { currentStartAgain } = req.body;
     const { userId } = req;
+    const oldShift = await currentShiftOperations.getCurrentShift(userId);
+    const { startAgain } = oldShift;
     const response = await currentShiftOperations.updateStartAgain(
       userId,
-      startAgain
+      +startAgain + currentStartAgain
     );
     if (!response || response.acknowledged == false) {
       return res.status(500).json(`someThing went wrong`);
@@ -57,9 +59,11 @@ async function updatePaused(req, res) {
   try {
     const { currentPaused } = req.body;
     const { userId } = req;
+    const oldShift = await currentShiftOperations.getCurrentShift(userId);
+    const { pausedSeconds } = oldShift;
     const response = await currentShiftOperations.updatePaused(
       userId,
-      currentPaused
+      +pausedSeconds + currentPaused
     );
     if (!response || response.acknowledged == false) {
       return res.status(500).json(`someThing went wrong`);

@@ -1,28 +1,21 @@
 import classes from "./style/clock.module.css";
+import { useContext } from "react";
 import { BiPlay } from "react-icons/bi";
 import { BsPause } from "react-icons/bs";
 import Timer from "./timer";
+import CurrentShift from "../../context/currentShiftContext.js";
 
 function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
+  const { updatePaused, updateStartAgain } = useContext(CurrentShift);
   const startToggleHandler = () => {
     if (play && seconds > 0) {
       const nowInSeconds = new Date().getTime();
-      shiftDetails.current.pausedSeconds =
-        shiftDetails.current.pausedSeconds + Math.floor(nowInSeconds / 1000);
-      localStorage.setItem(
-        "shiftDetails",
-        JSON.stringify(shiftDetails.current)
-      );
+      updatePaused(Math.floor(nowInSeconds / 1000));
     }
 
     if (!play && seconds > 0) {
       const nowInSeconds = new Date().getTime();
-      shiftDetails.current.startAgain =
-        shiftDetails.current.startAgain + Math.floor(nowInSeconds / 1000);
-      localStorage.setItem(
-        "shiftDetails",
-        JSON.stringify(shiftDetails.current)
-      );
+      updateStartAgain(Math.floor(nowInSeconds / 1000));
     }
 
     localStorage.setItem("setPlay", !play);

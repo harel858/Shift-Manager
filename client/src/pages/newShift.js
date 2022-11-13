@@ -15,6 +15,7 @@ import CurrentShift from "../context/currentShiftContext";
 function NewShift() {
   const { loginError, user, loading } = useContext(UserContext);
   const { currentShift, createCurrentShift } = useContext(CurrentShift);
+  console.log(currentShift);
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();

@@ -13,7 +13,7 @@ const CurrentShift = createContext({
   ) => {},
   updatePaused: (date) => {},
   updateStartAgain: (date) => {},
-  deleteShift: () => {},
+  deleteShift: (currentShift) => {},
   currentShift: {
     workPlace: String,
     start: String,
@@ -131,7 +131,7 @@ export function CurrentShiftContextProvider(props) {
     }
   };
 
-  const updateStartAgain = async (startAgain) => {
+  const updateStartAgain = async (currentStartAgain) => {
     setLoading(true);
     try {
       const res = await fetch(
@@ -141,7 +141,7 @@ export function CurrentShiftContextProvider(props) {
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: {
-            startAgain,
+            currentStartAgain,
           },
         }
       );
