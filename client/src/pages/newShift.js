@@ -10,9 +10,11 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import LinearColor from "../components/ui/loading.js";
+import CurrentShift from "../context/currentShiftContext";
 
 function NewShift() {
   const { loginError, user, loading } = useContext(UserContext);
+  const { currentShift, createCurrentShift } = useContext(CurrentShift);
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
@@ -30,30 +32,21 @@ function NewShift() {
     setOpen(false);
   };
 
-  if (!localStorage.getItem("shiftDetails")) {
+  if (!currentShift) {
     const today = new Date();
     const currentDateAndHour = today.toLocaleString();
     const currentDate = today.toLocaleString("en-US", { month: "long" });
-
-    shiftDetails.current = {
-      workPlace: user.workPlaces[0],
-      start: `${currentDateAndHour} `,
-      end: null,
-      date: `${currentDate}`,
-      startSeconds: today.getTime(),
-      pausedSeconds: 0,
-      startAgain: 0,
-      timeSpend: null,
-      totalProfit: null,
-      seconds: seconds,
-      basicPayment: 0,
-      firstOverTimePay: 0,
-      overTimePay: 0,
-    };
+    createCurrentShift(
+      user.workPlaces[0],
+      `${currentDateAndHour} `,
+      `${currentDate}`,
+      today.getTime(),
+      0,
+      0
+    );
   }
 
-  if (localStorage.getItem("shiftDetails"))
-    shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
+  if (currentShift) shiftDetails.current = currentShift;
   if (loading) {
     return <LinearColor />;
   }

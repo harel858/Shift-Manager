@@ -48,11 +48,12 @@ export function CurrentShiftContextProvider(props) {
           const data = await res.json();
           setCurrentShift(data);
         } else {
-          console.log(await res.json());
+          setCurrentShift(null);
         }
       } catch (err) {
         console.log(err);
         setError(err);
+        setCurrentShift(null);
       } finally {
         setLoading(false);
       }
