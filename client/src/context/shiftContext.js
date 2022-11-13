@@ -64,6 +64,8 @@ export function ShiftContextProvider(props) {
   }, [user, setUser, setLoginError]);
 
   async function addShiftHandler(shift) {
+    const today = new Date();
+    const currentDate = today.toLocaleString();
     try {
       const res = await fetch(
         "https://shift-manager-production.up.railway.app/shifts/create",
@@ -77,7 +79,7 @@ export function ShiftContextProvider(props) {
           body: JSON.stringify({
             workPlace: shift.workPlace,
             start: shift.start,
-            end: shift.end,
+            end: currentDate,
             date: shift.date,
             timeSpend: shift.timeSpend,
             totalProfit: shift.totalProfit,

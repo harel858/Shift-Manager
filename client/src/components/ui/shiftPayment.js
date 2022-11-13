@@ -79,12 +79,9 @@ function ShiftPayment({
   ]);
 
   async function saveHandler() {
-    const today = new Date();
-    const currentDate = today.toLocaleString();
     try {
-      shiftDetails.current.end = `${currentDate}`;
       localStorage.clear();
-      const shiftObj = { ...shiftEarnings.current, ...currentShift };
+      /*  const shiftObj = { ...shiftEarnings.current, ...currentShift }; */
       /* addShift(shiftObj); */
       setOpen(true);
       setSeconds(0);
