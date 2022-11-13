@@ -19,10 +19,10 @@ function ShiftPayment({
 
   const basicCalculate = useCallback(
     (sec) => {
-      shiftEarnings?.current?.basicPayment = ((sec / 60) * payment) / 60;
+      shiftEarnings.current.basicPayment = ((sec / 60) * payment) / 60;
 
-      currentPayment?.current = shiftEarnings?.current?.basicPayment;
-      shiftEarnings?.current?.totalProfit = currentPayment?.current?.toFixed(2);
+      currentPayment.current = shiftEarnings.current.basicPayment;
+      shiftEarnings.current.totalProfit = currentPayment.current?.toFixed(2);
     },
     [payment, shiftEarnings]
   );
@@ -33,7 +33,7 @@ function ShiftPayment({
       const TEN_HOURS_BY_MILLISECONDS = 36000;
 
       if (sec < EIGHT_HOURS_BY_MILLISECONDS) {
-        shiftEarnings?.current?.basicPayment = ((sec / 60) * payment) / 60;
+        shiftEarnings.current.basicPayment = ((sec / 60) * payment) / 60;
       }
 
       // Calculation of pay for the first two overtime hours
@@ -42,23 +42,23 @@ function ShiftPayment({
         sec > EIGHT_HOURS_BY_MILLISECONDS &&
         sec < TEN_HOURS_BY_MILLISECONDS
       ) {
-        shiftEarnings?.current?.firstOverTimePay =
+        shiftEarnings?.current.firstOverTimePay =
           (((sec - EIGHT_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.25)) / 60;
       }
 
       //Calculation of the remaining overtime hours
 
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftEarnings?.current?.overTimePay =
+        shiftEarnings.current.overTimePay =
           (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
       }
 
       currentPayment.current =
-        +shiftEarnings?.current?.basicPayment +
-        +shiftEarnings?.current?.firstOverTimePay +
-        +shiftEarnings?.current?.overTimePay;
+        +shiftEarnings.current.basicPayment +
+        +shiftEarnings.current.firstOverTimePay +
+        +shiftEarnings.current.overTimePay;
 
-      shiftEarnings?.current?.totalProfit = currentPayment.current.toFixed(2);
+      shiftEarnings.current.totalProfit = currentPayment.current.toFixed(2);
     },
     [payment, shiftEarnings]
   );
