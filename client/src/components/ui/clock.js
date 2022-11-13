@@ -4,10 +4,12 @@ import { BiPlay } from "react-icons/bi";
 import { BsPause } from "react-icons/bs";
 import Timer from "./timer";
 import CurrentShift from "../../context/currentShiftContext.js";
+import UserContext from "../../context/userContext.js";
 
 function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
   const { createCurrentShift, updatePaused, updateStartAgain, currentShift } =
     useContext(CurrentShift);
+  const { user } = useContext(UserContext);
   console.log(currentShift);
 
   const startToggleHandler = () => {
