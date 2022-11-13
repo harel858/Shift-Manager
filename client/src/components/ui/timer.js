@@ -16,17 +16,17 @@ function Timer({
       const EIGHT_HOURS_BY_MILLISECONDS = 28800;
       const TEN_HOURS_BY_MILLISECONDS = 36000;
       if (sec > EIGHT_HOURS_BY_MILLISECONDS) {
-        shiftEarnings.current.basicPayment =
+        shiftEarnings?.current?.basicPayment =
           ((EIGHT_HOURS_BY_MILLISECONDS / 60) * payment) / 60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftEarnings.current.firstOverTimePay =
+        shiftEarnings?.current?.firstOverTimePay =
           (((TEN_HOURS_BY_MILLISECONDS - EIGHT_HOURS_BY_MILLISECONDS) / 60) *
             (payment * 1.25)) /
           60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftEarnings.current.overTimePay =
+        shiftEarnings?.current?.overTimePay =
           (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
       }
     },
@@ -36,7 +36,7 @@ function Timer({
   let today = new Date();
   let currentTime = today.getTime();
   let currentTimeInSeconds = Math.floor(currentTime / 1000);
-  let startSeconds = currentShift.startSeconds;
+  let startSeconds = currentShift?.startSeconds;
   startSeconds = Math.floor(startSeconds / 1000);
 
   let hrs = 0;
@@ -61,28 +61,28 @@ function Timer({
       const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
 
       // while exit and playing
-      if (ifPlay === true && !currentShift.pausedSeconds) {
+      if (ifPlay === true && !currentShift?.pausedSeconds) {
         setSeconds(currentTimeInSeconds - startSeconds);
         setEarning(currentTimeInSeconds - startSeconds);
       }
 
-      if (ifPlay === true && currentShift.pausedSeconds) {
+      if (ifPlay === true && currentShift?.pausedSeconds) {
         setSeconds(
           currentTimeInSeconds -
             startSeconds -
-            (currentShift.startAgain - currentShift.pausedSeconds)
+            (currentShift.startAgain - currentShift?.pausedSeconds)
         );
         setEarning(
           currentTimeInSeconds -
             startSeconds -
-            (currentShift.startAgain - currentShift.pausedSeconds)
+            (currentShift.startAgain - currentShift?.pausedSeconds)
         );
       }
       // while exit and pause
       if (ifPlay === false) {
         currentShift.startAgain &&
-          setSeconds(currentShift.startAgain - currentShift.pausedSeconds);
-        setEarning(currentShift.startAgain - currentShift.pausedSeconds);
+          setSeconds(currentShift?.startAgain - currentShift?.pausedSeconds);
+        setEarning(currentShift?.startAgain - currentShift?.pausedSeconds);
       }
 
       // while exit and not playing
@@ -110,7 +110,7 @@ function Timer({
   hrs = (`0` + hrs).slice(-2);
   mins = (`0` + mins).slice(-2);
   secs = (`0` + secs).slice(-2);
-  shiftEarnings.current.timeSpend = `${hrs}:${mins}:${secs}`;
+  shiftEarnings?.current?.timeSpend = `${hrs}:${mins}:${secs}`;
 
   return (
     <>
