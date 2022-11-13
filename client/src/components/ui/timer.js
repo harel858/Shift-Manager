@@ -15,20 +15,27 @@ function Timer({
     (sec) => {
       const EIGHT_HOURS_BY_MILLISECONDS = 28800;
       const TEN_HOURS_BY_MILLISECONDS = 36000;
+      let basicPayment = 0;
+      let firstOverTimePay = 0;
+      let overTimePay = 0;
       if (sec > EIGHT_HOURS_BY_MILLISECONDS) {
-        shiftEarnings.current.basicPayment =
-          ((EIGHT_HOURS_BY_MILLISECONDS / 60) * payment) / 60;
+        basicPayment = ((EIGHT_HOURS_BY_MILLISECONDS / 60) * payment) / 60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftEarnings.current.firstOverTimePay =
+        firstOverTimePay =
           (((TEN_HOURS_BY_MILLISECONDS - EIGHT_HOURS_BY_MILLISECONDS) / 60) *
             (payment * 1.25)) /
           60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftEarnings.current.overTimePay =
+        overTimePay =
           (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
       }
+      shiftEarnings.current.basicPayment = basicPayment.toFixed(2);
+      shiftEarnings.current.firstOverTimePay = firstOverTimePay.toFixed(2);
+      shiftEarnings.current.overTimePay = overTimePay.toFixed(2);
+      shiftEarnings.current.totalProfit =
+        basicPayment + firstOverTimePay + overTimePay;
     },
     [shiftEarnings, payment]
   );
