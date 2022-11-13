@@ -17,7 +17,7 @@ function NewShift() {
   const [seconds, setSeconds] = useState(0);
   const [play, isPlay] = useState();
 
-  const shiftEarnings = useRef();
+  const shiftEarnings = useRef({});
 
   const today = new Date();
   const todayDate = today.toISOString().slice(0, 10);
