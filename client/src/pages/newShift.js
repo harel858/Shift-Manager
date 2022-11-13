@@ -68,6 +68,7 @@ function NewShift() {
             setSeconds={setSeconds}
           />
           <ShiftPayment
+            shiftEarnings={shiftEarnings}
             setSeconds={setSeconds}
             isPlay={isPlay}
             play={play}
