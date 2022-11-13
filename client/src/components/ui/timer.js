@@ -16,17 +16,17 @@ function Timer({
       const EIGHT_HOURS_BY_MILLISECONDS = 28800;
       const TEN_HOURS_BY_MILLISECONDS = 36000;
       if (sec > EIGHT_HOURS_BY_MILLISECONDS) {
-        shiftEarnings?.current?.basicPayment =
+        shiftEarnings.current.basicPayment =
           ((EIGHT_HOURS_BY_MILLISECONDS / 60) * payment) / 60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftEarnings?.current?.firstOverTimePay =
+        shiftEarnings.current.firstOverTimePay =
           (((TEN_HOURS_BY_MILLISECONDS - EIGHT_HOURS_BY_MILLISECONDS) / 60) *
             (payment * 1.25)) /
           60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftEarnings?.current?.overTimePay =
+        shiftEarnings.current.overTimePay =
           (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
       }
     },
