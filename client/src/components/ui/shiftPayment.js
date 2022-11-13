@@ -42,7 +42,7 @@ function ShiftPayment({
         sec > EIGHT_HOURS_BY_MILLISECONDS &&
         sec < TEN_HOURS_BY_MILLISECONDS
       ) {
-        shiftEarnings?.current.firstOverTimePay =
+        shiftEarnings.current.firstOverTimePay =
           (((sec - EIGHT_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.25)) / 60;
       }
 
