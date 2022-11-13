@@ -110,7 +110,7 @@ function Timer({
   hrs = (`0` + hrs).slice(-2);
   mins = (`0` + mins).slice(-2);
   secs = (`0` + secs).slice(-2);
-  shiftEarnings?.current?.timeSpend = `${hrs}:${mins}:${secs}`;
+  shiftEarnings.current.timeSpend = `${hrs}:${mins}:${secs}`;
 
   return (
     <>

@@ -67,7 +67,7 @@ function ShiftPayment({
     if (play) {
       !overTime ? basicCalculate(seconds) : overTimeCalculate(seconds);
     } else if (play === null) {
-      currentPayment?.current = 0;
+      currentPayment.current = 0;
     }
   }, [
     seconds,
