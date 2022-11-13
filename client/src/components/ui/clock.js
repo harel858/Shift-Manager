@@ -6,7 +6,7 @@ import Timer from "./timer";
 import CurrentShift from "../../context/currentShiftContext.js";
 import UserContext from "../../context/userContext.js";
 
-function Clock({ setSeconds, seconds, play, isPlay }) {
+function Clock({ shiftEarnings, setSeconds, seconds, play, isPlay }) {
   const { createCurrentShift, updatePaused, updateStartAgain, currentShift } =
     useContext(CurrentShift);
   const { user } = useContext(UserContext);
@@ -63,6 +63,7 @@ function Clock({ setSeconds, seconds, play, isPlay }) {
         )}
 
         <Timer
+          shiftEarnings={shiftEarnings}
           currentShift={currentShift}
           isPlay={isPlay}
           seconds={seconds}

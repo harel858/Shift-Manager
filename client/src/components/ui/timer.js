@@ -1,7 +1,14 @@
 import classes from "./style/clock.module.css";
 import { useEffect, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
-function Timer({ currentShift, play, setSeconds, seconds, isPlay }) {
+function Timer({
+  shiftEarnings,
+  currentShift,
+  play,
+  setSeconds,
+  seconds,
+  isPlay,
+}) {
   const { payment } = useContext(UserContext);
 
   const setEarning = useCallback(
@@ -9,25 +16,21 @@ function Timer({ currentShift, play, setSeconds, seconds, isPlay }) {
       const EIGHT_HOURS_BY_MILLISECONDS = 28800;
       const TEN_HOURS_BY_MILLISECONDS = 36000;
       if (sec > EIGHT_HOURS_BY_MILLISECONDS) {
-        shiftDetails.current.basicPayment =
+        shiftEarnings.current.basicPayment =
           ((EIGHT_HOURS_BY_MILLISECONDS / 60) * payment) / 60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftDetails.current.firstOverTimePay =
+        shiftEarnings.current.firstOverTimePay =
           (((TEN_HOURS_BY_MILLISECONDS - EIGHT_HOURS_BY_MILLISECONDS) / 60) *
             (payment * 1.25)) /
           60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftDetails.current.overTimePay =
+        shiftEarnings.current.overTimePay =
           (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
       }
-      localStorage.setItem(
-        "shiftDetails",
-        JSON.stringify(shiftDetails?.current)
-      );
     },
-    [shiftDetails, payment]
+    [shiftEarnings, payment]
   );
   //global variables
   let today = new Date();
@@ -54,10 +57,8 @@ function Timer({ currentShift, play, setSeconds, seconds, isPlay }) {
       interval = setInterval(() => {
         return setSeconds((prev) => prev + 1);
       }, 1000);
-      shiftDetails.current.seconds = seconds;
     } else {
       const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
-      const currentShift = JSON.parse(localStorage.getItem("shiftDetails"));
 
       // while exit and playing
       if (ifPlay === true && !currentShift.pausedSeconds) {
@@ -79,8 +80,9 @@ function Timer({ currentShift, play, setSeconds, seconds, isPlay }) {
       }
       // while exit and pause
       if (ifPlay === false) {
-        setSeconds(currentShift.seconds);
-        setEarning(currentShift.seconds);
+        currentShift.startAgain &&
+          setSeconds(currentShift.startAgain - currentShift.pausedSeconds);
+        setEarning(currentShift.startAgain - currentShift.pausedSeconds);
       }
 
       // while exit and not playing
@@ -96,7 +98,7 @@ function Timer({ currentShift, play, setSeconds, seconds, isPlay }) {
     isPlay,
     setSeconds,
     currentTimeInSeconds,
-    shiftDetails,
+    currentShift,
     startSeconds,
     setEarning,
   ]);
@@ -108,7 +110,7 @@ function Timer({ currentShift, play, setSeconds, seconds, isPlay }) {
   hrs = (`0` + hrs).slice(-2);
   mins = (`0` + mins).slice(-2);
   secs = (`0` + secs).slice(-2);
-  shiftDetails.current.timeSpend = `${hrs}:${mins}:${secs}`;
+  shiftEarnings.current.timeSpend = `${hrs}:${mins}:${secs}`;
 
   return (
     <>
