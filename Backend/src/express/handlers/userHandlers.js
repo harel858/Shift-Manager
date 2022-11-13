@@ -1,6 +1,5 @@
 const operations = require("../../mongoose/userOperations");
 const validateUser = require("../../joi/userValidation");
-const userModel = require("../../mongoose/userModel.js");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -21,6 +20,9 @@ async function overtimeUpdateHandler(req, res) {
     const { userId } = req;
 
     const response = await operations.updateOverTime(userId, overTime);
+    if (!response || response.acknowledged == false) {
+      return res.status(500).json(`someThing went wrong`);
+    }
 
     return res.status(204).json(overTime);
   } catch (err) {
@@ -223,7 +225,6 @@ async function signIn(req, res) {
   const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
 
   req.session = { token };
-  req.session.value = true;
   res.status(200).json(user);
 }
 async function logOut(req, res) {

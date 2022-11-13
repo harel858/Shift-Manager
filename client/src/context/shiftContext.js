@@ -55,11 +55,12 @@ export function ShiftContextProvider(props) {
       } catch (err) {
         setError(err);
         throw err;
+      } finally {
+        setShiftList(allShifts);
+        setLoading(false);
       }
-      setShiftList(allShifts);
     };
     getShiftData();
-    setLoading(false);
   }, [user, setUser, setLoginError]);
 
   async function addShiftHandler(shift) {

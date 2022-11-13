@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
   phone: String,
   workPlaces: [{ type: String }],
   password: { type: String, require: true },
-  isManager: Boolean,
+  isRunningShift: Boolean,
 });
 const userModel = mongoose.model("users", schema);
 
