@@ -15,18 +15,20 @@ const CurrentShift = createContext({
   updateStartAgain: (date) => {},
   deleteShift: () => {},
   currentShift: {
-    workPlace,
-    start,
-    date,
-    startSeconds,
-    pausedSeconds,
-    startAgain,
+    workPlace: String,
+    start: String,
+    date: String,
+    startSeconds: Number,
+    pausedSeconds: Number,
+    startAgain: Number,
   },
+  errorCurrentShift: String,
+  loadingCurrentShift: Boolean,
 });
 
 export function CurrentShiftContextProvider(props) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const [loadingCurrentShift, setLoading] = useState(false);
+  const [errorCurrentShift, setError] = useState();
   const [currentShift, setCurrentShift] = useState();
   const { user } = useContext(UserContext);
 
@@ -186,6 +188,9 @@ export function CurrentShiftContextProvider(props) {
     updatePaused,
     updateStartAgain,
     deleteShift,
+    loadingCurrentShift,
+    errorCurrentShift,
+    currentShift,
   };
 
   return (
