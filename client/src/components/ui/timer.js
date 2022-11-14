@@ -55,8 +55,8 @@ function Timer({
     let interval = null;
 
     //Maintains playing status continuously
-    if (localStorage.getItem("setPlay")) {
-      let res = JSON.parse(localStorage.getItem("setPlay"));
+    if (currentShift) {
+      let res = currentShift.play;
       isPlay(res);
     }
 

@@ -1,3 +1,4 @@
+const { boolean } = require("joi");
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
@@ -7,6 +8,7 @@ const schema = new mongoose.Schema({
   startSeconds: { type: Number, require: true },
   pausedSeconds: { type: Number },
   startAgain: { type: Number },
+  play: boolean,
   userId: { type: mongoose.Types.ObjectId, ref: "users" },
 });
 const currentShift = mongoose.model("currentShift", schema);

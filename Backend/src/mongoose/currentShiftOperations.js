@@ -23,7 +23,7 @@ async function updatePaused(id, date) {
   try {
     const newPaused = await currentShift.findOneAndUpdate(
       { _id: id },
-      { $set: { pausedSeconds: date } }
+      { $set: { pausedSeconds: date, play: false } }
     );
 
     return newPaused;
@@ -36,7 +36,7 @@ async function updateStartAgain(userId, date) {
   try {
     const startAgain = await currentShift.findOneAndUpdate(
       { userId: userId },
-      { $set: { startAgain: date } }
+      { $set: { startAgain: date, play: true } }
     );
 
     return startAgain;

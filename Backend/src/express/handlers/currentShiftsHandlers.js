@@ -17,8 +17,15 @@ async function getUserShifts(req, res) {
 
 async function createShift(req, res) {
   const { userId } = req;
-  const { workPlace, start, date, startSeconds, pausedSeconds, startAgain } =
-    req.body;
+  const {
+    workPlace,
+    start,
+    date,
+    startSeconds,
+    pausedSeconds,
+    startAgain,
+    play,
+  } = req.body;
   const newShift = await currentShiftOperations.addCurrentShift({
     workPlace,
     start,
@@ -27,8 +34,9 @@ async function createShift(req, res) {
     pausedSeconds: +pausedSeconds,
     startAgain: +startAgain,
     userId,
+    play,
   });
-  if (!workPlace || !start || !startSeconds || !date || !userId)
+  if (!workPlace || !start || !startSeconds || !date || !userId || !play)
     return res.status(400).json(`missing part`);
   if (!newShift) {
     return res.status(500).json(`something went wrong`);
