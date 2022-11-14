@@ -103,7 +103,6 @@ export function CurrentShiftContextProvider(props) {
   };
 
   const updatePaused = async (currentPaused) => {
-    console.log(currentPaused);
     setLoading(true);
     try {
       const res = await fetch(
