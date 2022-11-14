@@ -12,15 +12,18 @@ import MuiAlert from "@mui/material/Alert";
 import LinearColor from "../components/ui/loading.js";
 
 function NewShift() {
+  const today = new Date();
+  const todayDate = today.toISOString().slice(0, 10);
   const { loginError, user, loading } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
-  const [play, isPlay] = useState();
-
   const shiftEarnings = useRef({});
-
-  const today = new Date();
-  const todayDate = today.toISOString().slice(0, 10);
+  const [play, isPlay] = useState();
+  //Maintains playing status continuously
+  if (currentShift) {
+    let res = currentShift.play;
+    isPlay(res);
+  }
 
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -60,7 +63,6 @@ function NewShift() {
         </header>
         <div className={classes.clockAndEarning}>
           <Clock
-            todayDate={todayDate}
             shiftEarnings={shiftEarnings}
             play={play}
             isPlay={isPlay}

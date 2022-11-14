@@ -54,12 +54,6 @@ function Timer({
   useEffect(() => {
     let interval = null;
 
-    //Maintains playing status continuously
-    if (currentShift) {
-      let res = currentShift.play;
-      isPlay(res);
-    }
-
     if (play === true) {
       interval = setInterval(() => {
         return setSeconds((prev) => prev + 1);
