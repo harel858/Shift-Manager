@@ -34,6 +34,7 @@ function ShiftPayment({
 
       if (sec < EIGHT_HOURS_BY_MILLISECONDS) {
         shiftEarnings.current.basicPayment = ((sec / 60) * payment) / 60;
+        currentPayment.current = +shiftEarnings.current.basicPayment;
       }
 
       // Calculation of pay for the first two overtime hours
@@ -44,6 +45,9 @@ function ShiftPayment({
       ) {
         shiftEarnings.current.firstOverTimePay =
           (((sec - EIGHT_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.25)) / 60;
+        currentPayment.current =
+          +shiftEarnings.current.basicPayment +
+          +shiftEarnings.current.firstOverTimePay;
       }
 
       //Calculation of the remaining overtime hours
@@ -51,12 +55,11 @@ function ShiftPayment({
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
         shiftEarnings.current.overTimePay =
           (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
+        currentPayment.current =
+          +shiftEarnings.current.basicPayment +
+          +shiftEarnings.current.firstOverTimePay +
+          +shiftEarnings.current.overTimePay;
       }
-
-      currentPayment.current =
-        +shiftEarnings.current.basicPayment +
-        +shiftEarnings.current.firstOverTimePay +
-        +shiftEarnings.current.overTimePay;
 
       shiftEarnings.current.totalProfit = currentPayment.current.toFixed(2);
     },
