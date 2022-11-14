@@ -61,12 +61,12 @@ export function UserContextProvider(props) {
         );
 
         if (res.ok) {
-          const userData = await res.json();
+          const [userData] = await res.json();
 
-          setUser(userData[0]);
-          setCurrency(userData[0].currency);
-          setPayment(userData[0].payment);
-          return setOvertime(userData[0].overTime);
+          setUser(userData);
+          setCurrency(userData.currency);
+          setPayment(userData.payment);
+          return setOvertime(userData.overTime);
         } else {
           const resError = await res.json();
           setLoginError(resError);
