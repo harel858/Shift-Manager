@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
   startSeconds: { type: Number, require: true },
   pausedSeconds: { type: Number },
   startAgain: { type: Number },
-  play: boolean,
+  play: { type: Boolean },
   userId: { type: mongoose.Types.ObjectId, ref: "users" },
 });
 const currentShift = mongoose.model("currentShift", schema);
