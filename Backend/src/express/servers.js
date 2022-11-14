@@ -11,7 +11,6 @@ app.use(
   cors({
     credentials: true,
     origin: "https://kindly-mint-production.up.railway.app",
-    methods: "GET,PUT,POST,DELETE",
   })
 );
 app.use(json());
