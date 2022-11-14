@@ -45,7 +45,7 @@ export function CurrentShiftContextProvider(props) {
           }
         );
         if (res.ok) {
-          const data = await res.json();
+          const [data] = await res.json();
           setCurrentShift(data);
         } else {
           setCurrentShift(null);
@@ -112,7 +112,7 @@ export function CurrentShiftContextProvider(props) {
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            currentPaused,
+            currentPaused: currentPaused,
           }),
         }
       );
