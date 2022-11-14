@@ -162,7 +162,7 @@ export function CurrentShiftContextProvider(props) {
   };
 
   const deleteShift = async (shift) => {
-    console.log(shift._id);
+    console.log(shift);
     try {
       const res = await fetch(
         "https://shift-manager-production.up.railway.app/currentShift/delete",
