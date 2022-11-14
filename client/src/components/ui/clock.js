@@ -13,11 +13,13 @@ function Clock({ shiftEarnings, setSeconds, seconds, play, isPlay }) {
   console.log(currentShift);
 
   const startToggleHandler = () => {
-    console.log(play);
+    const today = new Date();
+
+    //start
     if (!play && !currentShift) {
-      const today = new Date();
       const currentDateAndHour = today.toLocaleString();
       const currentDate = today.toLocaleString("en-US", { month: "long" });
+
       createCurrentShift(
         user.workPlaces[0],
         `${currentDateAndHour} `,
@@ -27,17 +29,15 @@ function Clock({ shiftEarnings, setSeconds, seconds, play, isPlay }) {
         0
       );
     }
+    //paused
     if (play && currentShift) {
-      const nowInSeconds = new Date().getTime();
-      updatePaused(Math.floor(nowInSeconds / 1000));
+      updatePaused(Math.floor(today.getTime() / 1000));
     }
-
+    //continue
     if (!play && currentShift) {
-      const nowInSeconds = new Date().getTime();
-      updateStartAgain(Math.floor(nowInSeconds / 1000));
+      updateStartAgain(Math.floor(today.getTime() / 1000));
     }
 
-    localStorage.setItem("setPlay", !play);
     return isPlay((prev) => !prev);
   };
 
