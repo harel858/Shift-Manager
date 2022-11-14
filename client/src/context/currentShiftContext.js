@@ -117,7 +117,7 @@ export function CurrentShiftContextProvider(props) {
         }
       );
       if (res.ok) {
-        const [data] = await res.json();
+        const data = await res.json();
         console.log(data);
         setCurrentShift(data);
       } else {
