@@ -79,7 +79,7 @@ async function updatePaused(req, res) {
     }
     const updatedShift = await currentShiftOperations.getCurrentShift(userId);
     console.log(`updatedShift:${updatedShift}`);
-    return res.status(204).json(updatedShift);
+    return res.json(updatedShift);
   } catch (err) {
     console.log(err);
   }
