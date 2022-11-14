@@ -57,14 +57,16 @@ async function updateStartAgain(req, res) {
 }
 async function updatePaused(req, res) {
   try {
-    const { currentPaused } = req.body;
     const { userId } = req;
-    const oldShift = await currentShiftOperations.getCurrentShift(userId);
-    const { pausedSeconds } = oldShift;
-    const newPaused = +pausedSeconds + currentPaused;
+    const { currentPaused } = req.body;
+    const userShift = await currentShiftOperations.getCurrentShift(userId);
+
+    if (!userShift) return res.status(500).json("no shift found");
+    const { pausedSeconds, _id } = userShift;
+
     const response = await currentShiftOperations.updatePaused(
-      userId,
-      newPaused
+      _id,
+      +pausedSeconds + currentPaused
     );
     if (!response || response.acknowledged == false) {
       return res.status(500).json(`someThing went wrong`);

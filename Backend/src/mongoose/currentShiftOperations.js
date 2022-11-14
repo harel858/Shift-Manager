@@ -18,10 +18,10 @@ async function addCurrentShift(details) {
   }
 }
 
-async function updatePaused(userId, date) {
+async function updatePaused(id, date) {
   try {
     const newPaused = await currentShift.findOneAndUpdate(
-      { userId: userId },
+      { _id: id },
       { $set: { pausedSeconds: date } }
     );
 
