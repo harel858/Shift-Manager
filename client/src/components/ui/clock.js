@@ -10,11 +10,6 @@ function Clock({ shiftEarnings, setSeconds, seconds, play, isPlay }) {
   const { createCurrentShift, updatePaused, updateStartAgain, currentShift } =
     useContext(CurrentShift);
   const { user } = useContext(UserContext);
-  //Maintains playing status continuously
-  /*  if (currentShift) {
-    let res = currentShift.play;
-    isPlay(res);
-  } */
 
   const startToggleHandler = () => {
     isPlay((prev) => !prev);
