@@ -1,30 +1,32 @@
 import classes from "./style/shiftPayment.module.css";
 import { useEffect, useRef, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
-/* import ShiftContext from "../../context/shiftContext.js"; */
-import CurrentShift from "../../context/currentShiftContext.js";
+import ShiftContext from "../../context/shiftContext.js";
 
 function ShiftPayment({
-  shiftEarnings,
+  shiftDetails,
   seconds,
   play,
   isPlay,
   setSeconds,
   setOpen,
 }) {
-  const { deleteShift, currentShift } = useContext(CurrentShift);
   const { payment, currency, overTime } = useContext(UserContext);
-  /* const { addShift } = useContext(ShiftContext); */
+  const { addShift } = useContext(ShiftContext);
   const currentPayment = useRef(0);
 
   const basicCalculate = useCallback(
     (sec) => {
-      shiftEarnings.current.basicPayment = ((sec / 60) * payment) / 60;
+      shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
 
-      currentPayment.current = shiftEarnings.current.basicPayment;
-      shiftEarnings.current.totalProfit = currentPayment.current?.toFixed(2);
+      currentPayment.current = shiftDetails.current.basicPayment;
+      shiftDetails.current.totalProfit = currentPayment.current.toFixed(2);
+      localStorage.setItem(
+        "shiftDetails",
+        JSON.stringify(shiftDetails.current)
+      );
     },
-    [payment, shiftEarnings]
+    [payment, shiftDetails]
   );
   // Calculation of pay
   const overTimeCalculate = useCallback(
@@ -33,8 +35,7 @@ function ShiftPayment({
       const TEN_HOURS_BY_MILLISECONDS = 36000;
 
       if (sec < EIGHT_HOURS_BY_MILLISECONDS) {
-        shiftEarnings.current.basicPayment = ((sec / 60) * payment) / 60;
-        currentPayment.current = +shiftEarnings.current.basicPayment;
+        shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
       }
 
       // Calculation of pay for the first two overtime hours
@@ -43,28 +44,30 @@ function ShiftPayment({
         sec > EIGHT_HOURS_BY_MILLISECONDS &&
         sec < TEN_HOURS_BY_MILLISECONDS
       ) {
-        shiftEarnings.current.firstOverTimePay =
+        shiftDetails.current.firstOverTimePay =
           (((sec - EIGHT_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.25)) / 60;
-        currentPayment.current =
-          +shiftEarnings.current.basicPayment +
-          +shiftEarnings.current.firstOverTimePay;
       }
 
       //Calculation of the remaining overtime hours
 
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
-        shiftEarnings.current.overTimePay =
+        shiftDetails.current.overTimePay =
           (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
-        currentPayment.current =
-          +shiftEarnings.current.basicPayment +
-          +shiftEarnings.current.firstOverTimePay +
-          +shiftEarnings.current.overTimePay;
       }
 
-      return (shiftEarnings.current.totalProfit =
-        currentPayment.current.toFixed(2));
+      currentPayment.current =
+        +shiftDetails.current.basicPayment +
+        +shiftDetails.current.firstOverTimePay +
+        +shiftDetails.current.overTimePay;
+
+      shiftDetails.current.totalProfit = currentPayment.current.toFixed(2);
+
+      localStorage.setItem(
+        "shiftDetails",
+        JSON.stringify(shiftDetails.current)
+      );
     },
-    [payment, shiftEarnings]
+    [payment, shiftDetails]
   );
 
   useEffect(() => {
@@ -75,7 +78,7 @@ function ShiftPayment({
     }
   }, [
     seconds,
-    shiftEarnings,
+    shiftDetails,
     play,
     basicCalculate,
     overTime,
@@ -83,19 +86,27 @@ function ShiftPayment({
   ]);
 
   async function saveHandler() {
+    const today = new Date();
+    const currentDate = today.toLocaleString();
     try {
+      shiftDetails.current.end = `${currentDate}`;
       localStorage.clear();
-      /*  const shiftObj = { ...shiftEarnings.current, ...currentShift }; */
-      /* addShift(shiftObj); */
+      const shiftObj = { ...shiftDetails.current };
+      addShift(shiftObj);
       setOpen(true);
       setSeconds(0);
-      deleteShift(currentShift);
+      shiftDetails.current.basicPayment = 0;
+      shiftDetails.current.firstOverTimePay = 0;
+      shiftDetails.current.overTimePay = 0;
+      shiftDetails.current.seconds = 0;
+      shiftDetails.current.pausedSeconds = 0;
+      shiftDetails.current.startAgain = 0;
       return isPlay((play = null));
     } catch (err) {
       console.error(err);
     }
   }
-  const totalProfit = shiftEarnings.current.totalProfit;
+  const totalProfit = shiftDetails.current.totalProfit;
   const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
   return (
     <div

@@ -4,6 +4,7 @@ import LinearColor from "./ui/loading.js";
 import FormLayOut from "./layout/formLayOut.js";
 import Layout from "./layout/layout.js";
 import SettingsLayout from "./layout/settingsLayout.js";
+
 const Register = lazy(() => import("../pages/Register.js"));
 const Login = lazy(() => import("../pages/Login.js"));
 const ClockLayout = lazy(() => import("./layout/clockLayout.js"));

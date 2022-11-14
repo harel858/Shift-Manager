@@ -1,42 +1,32 @@
 import classes from "./style/clock.module.css";
-import { useContext } from "react";
 import { BiPlay } from "react-icons/bi";
 import { BsPause } from "react-icons/bs";
 import Timer from "./timer";
-import CurrentShift from "../../context/currentShiftContext.js";
-import UserContext from "../../context/userContext.js";
 
-function Clock({ shiftEarnings, setSeconds, seconds, play, isPlay }) {
-  const { createCurrentShift, updatePaused, updateStartAgain, currentShift } =
-    useContext(CurrentShift);
-  const { user } = useContext(UserContext);
-
+function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
   const startToggleHandler = () => {
-    isPlay((prev) => !prev);
-    const today = new Date();
-
-    //start
-    if (!play && !currentShift) {
-      const currentDateAndHour = today.toLocaleString();
-      const currentDate = today.toLocaleString("en-US", { month: "long" });
-
-      return createCurrentShift(
-        user.workPlaces[0],
-        `${currentDateAndHour} `,
-        `${currentDate}`,
-        today.getTime(),
-        0,
-        0
+    if (play && seconds > 0) {
+      const nowInSeconds = new Date().getTime();
+      shiftDetails.current.pausedSeconds =
+        shiftDetails.current.pausedSeconds + Math.floor(nowInSeconds / 1000);
+      localStorage.setItem(
+        "shiftDetails",
+        JSON.stringify(shiftDetails.current)
       );
     }
-    //paused
-    if (play && currentShift) {
-      return updatePaused(Math.floor(today.getTime() / 1000));
+
+    if (!play && seconds > 0) {
+      const nowInSeconds = new Date().getTime();
+      shiftDetails.current.startAgain =
+        shiftDetails.current.startAgain + Math.floor(nowInSeconds / 1000);
+      localStorage.setItem(
+        "shiftDetails",
+        JSON.stringify(shiftDetails.current)
+      );
     }
-    //continue
-    if (!play && currentShift) {
-      return updateStartAgain(Math.floor(today.getTime() / 1000));
-    }
+
+    localStorage.setItem("setPlay", !play);
+    return isPlay((prev) => !prev);
   };
 
   return (
@@ -62,9 +52,8 @@ function Clock({ shiftEarnings, setSeconds, seconds, play, isPlay }) {
         )}
 
         <Timer
-          shiftEarnings={shiftEarnings}
-          currentShift={currentShift}
           isPlay={isPlay}
+          shiftDetails={shiftDetails}
           seconds={seconds}
           setSeconds={setSeconds}
           play={play}

@@ -9,7 +9,7 @@ const schema = joi.object({
   payment: joi.required(),
   overTime: joi.boolean(),
   workPlace: joi.string().required(),
-  password: joi.string().min(6).required(),
+  password: joi.string().required(),
 });
 
 function validateUser(user) {

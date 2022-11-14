@@ -1,13 +1,13 @@
-import LinearColor from "../components/ui/loading.js";
+/* import ShiftList from "../components/shifts/ShiftList.js"; */
 import classes from "./style/allShifts.module.css";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
-import { useContext, useEffect, useState, lazy, Suspense } from "react";
+import ShiftList2 from "../components/shifts/ShiftList2.js";
+import ShiftSummary from "../components/shifts/ShiftSummary.js";
+import MonthStepper from "../components/shifts/MonthStepper.js";
+import { useContext, useEffect, useState } from "react";
 import ShiftContext from "../context/shiftContext.js";
 import UserContext from "../context/userContext.js";
-const ShiftList2 = lazy(() => import("../components/shifts/ShiftList2.js"));
-const ShiftSummary = lazy(() => import("../components/shifts/ShiftSummary.js"));
-const MonthStepper = lazy(() => import("../components/shifts/MonthStepper.js"));
 
 function AllShifts() {
   const byDate = (a, b) => {
@@ -26,8 +26,7 @@ function AllShifts() {
 
   const shiftsCtx = useContext(ShiftContext);
   const { loginError } = useContext(UserContext);
-  const { error, loading, shifts } = shiftsCtx;
-  const allShiftList = shifts.sort(byDate);
+  const allShiftList = shiftsCtx.shifts.sort(byDate);
 
   const [counter, setCounter] = useState(0);
   const [months, setMonths] = useState([
@@ -78,30 +77,27 @@ function AllShifts() {
 
   return (
     <>
-      <Suspense fallback={<LinearColor />}>
-        <MonthStepper
-          counter={counter}
-          setCounter={setCounter}
-          months={months}
-          setMonths={setMonths}
-        />
-        <ShiftList2
-          loading={loading}
-          error={error}
-          counter={counter}
-          setCounter={setCounter}
-          months={months}
-          setMonths={setMonths}
-          shiftList={shiftList}
-        />
-        <ShiftSummary
-          counter={counter}
-          setCounter={setCounter}
-          months={months}
-          setMonths={setMonths}
-          shiftList={shiftList}
-        />
-      </Suspense>
+      {/*  <ShiftList shiftList={shiftList} /> */}
+      <MonthStepper
+        counter={counter}
+        setCounter={setCounter}
+        months={months}
+        setMonths={setMonths}
+      />
+      <ShiftList2
+        counter={counter}
+        setCounter={setCounter}
+        months={months}
+        setMonths={setMonths}
+        shiftList={shiftList}
+      />
+      <ShiftSummary
+        counter={counter}
+        setCounter={setCounter}
+        months={months}
+        setMonths={setMonths}
+        shiftList={shiftList}
+      />
     </>
   );
 }

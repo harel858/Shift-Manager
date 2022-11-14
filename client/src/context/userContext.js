@@ -14,13 +14,11 @@ const UserContext = createContext({
   updatePayment: (payment) => {},
   updateCurrency: (obj) => {},
   updateOvertime: (value) => {},
-  loading: Boolean,
 });
 
 export function UserContextProvider(props) {
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState();
-  const [loginError, setLoginError] = useState();
+  const [user, setUser] = useState(null);
+  const [loginError, setLoginError] = useState(null);
   const [payment, setPayment] = useState(29.17);
   const [currency, setCurrency] = useState({
     value: "USD",
@@ -51,37 +49,35 @@ export function UserContextProvider(props) {
   ]);
 
   useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await fetch(
+          "https://shift-manager-production.up.railway.app/user",
+          {
+            method: "GET",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        if (res.ok) {
+          const userData = await res.json();
+
+          setUser(userData[0]);
+          setCurrency(userData[0].currency);
+          setPayment(userData[0].payment);
+          return setOvertime(userData[0].overTime);
+        } else {
+          const resError = await res.json();
+          setLoginError(resError);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     getUserData();
   }, []);
-
-  async function getUserData() {
-    setLoading(true);
-    try {
-      const res = await fetch(
-        "https://shift-manager-production.up.railway.app/user",
-        {
-          method: "GET",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-
-      if (res.ok) {
-        const [userData] = await res.json();
-        console.log(userData);
-        setUser(userData);
-        setCurrency(userData.currency);
-        setPayment(userData.payment);
-        setOvertime(userData.overTime);
-      } else {
-        const resError = await res.json();
-        setLoginError(resError);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    setLoading(false);
-  }
 
   async function updatePayment(newPayment) {
     try {
@@ -159,7 +155,6 @@ export function UserContextProvider(props) {
     currency,
     currencies,
     overTime,
-    loading,
     user,
     setUser,
     setPayment,

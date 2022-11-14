@@ -19,12 +19,9 @@ const ShiftContext = createContext({
     seconds,
     date
   ) => {},
-  loading: Boolean,
 });
 
 export function ShiftContextProvider(props) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
   const { user, setUser } = useContext(UserContext);
 
   const [shiftList, setShiftList] = useState([]);
@@ -35,7 +32,6 @@ export function ShiftContextProvider(props) {
     let allShifts = [];
 
     const getShiftData = async () => {
-      setLoading(true);
       try {
         const res = await fetch(
           "https://shift-manager-production.up.railway.app/shifts",
@@ -50,22 +46,18 @@ export function ShiftContextProvider(props) {
           allShifts.push(...shifts);
         } else {
           const resError = await res.json();
-          setError(resError);
+          setLoginError(resError);
         }
       } catch (err) {
-        setError(err);
-        throw err;
-      } finally {
         setShiftList(allShifts);
-        setLoading(false);
+        throw err;
       }
+      setShiftList(allShifts);
     };
     getShiftData();
   }, [user, setUser, setLoginError]);
 
   async function addShiftHandler(shift) {
-    const today = new Date();
-    const currentDate = today.toLocaleString();
     try {
       const res = await fetch(
         "https://shift-manager-production.up.railway.app/shifts/create",
@@ -79,7 +71,7 @@ export function ShiftContextProvider(props) {
           body: JSON.stringify({
             workPlace: shift.workPlace,
             start: shift.start,
-            end: currentDate,
+            end: shift.end,
             date: shift.date,
             timeSpend: shift.timeSpend,
             totalProfit: shift.totalProfit,
@@ -186,8 +178,6 @@ export function ShiftContextProvider(props) {
     addShift: addShiftHandler,
     deleteShift: deleteShiftHandler,
     updateShift: updateShiftHandler,
-    loading: loading,
-    error: error,
   };
 
   return (

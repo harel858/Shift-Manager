@@ -1,32 +1,7 @@
 import "./shiftsCss/shiftTable.css";
 import ShiftItem2 from "./ShiftItem2.js";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import LinearColor from "../ui/loading.js";
 
-export default function ShiftTable({
-  counter,
-  months,
-  shiftList,
-  error,
-  loading,
-}) {
-  if (loading) return <LinearColor />;
-
-  if (error) {
-    <Alert severity="error">
-      <AlertTitle>Something went wrong</AlertTitle>
-      <strong>WE ON THIS...</strong>
-    </Alert>;
-  }
-  if (shiftList.length <= 0) {
-    return (
-      <Alert severity="info">
-        <AlertTitle>You have no shifts for {months[counter]} yet </AlertTitle>
-        <strong>KEEP ON GRINDING!</strong>
-      </Alert>
-    );
-  }
+export default function ShiftTable({ counter, months, shiftList }) {
   return (
     <table>
       <thead>
