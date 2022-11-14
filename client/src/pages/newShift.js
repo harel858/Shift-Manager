@@ -19,11 +19,6 @@ function NewShift() {
   const [seconds, setSeconds] = useState(0);
   const shiftEarnings = useRef({});
   const [play, isPlay] = useState();
-  //Maintains playing status continuously
-  if (currentShift) {
-    let res = currentShift.play;
-    isPlay(res);
-  }
 
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
