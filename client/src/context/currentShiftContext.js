@@ -67,8 +67,7 @@ export function CurrentShiftContextProvider(props) {
     date,
     startSeconds,
     pausedSeconds,
-    startAgain,
-    play
+    startAgain
   ) => {
     setLoading(true);
     try {
@@ -85,7 +84,7 @@ export function CurrentShiftContextProvider(props) {
             startSeconds,
             pausedSeconds,
             startAgain,
-            play,
+            play: true,
           }),
         }
       );

@@ -24,8 +24,7 @@ function Clock({ shiftEarnings, setSeconds, seconds, play, isPlay }) {
         `${currentDate}`,
         today.getTime(),
         0,
-        0,
-        true
+        0
       );
     }
     if (play && currentShift) {
