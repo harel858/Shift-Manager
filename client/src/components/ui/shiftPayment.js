@@ -61,7 +61,8 @@ function ShiftPayment({
           +shiftEarnings.current.overTimePay;
       }
 
-      shiftEarnings.current.totalProfit = currentPayment.current.toFixed(2);
+      return (shiftEarnings.current.totalProfit =
+        currentPayment.current.toFixed(2));
     },
     [payment, shiftEarnings]
   );
