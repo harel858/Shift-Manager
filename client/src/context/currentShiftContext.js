@@ -59,7 +59,7 @@ export function CurrentShiftContextProvider(props) {
       }
     };
     getCurrentShiftData();
-  }, [user]);
+  }, []);
 
   const createCurrentShift = async (
     workPlace,
