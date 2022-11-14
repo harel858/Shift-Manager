@@ -22,7 +22,7 @@ async function updatePaused(id, date) {
   console.log(`date: ${date}`);
   try {
     const newPaused = await currentShift.findOneAndUpdate(
-      { userId: id },
+      { _id: id },
       { $set: { pausedSeconds: date } }
     );
 
