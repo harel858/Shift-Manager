@@ -111,9 +111,9 @@ export function CurrentShiftContextProvider(props) {
           method: "PUT",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: {
+          body: JSON.stringify({
             currentPaused,
-          },
+          }),
         }
       );
       if (res.ok) {
@@ -140,9 +140,9 @@ export function CurrentShiftContextProvider(props) {
           method: "PUT",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: {
+          body: JSON.stringify({
             currentStartAgain,
-          },
+          }),
         }
       );
       if (res.ok) {
