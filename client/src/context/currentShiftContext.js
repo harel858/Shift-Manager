@@ -84,7 +84,6 @@ export function CurrentShiftContextProvider(props) {
             startSeconds,
             pausedSeconds,
             startAgain,
-            play: true,
           }),
         }
       );
