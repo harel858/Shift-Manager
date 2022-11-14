@@ -65,15 +65,13 @@ function Timer({
         return setSeconds((prev) => prev + 1);
       }, 1000);
     } else {
-      const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
-
       // while exit and playing
-      if (ifPlay === true && !currentShift?.pausedSeconds) {
+      if (play === true && !currentShift?.pausedSeconds) {
         setSeconds(currentTimeInSeconds - startSeconds);
         setEarning(currentTimeInSeconds - startSeconds);
       }
 
-      if (ifPlay === true && currentShift?.pausedSeconds) {
+      if (play === true && currentShift?.pausedSeconds) {
         setSeconds(
           currentTimeInSeconds -
             startSeconds -
@@ -86,7 +84,7 @@ function Timer({
         );
       }
       // while exit and pause
-      if (ifPlay === false) {
+      if (play === false) {
         currentShift?.startAgain &&
           setSeconds(currentShift?.startAgain - currentShift?.pausedSeconds);
         setEarning(currentShift?.startAgain - currentShift?.pausedSeconds);
