@@ -78,6 +78,7 @@ async function updatePaused(req, res) {
       return res.status(500).json(`someThing went wrong`);
     }
     const [updatedShift] = await currentShiftOperations.getCurrentShift(userId);
+    console.log(`updatedShift:${updatedShift}`);
     return res.status(204).json(updatedShift);
   } catch (err) {
     console.log(err);
