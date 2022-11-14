@@ -59,6 +59,7 @@ async function updatePaused(req, res) {
   try {
     const { userId } = req;
     const { currentPaused } = req.body;
+    console.log(currentPaused);
     const userShift = await currentShiftOperations.getCurrentShift(userId);
 
     if (!userShift) return res.status(500).json("no shift found");
