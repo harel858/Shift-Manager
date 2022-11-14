@@ -23,9 +23,9 @@ async function createShift(req, res) {
     workPlace,
     start,
     date,
-    startSeconds,
-    pausedSeconds,
-    startAgain,
+    startSeconds: +startSeconds,
+    pausedSeconds: +pausedSeconds,
+    startAgain: +startAgain,
     userId,
   });
   if (!workPlace || !start || !startSeconds || !date || !userId)
