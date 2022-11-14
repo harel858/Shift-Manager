@@ -52,7 +52,7 @@ async function updateStartAgain(req, res) {
       return res.status(500).json(`someThing went wrong`);
     }
     const updatedShift = await currentShiftOperations.getCurrentShift(userId);
-    return res.status(204).json(updatedShift);
+    return res.status(200).json(updatedShift);
   } catch (err) {
     console.log(err);
   }
