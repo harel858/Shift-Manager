@@ -40,8 +40,10 @@ async function updateStartAgain(req, res) {
   try {
     const { currentStartAgain } = req.body;
     const { userId } = req;
-    const oldShift = await currentShiftOperations.getCurrentShift(userId);
-    const { startAgain } = oldShift;
+
+    const [userShift] = await currentShiftOperations.getCurrentShift(userId);
+    if (!userShift) return res.status(500).json("no shift found");
+    const { startAgain } = userShift;
     const response = await currentShiftOperations.updateStartAgain(
       userId,
       +startAgain + currentStartAgain
