@@ -15,10 +15,6 @@ router.put(
   authenticateUser,
   currentShiftsHandlers.updateStartAgain
 );
-router.delete(
-  "/deleteCurrent",
-  authenticateUser,
-  currentShiftsHandlers.deleteShift
-);
+router.delete("/delete", authenticateUser, currentShiftsHandlers.deleteShift);
 
 module.exports = router;
