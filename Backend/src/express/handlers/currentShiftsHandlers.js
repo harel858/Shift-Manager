@@ -61,9 +61,10 @@ async function updatePaused(req, res) {
     const { userId } = req;
     const oldShift = await currentShiftOperations.getCurrentShift(userId);
     const { pausedSeconds } = oldShift;
+    const newPaused = +pausedSeconds + currentPaused;
     const response = await currentShiftOperations.updatePaused(
       userId,
-      +pausedSeconds + currentPaused
+      newPaused
     );
     if (!response || response.acknowledged == false) {
       return res.status(500).json(`someThing went wrong`);
