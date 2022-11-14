@@ -30,7 +30,7 @@ export function CurrentShiftContextProvider(props) {
   const [loadingCurrentShift, setLoading] = useState(false);
   const [errorCurrentShift, setError] = useState();
   const [currentShift, setCurrentShift] = useState();
-  const { user } = useContext(UserContext);
+  /*   const { user } = useContext(UserContext); */
 
   useEffect(() => {
     const getCurrentShiftData = async () => {
