@@ -19,7 +19,6 @@ const UserContext = createContext({
 export function UserContextProvider(props) {
   const [user, setUser] = useState(null);
   const [loginError, setLoginError] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [payment, setPayment] = useState(29.17);
   const [currency, setCurrency] = useState({
     value: "USD",
@@ -50,7 +49,6 @@ export function UserContextProvider(props) {
   ]);
 
   useEffect(() => {
-    setLoading();
     const getUserData = async () => {
       try {
         const res = await fetch(`${process.env.REACT_APP_API_KEY}/user`, {
