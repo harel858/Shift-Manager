@@ -2,18 +2,15 @@ import classes from "./style/newShift.module.css";
 import Clock from "../components/ui/clock.js";
 import { useState, useRef, useContext } from "react";
 import { forwardRef } from "react";
-import { Link } from "react-router-dom";
 import ShiftPayment from "../components/ui/shiftPayment";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import UserContext from "../context/userContext.js";
-import Alerts from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 
 function NewShift() {
   const [open, setOpen] = useState(false);
-  const { loginError, user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -55,22 +52,6 @@ function NewShift() {
 
   if (localStorage.getItem("shiftDetails"))
     shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
-
-  if (!user) {
-    return (
-      <Alerts className={classes.noShiftAlert} severity="error">
-        <AlertTitle>ERROR</AlertTitle>
-        <strong>{loginError}</strong>
-        <Link className={classes.navLink} as={Link} to="/">
-          Click Here to Log In
-        </Link>
-        <h3>Not registered yet?</h3>
-        <Link className={classes.navLink} as={Link} to="/register">
-          Register Now
-        </Link>
-      </Alerts>
-    );
-  }
 
   return (
     <>
