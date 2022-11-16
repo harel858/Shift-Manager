@@ -2,21 +2,35 @@ import classes from "./style/clock.module.css";
 import { useEffect, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
 function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
-  const { payment } = useContext(UserContext);
+  const { payment, overTime } = useContext(UserContext);
 
   const setEarning = useCallback(
     (sec) => {
       const EIGHT_HOURS_BY_MILLISECONDS = 28800;
       const TEN_HOURS_BY_MILLISECONDS = 36000;
+      if (!overTime)
+        return (shiftDetails.current.basicPayment =
+          ((sec / 60) * payment) / 60);
+
       if (sec > EIGHT_HOURS_BY_MILLISECONDS) {
         shiftDetails.current.basicPayment =
           ((EIGHT_HOURS_BY_MILLISECONDS / 60) * payment) / 60;
+      }
+      if (sec < EIGHT_HOURS_BY_MILLISECONDS) {
+        shiftDetails.current.basicPayment = ((sec / 60) * payment) / 60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
         shiftDetails.current.firstOverTimePay =
           (((TEN_HOURS_BY_MILLISECONDS - EIGHT_HOURS_BY_MILLISECONDS) / 60) *
             (payment * 1.25)) /
           60;
+      }
+      if (
+        sec < TEN_HOURS_BY_MILLISECONDS &&
+        sec > EIGHT_HOURS_BY_MILLISECONDS
+      ) {
+        shiftDetails.current.firstOverTimePay =
+          (((sec - EIGHT_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.25)) / 60;
       }
       if (sec > TEN_HOURS_BY_MILLISECONDS) {
         shiftDetails.current.overTimePay =
@@ -27,7 +41,7 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
         JSON.stringify(shiftDetails?.current)
       );
     },
-    [shiftDetails, payment]
+    [shiftDetails, payment, overTime]
   );
   //global variables
   let today = new Date();
@@ -61,26 +75,23 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
 
       // while exit and playing
       if (ifPlay === true && !currentShift.pausedSeconds) {
-        setSeconds(currentTimeInSeconds - startSeconds);
-        setEarning(currentTimeInSeconds - startSeconds);
+        shiftDetails.current.seconds = currentTimeInSeconds - startSeconds;
+        setSeconds(shiftDetails.current.seconds);
+        setEarning(shiftDetails.current.seconds);
       }
 
       if (ifPlay === true && currentShift.pausedSeconds) {
-        setSeconds(
+        shiftDetails.current.seconds =
           currentTimeInSeconds -
-            startSeconds -
-            (currentShift.startAgain - currentShift.pausedSeconds)
-        );
-        setEarning(
-          currentTimeInSeconds -
-            startSeconds -
-            (currentShift.startAgain - currentShift.pausedSeconds)
-        );
+          startSeconds -
+          (currentShift.startAgain - currentShift.pausedSeconds);
+        setSeconds(shiftDetails.current.seconds);
+        setEarning(shiftDetails.current.seconds);
       }
       // while exit and pause
       if (ifPlay === false) {
-        setSeconds(currentShift.seconds);
-        setEarning(currentShift.seconds);
+        setSeconds(shiftDetails.current.seconds);
+        setEarning(shiftDetails.current.seconds);
       }
 
       // while exit and not playing

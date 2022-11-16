@@ -6,6 +6,7 @@ import Timer from "./timer";
 function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
   const startToggleHandler = () => {
     if (play && seconds > 0) {
+      shiftDetails.current.seconds = seconds;
       const nowInSeconds = new Date().getTime();
       shiftDetails.current.pausedSeconds =
         shiftDetails.current.pausedSeconds + Math.floor(nowInSeconds / 1000);

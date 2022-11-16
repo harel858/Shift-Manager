@@ -21,6 +21,7 @@ function ShiftPayment({
 
       currentPayment.current = shiftDetails.current.basicPayment;
       shiftDetails.current.totalProfit = currentPayment.current.toFixed(2);
+
       localStorage.setItem(
         "shiftDetails",
         JSON.stringify(shiftDetails.current)
@@ -61,7 +62,6 @@ function ShiftPayment({
         +shiftDetails.current.overTimePay;
 
       shiftDetails.current.totalProfit = currentPayment.current.toFixed(2);
-
       localStorage.setItem(
         "shiftDetails",
         JSON.stringify(shiftDetails.current)
@@ -73,7 +73,9 @@ function ShiftPayment({
   useEffect(() => {
     if (play) {
       !overTime ? basicCalculate(seconds) : overTimeCalculate(seconds);
-    } else if (play === null) {
+    }
+    if (play === null) {
+      console.log("hey");
       currentPayment.current = 0;
     }
   }, [
@@ -106,8 +108,12 @@ function ShiftPayment({
       console.error(err);
     }
   }
+  console.log(shiftDetails.current.totalProfit);
   const totalProfit = shiftDetails.current.totalProfit;
+  console.log(totalProfit);
   const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
+
+  console.log(currentPayment);
   return (
     <div
       className={
@@ -127,7 +133,7 @@ function ShiftPayment({
       )}
       {ifPlay === false && (
         <button className={classes.save}>
-          Save Shift {totalProfit}
+          Save Shift {shiftDetails.current.totalProfit}
           <span className={classes.currencyLabel}>{currency.label}</span>
         </button>
       )}

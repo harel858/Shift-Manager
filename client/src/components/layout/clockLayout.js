@@ -20,6 +20,7 @@ function ClockLayout(props) {
         <Link className={classes.navLink} as={Link} to="/">
           Click Here to Log In
         </Link>
+        <br />
         <strong>Not registered yet?</strong>
         <br />
         <Link className={classes.navLink} as={Link} to="/register">

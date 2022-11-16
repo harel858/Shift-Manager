@@ -44,8 +44,8 @@ async function createShift(req, res) {
     firstOverTime,
     overTime,
   });
+
   if (
-    !workPlace ||
     !start ||
     !end ||
     !date ||

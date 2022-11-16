@@ -139,7 +139,6 @@ export function ShiftContextProvider(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           _id,
-          workPlace,
           start,
           end,
           date,
