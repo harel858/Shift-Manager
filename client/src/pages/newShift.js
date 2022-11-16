@@ -9,11 +9,10 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import UserContext from "../context/userContext.js";
-import LinearColor from "../components/ui/loading.js";
 
 function NewShift() {
   const [open, setOpen] = useState(false);
-  const { loginError, user, loading } = useContext(UserContext);
+  const { loginError, user } = useContext(UserContext);
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -56,7 +55,6 @@ function NewShift() {
   if (localStorage.getItem("shiftDetails"))
     shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
 
-  if (loading) return <LinearColor />;
   if (!user) {
     return (
       <div className={classes.errorContainer}>
