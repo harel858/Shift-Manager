@@ -33,14 +33,11 @@ export function ShiftContextProvider(props) {
 
     const getShiftData = async () => {
       try {
-        const res = await fetch(
-          "https://shift-manager-production.up.railway.app/shifts",
-          {
-            method: "GET",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        const res = await fetch(`${process.env.REACT_APP_API_KEY}/shifts`, {
+          method: "GET",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+        });
         if (res.ok) {
           const shifts = await res.json();
           allShifts.push(...shifts);
@@ -60,7 +57,7 @@ export function ShiftContextProvider(props) {
   async function addShiftHandler(shift) {
     try {
       const res = await fetch(
-        "https://shift-manager-production.up.railway.app/shifts/create",
+        `${process.env.REACT_APP_API_KEY}/shifts/create`,
         {
           method: "POST",
           credentials: "include",
@@ -99,7 +96,7 @@ export function ShiftContextProvider(props) {
   const deleteShiftHandler = async (shift) => {
     try {
       const res = await fetch(
-        "https://shift-manager-production.up.railway.app/shifts/delete",
+        `${process.env.REACT_APP_API_KEY}/shifts/delete`,
         {
           method: "DELETE",
           credentials: "include",
@@ -136,27 +133,24 @@ export function ShiftContextProvider(props) {
     date
   ) => {
     try {
-      let res = await fetch(
-        "https://shift-manager-production.up.railway.app/shifts/update",
-        {
-          method: "PUT",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            _id,
-            workPlace,
-            start,
-            end,
-            date,
-            timeSpend,
-            basicPayment,
-            firstOverTime,
-            overTime,
-            totalProfit,
-            seconds,
-          }),
-        }
-      );
+      let res = await fetch(`${process.env.REACT_APP_API_KEY}/shifts/update`, {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _id,
+          workPlace,
+          start,
+          end,
+          date,
+          timeSpend,
+          basicPayment,
+          firstOverTime,
+          overTime,
+          totalProfit,
+          seconds,
+        }),
+      });
       if (res.ok) {
         const response = await res.json();
         let [updatedShift] = response;

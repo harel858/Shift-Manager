@@ -76,7 +76,7 @@ function NewShift() {
     <>
       <section className={classes.clockSection}>
         <header className={classes.header}>
-          <h1>Welcome {user.name}!</h1>
+          <h1>Welcome {user?.name}!</h1>
           <h3 className={classes.clockDate}>{todayDate}</h3>
         </header>
         <div className={classes.clockAndEarning}>

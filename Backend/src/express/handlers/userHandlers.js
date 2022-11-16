@@ -120,7 +120,10 @@ async function registerHandler(req, res) {
       isManager: false,
     });
     console.log(newUser);
-    const token = jwt.sign({ userId: newUser._id }, process.env.SECRET_KEY);
+    const token = jwt.sign(
+      { userId: newUser._id },
+      `${process.env.SECRET_KEY}`
+    );
 
     req.session = { token };
 
@@ -220,7 +223,7 @@ async function signIn(req, res) {
     return res.status(400).json(`incorrect email or password`);
   }
 
-  const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
+  const token = jwt.sign({ userId: user._id }, `${process.env.SECRET_KEY}`);
 
   req.session = { token };
 

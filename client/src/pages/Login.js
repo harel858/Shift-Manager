@@ -18,18 +18,15 @@ export default function Register() {
   async function loginHandler(e) {
     e.preventDefault();
     try {
-      const res = await fetch(
-        "https://shift-manager-production.up.railway.app/user/login",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: userEmail.toLocaleLowerCase(),
-            password: userPassword,
-          }),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_KEY}/user/login`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: userEmail.toLocaleLowerCase(),
+          password: userPassword,
+        }),
+      });
 
       if (res.ok) {
         const userData = await res.json();

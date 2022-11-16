@@ -1,17 +1,15 @@
 const { json } = require("express");
 const express = require("express");
 const cors = require("cors");
-const session = require("express-session");
 const cookieSession = require("cookie-session");
 const app = express();
 const userRouter = require("./routers/usersRouters");
 const shiftRouter = require("./routers/shiftRouters");
-const currentShift = require("../mongoose/mongoDBSession.js");
 
 app.use(
   cors({
     credentials: true,
-    origin: "https://kindly-mint-production.up.railway.app",
+    origin: `${process.env.CLIENT}`,
   })
 );
 app.use(json());
@@ -19,14 +17,6 @@ app.use(
   cookieSession({
     signed: false,
     secure: false,
-  })
-);
-app.use(
-  session({
-    secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
-    store: currentShift,
   })
 );
 

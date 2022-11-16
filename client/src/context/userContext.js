@@ -19,6 +19,7 @@ const UserContext = createContext({
 export function UserContextProvider(props) {
   const [user, setUser] = useState(null);
   const [loginError, setLoginError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [payment, setPayment] = useState(29.17);
   const [currency, setCurrency] = useState({
     value: "USD",
@@ -49,16 +50,14 @@ export function UserContextProvider(props) {
   ]);
 
   useEffect(() => {
+    setLoading();
     const getUserData = async () => {
       try {
-        const res = await fetch(
-          "https://shift-manager-production.up.railway.app/user",
-          {
-            method: "GET",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        const res = await fetch(`${process.env.REACT_APP_API_KEY}/user`, {
+          method: "GET",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+        });
 
         if (res.ok) {
           const [userData] = await res.json();
@@ -82,7 +81,7 @@ export function UserContextProvider(props) {
   async function updatePayment(newPayment) {
     try {
       const res = await fetch(
-        "https://shift-manager-production.up.railway.app/user/update-payment",
+        `${process.env.REACT_APP_API_KEY}/user/update-payment`,
         {
           method: "PUT",
           credentials: "include",
@@ -105,7 +104,7 @@ export function UserContextProvider(props) {
   async function updateCurrency(newCurrency) {
     try {
       const res = await fetch(
-        "https://shift-manager-production.up.railway.app/user/update-currency",
+        `${process.env.REACT_APP_API_KEY}/user/update-currency`,
         {
           method: "PUT",
           credentials: "include",
@@ -127,7 +126,7 @@ export function UserContextProvider(props) {
   async function updateOvertime(newOverTime) {
     try {
       const res = await fetch(
-        "https://shift-manager-production.up.railway.app/user/update-overtime",
+        `${process.env.REACT_APP_API_KEY}/user/update-overtime`,
         {
           method: "PUT",
           credentials: "include",

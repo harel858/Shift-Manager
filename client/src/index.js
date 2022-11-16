@@ -7,6 +7,8 @@ import { ShiftContextProvider } from "./context/shiftContext.js";
 import { UserContextProvider } from "./context/userContext.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+console.log(process.env.REACT_APP_API_KEY);
+console.log(process.env);
 root.render(
   <UserContextProvider>
     <ShiftContextProvider>

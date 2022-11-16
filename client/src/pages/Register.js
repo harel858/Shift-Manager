@@ -36,7 +36,7 @@ export default function Register() {
 
     try {
       const res = await fetch(
-        "https://shift-manager-production.up.railway.app/user/register",
+        `${process.env.REACT_APP_API_KEY}/user/register`,
         {
           method: "POST",
           credentials: "include",
