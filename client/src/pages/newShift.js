@@ -34,15 +34,14 @@ function NewShift() {
     const currentDate = today.toLocaleString("en-US", { month: "long" });
 
     shiftDetails.current = {
-      workPlace: user?.workPlaces[0],
       start: `${currentDateAndHour} `,
       end: null,
       date: `${currentDate}`,
       startSeconds: today.getTime(),
       pausedSeconds: 0,
       startAgain: 0,
-      timeSpend: null,
-      totalProfit: null,
+      timeSpend: `00:00:00`,
+      totalProfit: 0,
       seconds: seconds,
       basicPayment: 0,
       firstOverTimePay: 0,
