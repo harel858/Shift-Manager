@@ -1,4 +1,3 @@
-import { set } from "mongoose";
 import { useState, createContext, useEffect } from "react";
 
 const UserContext = createContext({
