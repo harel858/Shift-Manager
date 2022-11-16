@@ -1,3 +1,4 @@
+import { set } from "mongoose";
 import { useState, createContext, useEffect } from "react";
 
 const UserContext = createContext({
@@ -10,6 +11,7 @@ const UserContext = createContext({
   setOvertime: (value) => {},
   setLoginError: (value) => {},
   user: {},
+  loading: Boolean,
   setUser: () => {},
   updatePayment: (payment) => {},
   updateCurrency: (obj) => {},
@@ -19,6 +21,7 @@ const UserContext = createContext({
 export function UserContextProvider(props) {
   const [user, setUser] = useState(null);
   const [loginError, setLoginError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [payment, setPayment] = useState(29.17);
   const [currency, setCurrency] = useState({
     value: "USD",
@@ -50,6 +53,7 @@ export function UserContextProvider(props) {
 
   useEffect(() => {
     const getUserData = async () => {
+      setLoading(true);
       try {
         const res = await fetch(`${process.env.REACT_APP_API_KEY}/user`, {
           method: "GET",
@@ -70,6 +74,8 @@ export function UserContextProvider(props) {
         }
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -153,6 +159,7 @@ export function UserContextProvider(props) {
     currencies,
     overTime,
     user,
+    loading,
     setUser,
     setPayment,
     setCurrency,
