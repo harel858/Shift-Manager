@@ -16,10 +16,12 @@ function ClockLayout(props) {
       <Alerts className={classes.noShiftAlert} severity="error">
         <AlertTitle>ERROR</AlertTitle>
         <strong>{loginError}</strong>
+        <br />
         <Link className={classes.navLink} as={Link} to="/">
           Click Here to Log In
         </Link>
-        <h3>Not registered yet?</h3>
+        <strong>Not registered yet?</strong>
+        <br />
         <Link className={classes.navLink} as={Link} to="/register">
           Register Now
         </Link>
