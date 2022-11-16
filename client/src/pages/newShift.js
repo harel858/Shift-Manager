@@ -3,12 +3,13 @@ import Clock from "../components/ui/clock.js";
 import { useState, useRef, useContext } from "react";
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
 import ShiftPayment from "../components/ui/shiftPayment";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import UserContext from "../context/userContext.js";
+import Alerts from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
 function NewShift() {
   const [open, setOpen] = useState(false);
@@ -57,18 +58,17 @@ function NewShift() {
 
   if (!user) {
     return (
-      <div className={classes.errorContainer}>
-        <header className={classes.header}>
-          <h1>{loginError}</h1>
-        </header>
-        <Nav className={classes.navLink} as={Link} to="/">
+      <Alerts className={classes.noShiftAlert} severity="error">
+        <AlertTitle>ERROR</AlertTitle>
+        <strong>{loginError}</strong>
+        <Link className={classes.navLink} as={Link} to="/">
           Click Here to Log In
-        </Nav>
+        </Link>
         <h3>Not registered yet?</h3>
-        <Nav className={classes.navLink} as={Link} to="/register">
+        <Link className={classes.navLink} as={Link} to="/register">
           Register Now
-        </Nav>
-      </div>
+        </Link>
+      </Alerts>
     );
   }
 
