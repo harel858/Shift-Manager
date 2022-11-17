@@ -48,6 +48,7 @@ function NewShift() {
       overTimePay: 0,
     };
   }
+  console.log(user);
 
   if (localStorage.getItem("shiftDetails"))
     shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));

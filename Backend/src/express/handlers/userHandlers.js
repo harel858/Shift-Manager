@@ -224,7 +224,6 @@ async function signIn(req, res) {
   }
 
   const token = jwt.sign({ userId: user._id }, `${process.env.SECRET_KEY}`);
-
   req.session = { token };
 
   res.status(200).json(user);

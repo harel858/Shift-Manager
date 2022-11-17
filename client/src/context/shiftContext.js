@@ -6,6 +6,7 @@ const ShiftContext = createContext({
   error: String,
   addShift: (shift) => {},
   deleteShift: (shiftId) => {},
+  loading: Boolean,
   updateShift: (
     index,
     _id,
@@ -23,14 +24,14 @@ const ShiftContext = createContext({
 
 export function ShiftContextProvider(props) {
   const { user, setUser } = useContext(UserContext);
-
+  const [loading, setLoading] = useState(false);
   const [shiftList, setShiftList] = useState([]);
 
   const { setLoginError } = useContext(UserContext);
 
   useEffect(() => {
     let allShifts = [];
-
+    setLoading(true);
     const getShiftData = async () => {
       try {
         const res = await fetch(`${process.env.REACT_APP_API_KEY}/shifts`, {
@@ -48,8 +49,10 @@ export function ShiftContextProvider(props) {
       } catch (err) {
         setShiftList(allShifts);
         throw err;
+      } finally {
+        setShiftList(allShifts);
+        setLoading(false);
       }
-      setShiftList(allShifts);
     };
     getShiftData();
   }, [user, setUser, setLoginError]);
@@ -171,6 +174,7 @@ export function ShiftContextProvider(props) {
     addShift: addShiftHandler,
     deleteShift: deleteShiftHandler,
     updateShift: updateShiftHandler,
+    loading,
   };
 
   return (

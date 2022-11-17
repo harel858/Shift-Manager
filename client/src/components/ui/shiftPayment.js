@@ -108,12 +108,9 @@ function ShiftPayment({
       console.error(err);
     }
   }
-  console.log(shiftDetails.current.totalProfit);
-  const totalProfit = shiftDetails.current.totalProfit;
-  console.log(totalProfit);
+
   const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
 
-  console.log(currentPayment);
   return (
     <div
       className={

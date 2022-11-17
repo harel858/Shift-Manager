@@ -34,13 +34,10 @@ export default function NavigationBar() {
 
   const logOutHandler = async () => {
     try {
-      const res = await fetch(
-        "https://shift-manager-production.up.railway.app//user/logout",
-        {
-          method: "POST",
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API_KEY}/user/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
       if (res.ok) {
         console.log(res);
         navigate("/", { replace: true });

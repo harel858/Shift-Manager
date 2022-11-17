@@ -4,13 +4,14 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 
 export default function ShiftList2({
+  loading,
   counter,
   setCounter,
   months,
   setMonths,
   shiftList,
 }) {
-  if (shiftList.length <= 0) {
+  if (shiftList.length <= 0 && !loading) {
     return (
       <Alert className={classes.noShiftAlert} severity="info">
         <AlertTitle> You have no shifts for {months[counter]} yet </AlertTitle>
