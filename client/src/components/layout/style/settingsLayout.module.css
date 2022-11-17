@@ -30,7 +30,7 @@ body {
   transform: scale(1);
 }
 .noShiftAlert {
-  width: 50%;
+  width: max-content;
   margin: 10em auto;
   box-shadow: black 0 15px 15px !important;
 }
