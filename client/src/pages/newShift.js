@@ -7,10 +7,12 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import UserContext from "../context/userContext.js";
+import CurrentShiftContext from "../context/currentShiftCtx.js";
 
 function NewShift() {
   const [open, setOpen] = useState(false);
   const { user } = useContext(UserContext);
+  const { currentShift } = useContext(CurrentShiftContext);
   const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -28,14 +30,13 @@ function NewShift() {
   const today = new Date();
   const todayDate = today.toISOString().slice(0, 10);
 
-  if (!localStorage.getItem("shiftDetails")) {
+  const createNewShiftRef = () => {
     const today = new Date();
     const currentDateAndHour = today.toLocaleString();
     const currentDate = today.toLocaleString("en-US", { month: "long" });
 
     shiftDetails.current = {
       start: `${currentDateAndHour} `,
-      end: null,
       date: `${currentDate}`,
       startSeconds: today.getTime(),
       pausedSeconds: 0,
@@ -47,12 +48,13 @@ function NewShift() {
       firstOverTimePay: 0,
       overTimePay: 0,
     };
-  }
-  console.log(user);
+  };
 
-  if (localStorage.getItem("shiftDetails"))
-    shiftDetails.current = JSON.parse(localStorage.getItem("shiftDetails"));
+  if (!currentShift) createNewShiftRef();
 
+  if (currentShift) shiftDetails.current = currentShift;
+
+  console.log(shiftDetails.current);
   return (
     <>
       <section className={classes.clockSection}>

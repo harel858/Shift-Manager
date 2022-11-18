@@ -1,6 +1,7 @@
 import classes from "./style/clock.module.css";
 import { useEffect, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
+
 function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
   const { payment, overTime } = useContext(UserContext);
 
@@ -36,10 +37,10 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
         shiftDetails.current.overTimePay =
           (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
       }
-      localStorage.setItem(
+      /*   localStorage.setItem(
         "shiftDetails",
         JSON.stringify(shiftDetails?.current)
-      );
+      ); */
     },
     [shiftDetails, payment, overTime]
   );
@@ -71,22 +72,24 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
       shiftDetails.current.seconds = seconds;
     } else {
       const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
-      const currentShift = JSON.parse(localStorage.getItem("shiftDetails"));
+      const currentShift = shiftDetails.current;
 
       // while exit and playing
-      if (ifPlay === true && !currentShift.pausedSeconds) {
-        shiftDetails.current.seconds = currentTimeInSeconds - startSeconds;
-        setSeconds(shiftDetails.current.seconds);
-        setEarning(shiftDetails.current.seconds);
+      if (ifPlay === true && currentShift?.pausedSeconds === 0) {
+        console.log("1");
+        let secs = currentTimeInSeconds - startSeconds;
+        setSeconds(secs);
+        setEarning(secs);
       }
 
-      if (ifPlay === true && currentShift.pausedSeconds) {
-        shiftDetails.current.seconds =
+      if (ifPlay === true && currentShift.pausedSeconds > 0) {
+        console.log("2");
+        let secs =
           currentTimeInSeconds -
           startSeconds -
           (currentShift.startAgain - currentShift.pausedSeconds);
-        setSeconds(shiftDetails.current.seconds);
-        setEarning(shiftDetails.current.seconds);
+        setSeconds(secs);
+        setEarning(secs);
       }
       // while exit and pause
       if (ifPlay === false) {

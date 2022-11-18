@@ -85,7 +85,6 @@ export function ShiftContextProvider(props) {
 
       if (res.ok) {
         const newShift = await res.json();
-
         setShiftList((prev) => [...prev, newShift]);
       } else {
         const response = await res.json();

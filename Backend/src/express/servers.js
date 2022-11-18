@@ -5,6 +5,7 @@ const cookieSession = require("cookie-session");
 const app = express();
 const userRouter = require("./routers/usersRouters");
 const shiftRouter = require("./routers/shiftRouters");
+const currentShiftRouter = require("./routers/currentShiftRouter.js");
 console.log(`${process.env.CLIENT}`);
 app.use(
   cors({
@@ -22,6 +23,7 @@ app.use(
 
 app.use("/user", userRouter);
 app.use("/shifts", shiftRouter);
+app.use("/currentShift", currentShiftRouter);
 app.get("/", (req, res) => {
   res.status(200).send("app is running");
 });

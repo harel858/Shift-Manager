@@ -2,6 +2,7 @@ import classes from "./style/shiftPayment.module.css";
 import { useEffect, useRef, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
 import ShiftContext from "../../context/shiftContext.js";
+import CurrentShiftContext from "../../context/currentShiftCtx.js";
 
 function ShiftPayment({
   shiftDetails,
@@ -13,6 +14,7 @@ function ShiftPayment({
 }) {
   const { payment, currency, overTime } = useContext(UserContext);
   const { addShift } = useContext(ShiftContext);
+  const { deleteShiftHandler } = useContext(CurrentShiftContext);
   const currentPayment = useRef(0);
 
   const basicCalculate = useCallback(
@@ -22,10 +24,10 @@ function ShiftPayment({
       currentPayment.current = shiftDetails.current.basicPayment;
       shiftDetails.current.totalProfit = currentPayment.current.toFixed(2);
 
-      localStorage.setItem(
+      /*   localStorage.setItem(
         "shiftDetails",
         JSON.stringify(shiftDetails.current)
-      );
+      ); */
     },
     [payment, shiftDetails]
   );
@@ -62,10 +64,10 @@ function ShiftPayment({
         +shiftDetails.current.overTimePay;
 
       shiftDetails.current.totalProfit = currentPayment.current.toFixed(2);
-      localStorage.setItem(
+      /*   localStorage.setItem(
         "shiftDetails",
         JSON.stringify(shiftDetails.current)
-      );
+      ); */
     },
     [payment, shiftDetails]
   );
@@ -92,17 +94,13 @@ function ShiftPayment({
     const currentDate = today.toLocaleString();
     try {
       shiftDetails.current.end = `${currentDate}`;
-      localStorage.clear();
       const shiftObj = { ...shiftDetails.current };
       addShift(shiftObj);
-      setOpen(true);
+      deleteShiftHandler();
       setSeconds(0);
-      shiftDetails.current.basicPayment = 0;
-      shiftDetails.current.firstOverTimePay = 0;
-      shiftDetails.current.overTimePay = 0;
-      shiftDetails.current.seconds = 0;
-      shiftDetails.current.pausedSeconds = 0;
-      shiftDetails.current.startAgain = 0;
+      setOpen(true);
+      currentPayment.current = 0;
+      localStorage.clear();
       return isPlay((play = null));
     } catch (err) {
       console.error(err);
@@ -130,7 +128,7 @@ function ShiftPayment({
       )}
       {ifPlay === false && (
         <button className={classes.save}>
-          Save Shift {shiftDetails.current.totalProfit}
+          Save Shift {shiftDetails?.current?.totalProfit}
           <span className={classes.currencyLabel}>{currency.label}</span>
         </button>
       )}
