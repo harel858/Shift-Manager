@@ -64,6 +64,7 @@ function NewShift() {
         </header>
         <div className={classes.clockAndEarning}>
           <Clock
+            createNewShiftRef={createNewShiftRef}
             todayDate={todayDate}
             shiftDetails={shiftDetails}
             seconds={seconds}
