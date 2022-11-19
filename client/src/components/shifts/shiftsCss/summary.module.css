@@ -23,7 +23,7 @@
 .gross {
   text-decoration-line: line-through;
   text-decoration-color: white;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1px;
 }
 .net {
   font-size: 1.6em !important;
