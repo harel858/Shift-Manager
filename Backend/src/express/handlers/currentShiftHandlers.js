@@ -44,6 +44,7 @@ async function createShift(req, res) {
     basicPayment,
     firstOverTimePay,
     overTimePay,
+    isRunning: true,
     userId,
   });
 
@@ -52,6 +53,7 @@ async function createShift(req, res) {
   if (!newShift) {
     return res.status(500).json(`something went wrong`);
   }
+  console.log(newShift);
   res.status(201).json(newShift);
 }
 
@@ -117,12 +119,14 @@ async function updateStartSeconds(req, res) {
 async function deleteShift(req, res) {
   const { userId } = req;
 
-  const userShift = await operations.getUserCurrentShift(userId);
+  const [userShift] = await operations.getUserCurrentShift(userId);
   if (!userShift || userShift.length <= 0)
     return res.status(500).send(`shift has not found`);
 
   const { _id } = userShift;
   let deletedShift = await operations.deleteShift(_id);
+
+  if (!deletedShift) return res.status(500).json("not deleted");
 
   return res.status(201).json(deletedShift);
 }

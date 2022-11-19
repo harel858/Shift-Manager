@@ -133,8 +133,7 @@ export default function ShiftItem2({ shift }) {
     let date = shift.date;
     let startSeconds = Math.floor(new Date(startTime).getTime() / 1000);
     let endSeconds = Math.floor(new Date(endTime).getTime() / 1000);
-    console.log(startTime);
-    console.log(endTime);
+
     if (newStart) {
       startTime = new Date(newStart).toLocaleString();
       startSeconds = Math.floor(new Date(newStart).getTime() / 1000);
@@ -142,15 +141,11 @@ export default function ShiftItem2({ shift }) {
         month: "long",
       });
     }
-    console.log(newEnd);
+
     if (newEnd) {
-      console.log(newEnd);
       endTime = new Date(newEnd).toLocaleString();
       endSeconds = Math.floor(new Date(newEnd).getTime() / 1000);
-      console.log(endTime);
     }
-    console.log(endSeconds);
-    console.log(startSeconds);
 
     let newShift = calculationFunc(
       endSeconds - startSeconds,
@@ -158,8 +153,6 @@ export default function ShiftItem2({ shift }) {
       endTime,
       date
     );
-
-    console.log(newShift);
 
     updateShift(
       shift.index,

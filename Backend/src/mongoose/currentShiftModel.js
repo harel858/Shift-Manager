@@ -12,6 +12,7 @@ const schema = new mongoose.Schema({
   basicPayment: { type: Number, require: true },
   firstOverTimePay: { type: Number },
   overTimePay: { type: Number },
+  isRunning: { type: Boolean },
   userId: { type: mongoose.Types.ObjectId, ref: "users" },
 });
 const currentShiftModel = mongoose.model("currentShift", schema);

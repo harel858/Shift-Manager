@@ -39,7 +39,6 @@ export default function NavigationBar() {
         credentials: "include",
       });
       if (res.ok) {
-        console.log(res);
         navigate("/", { replace: true });
       }
     } catch (err) {

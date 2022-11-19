@@ -1,9 +1,11 @@
 import classes from "./style/clock.module.css";
 import { useEffect, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
+import CurrentShiftContext from "../../context/currentShiftCtx.js";
 
 function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
   const { payment, overTime } = useContext(UserContext);
+  const { currentShift } = useContext(CurrentShiftContext);
 
   const setEarning = useCallback(
     (sec) => {
@@ -37,10 +39,6 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
         shiftDetails.current.overTimePay =
           (((sec - TEN_HOURS_BY_MILLISECONDS) / 60) * (payment * 1.5)) / 60;
       }
-      /*   localStorage.setItem(
-        "shiftDetails",
-        JSON.stringify(shiftDetails?.current)
-      ); */
     },
     [shiftDetails, payment, overTime]
   );
@@ -58,48 +56,44 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
   //update the timer
   useEffect(() => {
     let interval = null;
+    console.log(play);
+    console.log(shiftDetails.current.pausedSeconds);
 
-    //Maintains playing status continuously
-    if (localStorage.getItem("setPlay")) {
-      let res = JSON.parse(localStorage.getItem("setPlay"));
-      isPlay(res);
+    // while exit and playing
+    if (play === true && shiftDetails.current.pausedSeconds === 0) {
+      console.log("while exit and playing");
+      let secs = currentTimeInSeconds - startSeconds;
+      setSeconds(secs);
+      setEarning(secs);
     }
 
+    // while exit and playing but has been stopped
+    if (play === true && shiftDetails.current.startAgain > 0) {
+      console.log("while exit and playing but has been stopped");
+      let secs =
+        currentTimeInSeconds -
+        startSeconds -
+        (shiftDetails.current.startAgain - shiftDetails.current.pausedSeconds);
+      setSeconds(secs);
+      setEarning(secs);
+    }
+
+    //while playing
     if (play === true) {
       interval = setInterval(() => {
         return setSeconds((prev) => prev + 1);
       }, 1000);
       shiftDetails.current.seconds = seconds;
     } else {
-      const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
-      const currentShift = shiftDetails.current;
-
-      // while exit and playing
-      if (ifPlay === true && currentShift?.pausedSeconds === 0) {
-        console.log("1");
-        let secs = currentTimeInSeconds - startSeconds;
-        setSeconds(secs);
-        setEarning(secs);
-      }
-
-      if (ifPlay === true && currentShift.pausedSeconds > 0) {
-        console.log("2");
-        let secs =
-          currentTimeInSeconds -
-          startSeconds -
-          (currentShift.startAgain - currentShift.pausedSeconds);
-        setSeconds(secs);
-        setEarning(secs);
-      }
       // while exit and pause
-      if (ifPlay === false) {
+      if (play === false) {
+        console.log("while exit and playing but has been stopped");
         setSeconds(shiftDetails.current.seconds);
         setEarning(shiftDetails.current.seconds);
       }
 
       // while exit and not playing
       !currentShift && setSeconds(0);
-
       clearInterval(interval);
       interval = null;
     }
@@ -113,6 +107,7 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
     shiftDetails,
     startSeconds,
     setEarning,
+    currentShift,
   ]);
 
   hrs = Math.floor(seconds / 3600);

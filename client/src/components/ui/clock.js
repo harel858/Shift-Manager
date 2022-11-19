@@ -5,12 +5,14 @@ import Timer from "./timer";
 import { useContext } from "react";
 import CurrentShiftContext from "../../context/currentShiftCtx";
 
-function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
+function Clock({ shiftDetails, setSeconds, seconds }) {
   const {
     createCurrentShift,
     currentShift,
     updateShiftPaused,
     updateShiftStart,
+    play,
+    isPlay,
   } = useContext(CurrentShiftContext);
 
   const startToggleHandler = () => {
@@ -18,7 +20,7 @@ function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
       createCurrentShift(shiftDetails.current);
     }
 
-    console.log(currentShift);
+  
 
     if (play && seconds > 0) {
       shiftDetails.current.seconds = seconds;
@@ -35,7 +37,6 @@ function Clock({ shiftDetails, setSeconds, seconds, play, isPlay }) {
       updateShiftStart(shiftDetails.current);
     }
 
-    localStorage.setItem("setPlay", !play);
     return isPlay((prev) => !prev);
   };
 

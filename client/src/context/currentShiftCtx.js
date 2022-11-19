@@ -1,4 +1,5 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect, useContext } from "react";
+import UserContext from "./userContext.js";
 const CurrentShiftContext = createContext({
   currentShift: {},
   createCurrentShift: (shift) => {},
@@ -15,12 +16,16 @@ const CurrentShiftContext = createContext({
   deleteShiftHandler: () => {},
   error: String,
   loading: Boolean,
+  play: Boolean,
+  isPlay: () => {},
 });
 
 export function CurrentShiftContextProvider(props) {
+  const { user } = useContext(UserContext);
   const [currentShift, setCurrentShift] = useState();
   const [loadingShift, setLoadingShift] = useState(false);
   const [shiftError, setShiftError] = useState("");
+  const [play, isPlay] = useState(null);
 
   useEffect(() => {
     setLoadingShift(true);
@@ -36,8 +41,9 @@ export function CurrentShiftContextProvider(props) {
         );
         if (res.ok) {
           const [shift] = await res.json();
-          console.log(shift);
+
           setCurrentShift(shift);
+          isPlay(shift.isRunning);
         } else {
           const resError = await res.json();
           console.log(resError);
@@ -50,10 +56,9 @@ export function CurrentShiftContextProvider(props) {
       }
     };
     getShiftData();
-  }, []);
+  }, [user]);
 
   async function createCurrentShift(shift) {
-    console.log(shift);
     setLoadingShift(true);
     try {
       const res = await fetch(
@@ -83,7 +88,7 @@ export function CurrentShiftContextProvider(props) {
 
       if (res.ok) {
         const newShift = await res.json();
-        console.log(newShift);
+
         setCurrentShift(newShift);
       } else {
         const response = await res.json();
@@ -109,7 +114,7 @@ export function CurrentShiftContextProvider(props) {
         firstOverTimePay,
         overTimePay,
       } = shift;
-      console.log(timeSpend);
+
       let res = await fetch(
         `${process.env.REACT_APP_API_KEY}/currentShift/update-paused`,
         {
@@ -129,7 +134,7 @@ export function CurrentShiftContextProvider(props) {
       );
       if (res.ok) {
         const response = await res.json();
-        console.log(response);
+
         let [updatedShift] = response;
         setCurrentShift(updatedShift);
       } else {
@@ -145,7 +150,6 @@ export function CurrentShiftContextProvider(props) {
   const updateShiftStart = async (shift) => {
     setLoadingShift(true);
     const { startAgain } = shift;
-    console.log(startAgain);
     try {
       let res = await fetch(
         `${process.env.REACT_APP_API_KEY}/currentShift/update-start`,
@@ -201,6 +205,8 @@ export function CurrentShiftContextProvider(props) {
     updateShiftPaused,
     updateShiftStart,
     deleteShiftHandler,
+    play,
+    isPlay,
   };
   return (
     <CurrentShiftContext.Provider value={context}>

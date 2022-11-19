@@ -7,14 +7,13 @@ import CurrentShiftContext from "../../context/currentShiftCtx.js";
 function ShiftPayment({
   shiftDetails,
   seconds,
-  play,
-  isPlay,
+
   setSeconds,
   setOpen,
 }) {
   const { payment, currency, overTime } = useContext(UserContext);
   const { addShift } = useContext(ShiftContext);
-  const { deleteShiftHandler } = useContext(CurrentShiftContext);
+  const { deleteShiftHandler, play, isPlay } = useContext(CurrentShiftContext);
   const currentPayment = useRef(0);
 
   const basicCalculate = useCallback(
@@ -77,7 +76,6 @@ function ShiftPayment({
       !overTime ? basicCalculate(seconds) : overTimeCalculate(seconds);
     }
     if (play === null) {
-      console.log("hey");
       currentPayment.current = 0;
     }
   }, [
@@ -101,13 +99,11 @@ function ShiftPayment({
       setOpen(true);
       currentPayment.current = 0;
       localStorage.clear();
-      return isPlay((play = null));
+      return isPlay(null);
     } catch (err) {
       console.error(err);
     }
   }
-
-  const ifPlay = JSON.parse(localStorage.getItem("setPlay"));
 
   return (
     <div
@@ -120,19 +116,19 @@ function ShiftPayment({
       }
       onClick={play === false ? saveHandler : null}
     >
-      {ifPlay && (
+      {play && (
         <h3 className={classes.text}>
           Current Payment: {currentPayment.current.toFixed(2)}
           <span className={classes.currencyLabel}>{currency.label}</span>
         </h3>
       )}
-      {ifPlay === false && (
+      {play === false && (
         <button className={classes.save}>
           Save Shift {shiftDetails?.current?.totalProfit}
           <span className={classes.currencyLabel}>{currency.label}</span>
         </button>
       )}
-      {!localStorage.getItem("setPlay") && (
+      {play === null && (
         <h3 className={classes.text}>
           Current Payment: 0
           <span className={classes.currencyLabel}>{currency.label}</span>

@@ -25,7 +25,7 @@ function NewShift() {
   };
 
   const [seconds, setSeconds] = useState(0);
-  const [play, isPlay] = useState();
+
   const shiftDetails = useRef();
   const today = new Date();
   const todayDate = today.toISOString().slice(0, 10);
@@ -47,6 +47,7 @@ function NewShift() {
       basicPayment: 0,
       firstOverTimePay: 0,
       overTimePay: 0,
+      isRunning: null,
     };
   };
 
@@ -54,7 +55,6 @@ function NewShift() {
 
   if (currentShift) shiftDetails.current = currentShift;
 
-  console.log(shiftDetails.current);
   return (
     <>
       <section className={classes.clockSection}>
@@ -66,16 +66,12 @@ function NewShift() {
           <Clock
             todayDate={todayDate}
             shiftDetails={shiftDetails}
-            play={play}
-            isPlay={isPlay}
             seconds={seconds}
             setSeconds={setSeconds}
           />
           <ShiftPayment
             shiftDetails={shiftDetails}
             setSeconds={setSeconds}
-            isPlay={isPlay}
-            play={play}
             seconds={seconds}
             setOpen={setOpen}
           />

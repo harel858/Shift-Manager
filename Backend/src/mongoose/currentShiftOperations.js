@@ -45,6 +45,7 @@ async function updatePausedSeconds(
           basicPayment: basicPayment,
           firstOverTimePay: firstOverTimePay,
           overTimePay: overTimePay,
+          isRunning: false,
         },
       }
     );
@@ -65,6 +66,7 @@ async function updateStartSeconds(_id, startAgain) {
       {
         $set: {
           startAgain: startAgain,
+          isRunning: true,
         },
       }
     );
