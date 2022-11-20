@@ -6,7 +6,7 @@ const ShiftContext = createContext({
   error: String,
   addShift: (shift) => {},
   deleteShift: (shiftId) => {},
-  loading: Boolean,
+  loadingShift: Boolean,
   updateShift: (
     index,
     _id,
@@ -173,7 +173,7 @@ export function ShiftContextProvider(props) {
     addShift: addShiftHandler,
     deleteShift: deleteShiftHandler,
     updateShift: updateShiftHandler,
-    loading,
+    loadingShift: loading,
   };
 
   return (

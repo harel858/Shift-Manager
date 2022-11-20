@@ -1,7 +1,5 @@
 import classes from "./style/settings.module.css";
-
-import { useState, useContext, useRef } from "react";
-
+import { useState, useContext, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import OvertimeCard from "../components/ui/OvertimeCard.js";
@@ -20,13 +18,19 @@ function Settings() {
     updateOvertime,
     loginError,
   } = useContext(UserContext);
-
+  const [checked, setChecked] = useState(false);
   const [card1Open, setCard1Open] = useState(false);
   const [card2Open, setCard2Open] = useState(false);
   const [card3Open, setCard3Open] = useState(false);
   const card1Ref = useRef();
   const card2Ref = useRef();
   const card3Ref = useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setChecked(true);
+    }, 50);
+  }, []);
 
   if (loginError) {
     return (
@@ -52,6 +56,7 @@ function Settings() {
       </header>
       <div className={classes.btnContainer}>
         <OvertimeCard
+          checked={checked}
           overTime={overTime}
           cardRef={card1Ref}
           card2Ref={card2Ref}
@@ -64,6 +69,7 @@ function Settings() {
         />
 
         <CurrencyCard
+          checked={checked}
           cardRef={card2Ref}
           card1Ref={card1Ref}
           card3Ref={card3Ref}
@@ -77,6 +83,7 @@ function Settings() {
         />
 
         <PaymentCard
+          checked={checked}
           cardRef={card3Ref}
           card1Ref={card1Ref}
           card2Ref={card2Ref}

@@ -47,7 +47,7 @@ function Clock({
   };
 
   return (
-    <Zoom in={checked}>
+    <Zoom in={checked} style={{ transitionDelay: checked ? "400ms" : "0ms" }}>
       <div
         onClick={startToggleHandler}
         className={

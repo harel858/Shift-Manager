@@ -5,11 +5,12 @@ import NavigationBar from "../navbar/NavigationBar.js";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import UserContext from "../../context/userContext";
+import LinearColor from "../ui/loading";
 
 export default function SettingsLayout(props) {
-  const { user, loginError } = useContext(UserContext);
-
-  if (!user) {
+  const { user, loginError, loading } = useContext(UserContext);
+  if (loading) return <LinearColor />;
+  if (!user && loginError) {
     return (
       <Alert className={classes.noShiftAlert} severity="error">
         <AlertTitle>ERROR</AlertTitle>

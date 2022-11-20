@@ -8,12 +8,12 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import classes from "./style/layout.module.css";
 function Layout(props) {
-  const { loading } = useContext(ShiftContext);
-  const { user, loginError } = useContext(UserContext);
+  const { loadingShift } = useContext(ShiftContext);
+  const { user, loginError, loading } = useContext(UserContext);
 
-  if (loading) return <LinearColor />;
+  if (loading || loadingShift) return <LinearColor />;
 
-  if (!user) {
+  if (!user && !loading && !loadingShift && loginError) {
     return (
       <Alert className={classes.noShiftAlert} severity="error">
         <AlertTitle>ERROR</AlertTitle>

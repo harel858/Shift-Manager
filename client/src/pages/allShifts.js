@@ -3,8 +3,12 @@ import ShiftSummary from "../components/shifts/ShiftSummary.js";
 import MonthStepper from "../components/shifts/MonthStepper.js";
 import { useContext, useEffect, useState } from "react";
 import ShiftContext from "../context/shiftContext.js";
+import UserContext from "../context/userContext.js";
+import LinearColor from "../components/ui/loading.js";
 
 function AllShifts() {
+  const [checked, setChecked] = useState(false);
+  const [loadingMonth, setLoadingMonth] = useState(false);
   const byDate = (a, b) => {
     const d1 = new Date(a.start);
     const d2 = new Date(b.start);
@@ -19,7 +23,8 @@ function AllShifts() {
     }
   };
 
-  const { shifts, loading } = useContext(ShiftContext);
+  const { shifts, loadingShift } = useContext(ShiftContext);
+  const { loading } = useContext(UserContext);
   const allShiftList = shifts.sort(byDate);
 
   const [counter, setCounter] = useState(0);
@@ -41,6 +46,13 @@ function AllShifts() {
   const [shiftList, setShiftList] = useState([]);
 
   useEffect(() => {
+    setTimeout(() => {
+      setChecked(true);
+    }, 50);
+  }, []);
+
+  useEffect(() => {
+    setLoadingMonth(true);
     let shiftsOfMonth = [];
     allShiftList.map((shift, i) => {
       if (shift.date === months[counter]) {
@@ -49,20 +61,24 @@ function AllShifts() {
       }
       return shiftsOfMonth;
     });
-    return setShiftList(shiftsOfMonth);
+    setShiftList(shiftsOfMonth);
+    return setLoadingMonth(false);
   }, [counter, months, allShiftList]);
+
+  if (loading || loadingShift) return <LinearColor />;
 
   return (
     <>
-      {/*  <ShiftList shiftList={shiftList} /> */}
       <MonthStepper
+        checked={checked}
         counter={counter}
         setCounter={setCounter}
         months={months}
         setMonths={setMonths}
       />
       <ShiftList2
-        loading={loading}
+        checked={checked}
+        loadingMonth={loadingMonth}
         counter={counter}
         setCounter={setCounter}
         months={months}
@@ -70,6 +86,7 @@ function AllShifts() {
         shiftList={shiftList}
       />
       <ShiftSummary
+        checked={checked}
         counter={counter}
         setCounter={setCounter}
         months={months}

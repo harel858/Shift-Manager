@@ -8,6 +8,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import UserContext from "../context/userContext.js";
 import CurrentShiftContext from "../context/currentShiftCtx.js";
+import Zoom from "@mui/material/Zoom";
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -64,10 +65,12 @@ function NewShift() {
   return (
     <>
       <section className={classes.clockSection}>
-        <header className={classes.header}>
-          <h1>Welcome {user?.name}!</h1>
-          <h3 className={classes.clockDate}>{todayDate}</h3>
-        </header>
+        <Zoom in={checked}>
+          <header className={classes.header}>
+            <h1>Welcome {user?.name}!</h1>
+            <h3 className={classes.clockDate}>{todayDate}</h3>
+          </header>
+        </Zoom>
         <div className={classes.clockAndEarning}>
           <Clock
             checked={checked}

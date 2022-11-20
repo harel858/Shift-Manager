@@ -1,17 +1,25 @@
 import classes from "./shiftsCss/listContainer.module.css";
+import { useContext } from "react";
 import ShiftTable from "./ShiftTable.js";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import ShiftContext from "../../context/shiftContext";
+import UserContext from "../../context/userContext";
+import Slide from "@mui/material/Slide";
 
 export default function ShiftList2({
-  loading,
   counter,
   setCounter,
   months,
   setMonths,
   shiftList,
+  loadingMonth,
+  checked,
 }) {
-  if (shiftList.length <= 0 && !loading) {
+  const { loadingShift } = useContext(ShiftContext);
+  const { loading } = useContext(UserContext);
+
+  if (shiftList.length <= 0 && !loadingShift && !loading && !loadingMonth) {
     return (
       <Alert className={classes.noShiftAlert} severity="info">
         <AlertTitle> You have no shifts for {months[counter]} yet </AlertTitle>
@@ -20,14 +28,16 @@ export default function ShiftList2({
     );
   }
   return (
-    <div className={classes.listContainer}>
-      <ShiftTable
-        counter={counter}
-        setCounter={setCounter}
-        months={months}
-        setMonths={setMonths}
-        shiftList={shiftList}
-      />
-    </div>
+    <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
+      <div className={classes.listContainer}>
+        <ShiftTable
+          counter={counter}
+          setCounter={setCounter}
+          months={months}
+          setMonths={setMonths}
+          shiftList={shiftList}
+        />
+      </div>
+    </Slide>
   );
 }

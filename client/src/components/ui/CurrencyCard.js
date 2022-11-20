@@ -2,6 +2,8 @@ import classes from "./style/CurrencyCard.module.css";
 import { BsCurrencyExchange } from "react-icons/bs";
 import MenuItem from "@mui/material/MenuItem";
 import { TextField } from "@mui/material";
+import Zoom from "@mui/material/Zoom";
+
 export default function CurrencyCard({
   cardRef,
   card1Ref,
@@ -13,6 +15,7 @@ export default function CurrencyCard({
   currency,
   updateCurrency,
   currencies,
+  checked,
 }) {
   const card2Handler = (e) => {
     setCard1Open(false);
@@ -32,7 +35,7 @@ export default function CurrencyCard({
   };
 
   return (
-    <>
+    <Zoom in={checked} style={{ transitionDelay: checked ? "200ms" : "0ms" }}>
       {!card2Open ? (
         <div ref={cardRef} onClick={card2Handler} className={classes.card2}>
           <div className={classes.innerContainer}>
@@ -71,6 +74,6 @@ export default function CurrencyCard({
           </h3>
         </div>
       )}
-    </>
+    </Zoom>
   );
 }

@@ -1,6 +1,7 @@
 import classes from "./style/OvertimeCard.module.css";
 import Switch from "@mui/material/Switch";
 import { BsFillClockFill } from "react-icons/bs";
+import Zoom from "@mui/material/Zoom";
 
 export default function OvertimeCard({
   overTime,
@@ -12,6 +13,7 @@ export default function OvertimeCard({
   card2Ref,
   card3Ref,
   updateOvertime,
+  checked,
 }) {
   const card1Handler = () => {
     setCard2Open(false);
@@ -27,7 +29,7 @@ export default function OvertimeCard({
   const handelOvertime = () => updateOvertime(!overTime);
 
   return (
-    <>
+    <Zoom in={checked}>
       {!card1Open ? (
         <div ref={cardRef} onClick={card1Handler} className={classes.card1}>
           <div className={classes.innerContainer}>
@@ -53,6 +55,6 @@ export default function OvertimeCard({
           </button>
         </div>
       )}
-    </>
+    </Zoom>
   );
 }

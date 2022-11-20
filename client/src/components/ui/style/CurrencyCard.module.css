@@ -13,10 +13,10 @@
   border: 3px solid black;
   border-radius: 2em;
   cursor: pointer;
-  transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out !important;
 }
 .card2:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) !important;
   box-shadow: 0 10px 50px 10px black;
   background: linear-gradient(
     120deg,
@@ -67,8 +67,8 @@
   border-radius: 2em;
   box-shadow: 0 10px 100px 100px black;
   cursor: pointer;
-  transform: scale(2);
-  transition: all 200ms ease-in-out;
+  transform: scale(2) !important;
+  transition: all 200ms ease-in-out !important;
 }
 .currencyLabel {
   font-size: 1.2em;
@@ -104,7 +104,7 @@
     max-width: 70vw;
     min-height: 50vh;
     box-shadow: 0 10px 100px 100px black;
-    transform: scale(1.2);
-    transition: all 200ms ease-in-out;
+    transform: scale(1.2) !important;
+    transition: all 200ms ease-in-out !important;
   }
 }

@@ -1,5 +1,5 @@
 import classes from "./style/PaymentCard.module.css";
-
+import Zoom from "@mui/material/Zoom";
 import { useState } from "react";
 import { MdPayments } from "react-icons/md";
 import { TextField } from "@mui/material";
@@ -14,6 +14,7 @@ export default function PaymentCard({
   payment,
   currency,
   updatePayment,
+  checked,
 }) {
   const [error, setError] = useState("");
 
@@ -45,7 +46,7 @@ export default function PaymentCard({
   }
 
   return (
-    <>
+    <Zoom in={checked} style={{ transitionDelay: checked ? "400ms" : "0ms" }}>
       {!card3Open ? (
         <div ref={cardRef} onClick={card3Handler} className={classes.card3}>
           <div className={classes.innerContainer}>
@@ -77,6 +78,6 @@ export default function PaymentCard({
           <p className={classes.cardError}>{error}</p>
         </div>
       )}
-    </>
+    </Zoom>
   );
 }
