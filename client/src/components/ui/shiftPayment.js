@@ -3,14 +3,9 @@ import { useEffect, useRef, useContext, useCallback } from "react";
 import UserContext from "../../context/userContext.js";
 import ShiftContext from "../../context/shiftContext.js";
 import CurrentShiftContext from "../../context/currentShiftCtx.js";
+import Zoom from "@mui/material/Zoom";
 
-function ShiftPayment({
-  shiftDetails,
-  seconds,
-
-  setSeconds,
-  setOpen,
-}) {
+function ShiftPayment({ shiftDetails, seconds, checked, setSeconds, setOpen }) {
   const { payment, currency, overTime } = useContext(UserContext);
   const { addShift } = useContext(ShiftContext);
   const { deleteShiftHandler, play, isPlay } = useContext(CurrentShiftContext);
@@ -106,35 +101,37 @@ function ShiftPayment({
   }
 
   return (
-    <div
-      className={
-        play
-          ? classes.containerPlay
-          : play === false
-          ? classes.containerSave
-          : classes.container
-      }
-      onClick={play === false ? saveHandler : null}
-    >
-      {play && (
-        <h3 className={classes.text}>
-          Current Payment: {currentPayment.current.toFixed(2)}
-          <span className={classes.currencyLabel}>{currency.label}</span>
-        </h3>
-      )}
-      {play === false && (
-        <button className={classes.save}>
-          Save Shift {shiftDetails?.current?.totalProfit}
-          <span className={classes.currencyLabel}>{currency.label}</span>
-        </button>
-      )}
-      {play === null && (
-        <h3 className={classes.text}>
-          Current Payment: 0
-          <span className={classes.currencyLabel}>{currency.label}</span>
-        </h3>
-      )}
-    </div>
+    <Zoom in={checked} style={{ transitionDelay: checked ? "200ms" : "0ms" }}>
+      <div
+        className={
+          play
+            ? classes.containerPlay
+            : play === false
+            ? classes.containerSave
+            : classes.container
+        }
+        onClick={play === false ? saveHandler : null}
+      >
+        {play && (
+          <h3 className={classes.text}>
+            Current Payment: {currentPayment.current.toFixed(2)}
+            <span className={classes.currencyLabel}>{currency.label}</span>
+          </h3>
+        )}
+        {play === false && (
+          <button className={classes.save}>
+            Save Shift {shiftDetails?.current?.totalProfit}
+            <span className={classes.currencyLabel}>{currency.label}</span>
+          </button>
+        )}
+        {play === null && (
+          <h3 className={classes.text}>
+            Current Payment: 0
+            <span className={classes.currencyLabel}>{currency.label}</span>
+          </h3>
+        )}
+      </div>
+    </Zoom>
   );
 }
 export default ShiftPayment;

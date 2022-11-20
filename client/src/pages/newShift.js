@@ -1,6 +1,6 @@
 import classes from "./style/newShift.module.css";
 import Clock from "../components/ui/clock.js";
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import { forwardRef } from "react";
 import ShiftPayment from "../components/ui/shiftPayment";
 import Stack from "@mui/material/Stack";
@@ -9,13 +9,25 @@ import MuiAlert from "@mui/material/Alert";
 import UserContext from "../context/userContext.js";
 import CurrentShiftContext from "../context/currentShiftCtx.js";
 
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 function NewShift() {
+  const [checked, setChecked] = useState(false);
   const [open, setOpen] = useState(false);
   const { user } = useContext(UserContext);
   const { currentShift } = useContext(CurrentShiftContext);
-  const Alert = forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+  const [seconds, setSeconds] = useState(0);
+  const shiftDetails = useRef();
+  const today = new Date();
+  const todayDate = today.toISOString().slice(0, 10);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setChecked(true);
+    }, 50);
+  }, []);
 
   const handleClose = (_event, reason) => {
     if (reason === "clickaway") {
@@ -23,12 +35,6 @@ function NewShift() {
     }
     setOpen(false);
   };
-
-  const [seconds, setSeconds] = useState(0);
-
-  const shiftDetails = useRef();
-  const today = new Date();
-  const todayDate = today.toISOString().slice(0, 10);
 
   const createNewShiftRef = () => {
     const today = new Date();
@@ -64,6 +70,7 @@ function NewShift() {
         </header>
         <div className={classes.clockAndEarning}>
           <Clock
+            checked={checked}
             createNewShiftRef={createNewShiftRef}
             todayDate={todayDate}
             shiftDetails={shiftDetails}
@@ -71,6 +78,7 @@ function NewShift() {
             setSeconds={setSeconds}
           />
           <ShiftPayment
+            checked={checked}
             shiftDetails={shiftDetails}
             setSeconds={setSeconds}
             seconds={seconds}

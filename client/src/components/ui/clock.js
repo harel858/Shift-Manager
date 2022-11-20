@@ -4,8 +4,15 @@ import { BsPause } from "react-icons/bs";
 import Timer from "./timer";
 import { useContext } from "react";
 import CurrentShiftContext from "../../context/currentShiftCtx";
+import Zoom from "@mui/material/Zoom";
 
-function Clock({ shiftDetails, setSeconds, seconds, createNewShiftRef }) {
+function Clock({
+  shiftDetails,
+  setSeconds,
+  seconds,
+  createNewShiftRef,
+  checked,
+}) {
   const {
     createCurrentShift,
     currentShift,
@@ -40,7 +47,7 @@ function Clock({ shiftDetails, setSeconds, seconds, createNewShiftRef }) {
   };
 
   return (
-    <>
+    <Zoom in={checked}>
       <div
         onClick={startToggleHandler}
         className={
@@ -69,7 +76,7 @@ function Clock({ shiftDetails, setSeconds, seconds, createNewShiftRef }) {
           play={play}
         />
       </div>
-    </>
+    </Zoom>
   );
 }
 
