@@ -20,16 +20,14 @@ export default function ShiftList2({
     );
   }
   return (
-    <>
-      <div className={classes.listContainer}>
-        <ShiftTable
-          counter={counter}
-          setCounter={setCounter}
-          months={months}
-          setMonths={setMonths}
-          shiftList={shiftList}
-        />
-      </div>
-    </>
+    <div className={classes.listContainer}>
+      <ShiftTable
+        counter={counter}
+        setCounter={setCounter}
+        months={months}
+        setMonths={setMonths}
+        shiftList={shiftList}
+      />
+    </div>
   );
 }

@@ -1,6 +1,7 @@
 import classes from "./shiftsCss/summary.module.css";
 import { useMemo, useState, useContext } from "react";
 import UserContext from "../../context/userContext.js";
+
 export default function ShiftSummary(props) {
   const { currency } = useContext(UserContext);
 
@@ -25,6 +26,7 @@ export default function ShiftSummary(props) {
         overtimeEarn = overtimeEarn + +props.shiftList[i].overTime;
         totalSeconds = totalSeconds + parseInt(props.shiftList[i].seconds);
       }
+
       //Calculation income Tax of Internal Revenue Service
       totalProfit < 6450 && setIncomeTax((totalProfit * 0.1).toFixed(2));
       if (totalProfit > 6450 && totalProfit < 9240)
