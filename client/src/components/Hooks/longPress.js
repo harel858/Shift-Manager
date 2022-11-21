@@ -57,7 +57,7 @@ export default function UseLongPress({
   function startPressTimer() {
     timeRef.current = setTimeout(() => {
       startToggleHandler();
-    }, 1000);
+    }, 2000);
   }
 
   return {
