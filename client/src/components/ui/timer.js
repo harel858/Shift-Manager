@@ -56,12 +56,9 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
   //update the timer
   useEffect(() => {
     let interval = null;
-    console.log(play);
-    console.log(shiftDetails.current.pausedSeconds);
 
     // while exit and playing
     if (play === true && shiftDetails.current.pausedSeconds === 0) {
-      console.log("while exit and playing");
       let secs = currentTimeInSeconds - startSeconds;
       setSeconds(secs);
       setEarning(secs);
@@ -69,7 +66,6 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
 
     // while exit and playing but has been stopped
     if (play === true && shiftDetails.current.startAgain > 0) {
-      console.log("while exit and playing but has been stopped");
       let secs =
         currentTimeInSeconds -
         startSeconds -
@@ -87,7 +83,6 @@ function Timer({ shiftDetails, play, setSeconds, seconds, isPlay }) {
     } else {
       // while exit and pause
       if (play === false) {
-        console.log("while exit and playing but has been stopped");
         setSeconds(shiftDetails.current.seconds);
         setEarning(shiftDetails.current.seconds);
       }
