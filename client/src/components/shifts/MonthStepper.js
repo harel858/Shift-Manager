@@ -14,7 +14,7 @@ export default function MonthStepper(props) {
     }
   }, [currentMonth, props]);
   return (
-    <Slide direction="left" in={props.checked} mountOnEnter unmountOnExit>
+    <Slide direction="right" in={props.checked} mountOnEnter unmountOnExit>
       <div className={classes.container}>
         <ArrowBackIosNewIcon
           className={classes.btn}
