@@ -65,7 +65,7 @@ function AllShifts() {
     return setLoadingMonth(false);
   }, [counter, months, allShiftList]);
 
-  if (loading || loadingShift) return <LinearColor />;
+  if (loadingMonth || loading || loadingShift) return <LinearColor />;
 
   return (
     <>

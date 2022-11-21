@@ -1,8 +1,9 @@
 import classes from "./style/clock.module.css";
+import { useContext } from "react";
+import UseLongPress from "../Hooks/longPress.js";
 import { BiPlay } from "react-icons/bi";
 import { BsPause } from "react-icons/bs";
 import Timer from "./timer";
-import { useContext } from "react";
 import CurrentShiftContext from "../../context/currentShiftCtx";
 import Zoom from "@mui/material/Zoom";
 
@@ -22,34 +23,24 @@ function Clock({
     isPlay,
   } = useContext(CurrentShiftContext);
 
-  const startToggleHandler = () => {
-    if (!play && seconds <= 0 && !currentShift) {
-      createNewShiftRef();
-      createCurrentShift(shiftDetails.current);
-    }
-
-    if (play && seconds > 0) {
-      shiftDetails.current.seconds = seconds;
-      const nowInSeconds = new Date().getTime();
-      shiftDetails.current.pausedSeconds =
-        shiftDetails.current.pausedSeconds + Math.floor(nowInSeconds / 1000);
-      updateShiftPaused(shiftDetails.current);
-    }
-
-    if (!play && seconds > 0) {
-      const nowInSeconds = new Date().getTime();
-      shiftDetails.current.startAgain =
-        shiftDetails.current.startAgain + Math.floor(nowInSeconds / 1000);
-      updateShiftStart(shiftDetails.current);
-    }
-
-    return isPlay((prev) => !prev);
+  const dependency = {
+    shiftDetails,
+    updateShiftPaused,
+    updateShiftStart,
+    play,
+    isPlay,
+    seconds,
+    currentShift,
+    createNewShiftRef,
+    createCurrentShift,
   };
+
+  const { handlers } = UseLongPress({ ...dependency });
 
   return (
     <Zoom in={checked} style={{ transitionDelay: checked ? "400ms" : "0ms" }}>
       <div
-        onClick={startToggleHandler}
+        {...handlers}
         className={
           play
             ? classes.circlePlay

@@ -20,13 +20,14 @@ export default function ShiftSummary(props) {
       let firstOvertimeEarn = 0;
       let overtimeEarn = 0;
       let totalSeconds = 0;
-      for (let i = 0; i < props.shiftList.length; i++) {
-        totalProfit = totalProfit + +props.shiftList[i].totalProfit;
-        firstOvertimeEarn =
-          firstOvertimeEarn + +props.shiftList[i].firstOverTime;
-        overtimeEarn = overtimeEarn + +props.shiftList[i].overTime;
-        totalSeconds = totalSeconds + parseInt(props.shiftList[i].seconds);
-      }
+      if (props.shiftList[0] !== null)
+        for (let i = 0; i < props.shiftList.length; i++) {
+          totalProfit = totalProfit + +props.shiftList[i].totalProfit;
+          firstOvertimeEarn =
+            firstOvertimeEarn + +props.shiftList[i].firstOverTime;
+          overtimeEarn = overtimeEarn + +props.shiftList[i].overTime;
+          totalSeconds = totalSeconds + parseInt(props.shiftList[i].seconds);
+        }
 
       //Calculation income Tax of Internal Revenue Service
       totalProfit < 6450 && setIncomeTax((totalProfit * 0.1).toFixed(2));
