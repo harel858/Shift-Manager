@@ -9,7 +9,7 @@ export default function ShiftSummary(props) {
   //Define A Summary Object
   const [summary, setSummary] = useState({
     totalProfit: 0,
-    amountOfShifts: props.shiftList.length,
+    amountOfShifts: props?.shiftList?.length,
     totalTimeSpending: 0,
   });
   const [incomeTax, setIncomeTax] = useState();
@@ -21,7 +21,7 @@ export default function ShiftSummary(props) {
       let overtimeEarn = 0;
       let totalSeconds = 0;
       if (props.shiftList[0] !== null)
-        for (let i = 0; i < props.shiftList.length; i++) {
+        for (let i = 0; i < props.shiftList?.length; i++) {
           totalProfit = totalProfit + +props.shiftList[i].totalProfit;
           firstOvertimeEarn =
             firstOvertimeEarn + +props.shiftList[i].firstOverTime;
@@ -59,7 +59,7 @@ export default function ShiftSummary(props) {
     getData();
   }, [props.shiftList]);
   return (
-    <Slide direction="down" in={props.checked} mountOnEnter unmountOnExit>
+    <Slide direction="right" in={props.checked} mountOnEnter unmountOnExit>
       <ul className={classes.summaryContainer}>
         <li className={classes.summaryEarning}>
           <h5>Net Earning:</h5>
