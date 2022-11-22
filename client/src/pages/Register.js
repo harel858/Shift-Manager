@@ -223,7 +223,7 @@ export default function Register() {
       <div className={classes.registerBtnContainer}>
         <p className={classes.error}>{error}</p>
         <button type="button" className={classes.btn} onClick={registerHandler}>
-          Click Here
+          Register Now
         </button>
       </div>
       <div className={classes.login}>

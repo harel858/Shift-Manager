@@ -17,6 +17,7 @@ export default function UseLongPress(
   const timeRef = useRef();
 
   function startToggleHandler() {
+    clockRef.id = "";
     if (!play && seconds <= 0 && !currentShift) {
       createNewShiftRef();
       createCurrentShift(shiftDetails.current);
@@ -42,6 +43,7 @@ export default function UseLongPress(
 
   const onMouseUp = () => {
     clearTimeout(timeRef.current);
+    clockRef.id = "";
   };
   const onMouseDown = () => {
     startPressTimer();
@@ -51,14 +53,23 @@ export default function UseLongPress(
   };
   const onTouchEnd = () => {
     clearTimeout(timeRef.current);
+    clockRef.id = "";
   };
 
   function startPressTimer() {
-    clockRef.id = "loadingClock";
-    console.log(clockRef);
+    if (clockRef.className === "clock_circleContinue__+FTJ4") {
+      clockRef.id = "continueShift";
+    }
+    if (clockRef.className === "clock_circle__dIn9H") {
+      clockRef.id = "startShift";
+    }
+    if (clockRef.className === "clock_circlePlay__t30qY") {
+      clockRef.id = "stoppingShift";
+    }
     timeRef.current = setTimeout(() => {
+      clockRef.id = "";
       startToggleHandler();
-    }, 2000);
+    }, 4000);
   }
 
   return {

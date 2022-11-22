@@ -1,0 +1,107 @@
+#startShift {
+  box-shadow: black 0 10px 60px 40px;
+  overflow: hidden;
+  border: 3px solid black;
+  transition: all 200ms ease-in-out;
+}
+
+#startShift::before {
+  content: "";
+  background: conic-gradient(transParent, #ffff);
+  width: 150%;
+  height: 150%;
+  position: absolute;
+  animation: rotate 4s linear infinite;
+}
+#startShift::after {
+  content: "Starting Shift";
+  background-color: #1db954;
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-style: oblique;
+  font-family: tahoma;
+  font-size: 1.5em;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+#stoppingShift {
+  box-shadow: black 0 10px 60px 40px;
+  overflow: hidden;
+  border: 3px solid black;
+  transition: all 200ms ease-in-out;
+}
+
+#stoppingShift::before {
+  content: "";
+  background: conic-gradient(transParent, #ffff);
+  width: 150%;
+  height: 150%;
+  position: absolute;
+  animation: rotate 4s linear infinite;
+}
+#stoppingShift::after {
+  content: "Stopping Shift";
+  background-color: #b91d1d;
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-style: oblique;
+  font-family: tahoma;
+  font-size: 1.5em;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+#continueShift {
+  box-shadow: black 0 10px 60px 40px;
+  overflow: hidden;
+  border: 3px solid black;
+  transition: all 200ms ease-in-out;
+}
+
+#continueShift::before {
+  content: "";
+  background: conic-gradient(transParent, #ffff);
+  width: 150%;
+  height: 150%;
+  position: absolute;
+  animation: rotate 4s linear infinite;
+}
+#continueShift::after {
+  content: "Continue Shift";
+  background: linear-gradient(120deg, #ff8c00, #d5ff18);
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-style: oblique;
+  font-family: tahoma;
+  font-size: 1.5em;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

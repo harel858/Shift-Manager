@@ -74,7 +74,7 @@ export default function Register() {
         <div className={classes.loginBtnContainer}>
           <p className={classes.error}>{error}</p>
           <button type="button" className={classes.btn} onClick={loginHandler}>
-            Click Here
+            Log In
           </button>
         </div>
       </form>
