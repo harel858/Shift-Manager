@@ -87,7 +87,7 @@
 }
 @media screen and (max-width: 1200px) {
   .card2 {
-    padding: 2em 5em;
+    padding: 2em 4em;
   }
   .card2Open {
     display: flex;
