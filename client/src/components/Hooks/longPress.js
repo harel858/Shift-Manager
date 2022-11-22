@@ -61,6 +61,7 @@ export default function UseLongPress(
       clockRef.id = "";
       startToggleHandler();
     }, 4000);
+
     if (clockRef.className === "clock_circleContinue__+FTJ4") {
       return (clockRef.id = "continueShift");
     }
