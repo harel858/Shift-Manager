@@ -66,6 +66,7 @@ export default function UseLongPress(
     if (clockRef.className === "clock_circlePlay__t30qY") {
       clockRef.id = "stoppingShift";
     }
+    console.log(clockRef.id);
     timeRef.current = setTimeout(() => {
       clockRef.id = "";
       startToggleHandler();
