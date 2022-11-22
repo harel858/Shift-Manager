@@ -32,5 +32,6 @@ body {
 .noShiftAlert {
   width: max-content;
   margin: 10em auto;
-  box-shadow: black 0 15px 15px !important;
+  box-shadow: black 0 15px 20px 10px !important;
+  border: 1px solid black !important;
 }
