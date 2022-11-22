@@ -1,17 +1,17 @@
 #startShift {
-  box-shadow: black 0 10px 60px 40px;
-  overflow: hidden;
-  border: 3px solid black;
-  transition: all 200ms ease-in-out;
+  box-shadow: black 0 10px 60px 40px !important;
+  overflow: hidden !important;
+  border: 3px solid black !important;
+  transition: all 200ms ease-in-out !important;
 }
 
 #startShift::before {
-  content: "";
-  background: conic-gradient(transParent, #ffff);
-  width: 150%;
-  height: 150%;
-  position: absolute;
-  animation: rotate 2s linear infinite;
+  content: "" !important;
+  background: conic-gradient(transParent, #ffff) !important;
+  width: 150% !important;
+  height: 150% !important;
+  position: absolute !important;
+  animation: rotate 2s linear infinite !important;
 }
 #startShift::after {
   content: "Starting Shift";
@@ -100,8 +100,10 @@
 @keyframes rotate {
   from {
     transform: rotate(0deg);
+    opacity: 90;
   }
   to {
+    opacity: 100;
     transform: rotate(360deg);
   }
 }
