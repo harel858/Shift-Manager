@@ -35,9 +35,8 @@ function Clock({
     createNewShiftRef,
     createCurrentShift,
   };
-  const clockRef = useRef();
 
-  const { handlers } = UseLongPress({ ...dependency }, clockRef.current);
+  const { handlers, clockRef } = UseLongPress({ ...dependency });
 
   return (
     <Zoom in={checked} style={{ transitionDelay: checked ? "400ms" : "0ms" }}>

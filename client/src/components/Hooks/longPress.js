@@ -1,23 +1,21 @@
 import { useRef } from "react";
 
-export default function UseLongPress(
-  {
-    shiftDetails,
-    updateShiftPaused,
-    updateShiftStart,
-    play,
-    isPlay,
-    seconds,
-    currentShift,
-    createNewShiftRef,
-    createCurrentShift,
-  },
-  clockRef
-) {
+export default function UseLongPress({
+  shiftDetails,
+  updateShiftPaused,
+  updateShiftStart,
+  play,
+  isPlay,
+  seconds,
+  currentShift,
+  createNewShiftRef,
+  createCurrentShift,
+}) {
+  const clockRef = useRef();
   const timeRef = useRef();
 
   function startToggleHandler() {
-    clockRef.id = "";
+    clockRef.current.id = "";
     if (!play && seconds <= 0 && !currentShift) {
       createNewShiftRef();
       createCurrentShift(shiftDetails.current);
@@ -43,7 +41,7 @@ export default function UseLongPress(
 
   const onMouseUp = () => {
     clearTimeout(timeRef.current);
-    clockRef.id = "";
+    clockRef.current.id = "";
   };
   const onMouseDown = () => {
     startPressTimer();
@@ -53,24 +51,23 @@ export default function UseLongPress(
   };
   const onTouchEnd = () => {
     clearTimeout(timeRef.current);
-    clockRef.id = "";
+    clockRef.current.id = "";
   };
 
   function startPressTimer() {
+    if (clockRef.current.className === "clock_circleContinue__+FTJ4") {
+      clockRef.current.id = "continueShift";
+    }
+    if (clockRef.current.className === "clock_circle__dIn9H") {
+      clockRef.current.id = "startShift";
+    }
+    if (clockRef.current.className === "clock_circlePlay__t30qY") {
+      clockRef.current.id = "stoppingShift";
+    }
     timeRef.current = setTimeout(() => {
-      clockRef.id = "";
+      clockRef.current.id = "";
       startToggleHandler();
     }, 4000);
-
-    if (clockRef.className === "clock_circleContinue__+FTJ4") {
-      return (clockRef.id = "continueShift");
-    }
-    if (clockRef.className === "clock_circle__dIn9H") {
-      return (clockRef.id = "startShift");
-    }
-    if (clockRef.className === "clock_circlePlay__t30qY") {
-      return (clockRef.id = "stoppingShift");
-    }
   }
 
   return {
@@ -80,5 +77,6 @@ export default function UseLongPress(
       onTouchStart,
       onTouchEnd,
     },
+    clockRef,
   };
 }
