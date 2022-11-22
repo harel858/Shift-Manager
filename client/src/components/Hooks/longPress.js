@@ -57,20 +57,19 @@ export default function UseLongPress(
   };
 
   function startPressTimer() {
-    if (clockRef.className === "clock_circleContinue__+FTJ4") {
-      clockRef.id = "continueShift";
-    }
-    if (clockRef.className === "clock_circle__dIn9H") {
-      clockRef.id = "startShift";
-    }
-    if (clockRef.className === "clock_circlePlay__t30qY") {
-      clockRef.id = "stoppingShift";
-    }
-    console.log(clockRef.id);
     timeRef.current = setTimeout(() => {
       clockRef.id = "";
       startToggleHandler();
     }, 4000);
+    if (clockRef.className === "clock_circleContinue__+FTJ4") {
+      return (clockRef.id = "continueShift");
+    }
+    if (clockRef.className === "clock_circle__dIn9H") {
+      return (clockRef.id = "startShift");
+    }
+    if (clockRef.className === "clock_circlePlay__t30qY") {
+      return (clockRef.id = "stoppingShift");
+    }
   }
 
   return {
