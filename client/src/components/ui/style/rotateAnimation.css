@@ -11,7 +11,7 @@
   width: 150%;
   height: 150%;
   position: absolute;
-  animation: rotate 4s linear infinite;
+  animation: rotate 2s linear infinite;
 }
 #startShift::after {
   content: "Starting Shift";
@@ -44,7 +44,7 @@
   width: 150%;
   height: 150%;
   position: absolute;
-  animation: rotate 4s linear infinite;
+  animation: rotate 2s linear infinite;
 }
 #stoppingShift::after {
   content: "Stopping Shift";
@@ -77,7 +77,7 @@
   width: 150%;
   height: 150%;
   position: absolute;
-  animation: rotate 4s linear infinite;
+  animation: rotate 2s linear infinite;
 }
 #continueShift::after {
   content: "Continue Shift";

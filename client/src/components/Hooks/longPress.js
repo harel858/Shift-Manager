@@ -67,7 +67,7 @@ export default function UseLongPress({
     timeRef.current = setTimeout(() => {
       clockRef.current.id = "";
       startToggleHandler();
-    }, 4000);
+    }, 2000);
   }
 
   return {
