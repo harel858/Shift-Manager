@@ -1,16 +1,19 @@
 import { useRef } from "react";
 
-export default function UseLongPress({
-  shiftDetails,
-  updateShiftPaused,
-  updateShiftStart,
-  play,
-  isPlay,
-  seconds,
-  currentShift,
-  createNewShiftRef,
-  createCurrentShift,
-}) {
+export default function UseLongPress(
+  {
+    shiftDetails,
+    updateShiftPaused,
+    updateShiftStart,
+    play,
+    isPlay,
+    seconds,
+    currentShift,
+    createNewShiftRef,
+    createCurrentShift,
+  },
+  clockRef
+) {
   const timeRef = useRef();
 
   function startToggleHandler() {
@@ -39,22 +42,20 @@ export default function UseLongPress({
 
   const onMouseUp = () => {
     clearTimeout(timeRef.current);
-    console.log("onMouseUp");
   };
   const onMouseDown = () => {
     startPressTimer();
-    console.log("onMouseDown");
   };
   const onTouchStart = () => {
     startPressTimer();
-    console.log("onTouchStart");
   };
   const onTouchEnd = () => {
-    console.log("onTouchEnd");
     clearTimeout(timeRef.current);
   };
 
   function startPressTimer() {
+    clockRef.id = "loadingClock";
+    console.log(clockRef);
     timeRef.current = setTimeout(() => {
       startToggleHandler();
     }, 2000);

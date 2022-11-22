@@ -80,19 +80,10 @@ function AllShifts() {
         checked={checked}
         loadingMonth={loadingMonth}
         counter={counter}
-        setCounter={setCounter}
         months={months}
-        setMonths={setMonths}
         shiftList={shiftList}
       />
-      <ShiftSummary
-        checked={checked}
-        counter={counter}
-        setCounter={setCounter}
-        months={months}
-        setMonths={setMonths}
-        shiftList={shiftList}
-      />
+      <ShiftSummary checked={checked} shiftList={shiftList} />
     </>
   );
 }

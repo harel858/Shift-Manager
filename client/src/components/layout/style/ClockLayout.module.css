@@ -10,7 +10,8 @@
 .noShiftAlert {
   width: max-content;
   margin: 10em auto;
-  box-shadow: black 0 15px 15px;
+  box-shadow: black 0 15px 20px 10px;
+  border: 1px solid black;
 }
 @media screen and (max-width: 900px) {
   .mainClock {

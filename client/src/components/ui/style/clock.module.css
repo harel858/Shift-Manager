@@ -83,16 +83,20 @@
 }
 
 .stopWatch {
-  margin: 3em;
+  position: absolute;
+  bottom: 1.3em;
   font-size: 2em;
   font-weight: 500;
   font-family: tahoma;
 }
 
 .clockHeader {
-  padding-top: 3em;
+  position: absolute;
+  top: 2em;
+  font-size: 1.5em;
   width: max-content;
 }
+
 @media screen and (max-width: 500px) {
   .circle {
     position: relative;
