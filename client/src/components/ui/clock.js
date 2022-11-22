@@ -1,6 +1,6 @@
 import classes from "./style/clock.module.css";
 import "./style/rotateAnimation.css";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import UseLongPress from "../Hooks/longPress.js";
 import { BiPlay } from "react-icons/bi";
 import { BsPause } from "react-icons/bs";
