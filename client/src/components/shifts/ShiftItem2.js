@@ -1,6 +1,9 @@
 import { MdDelete, MdEdit } from "react-icons/md";
 import classes from "./shiftsCss/shiftItem2.module.css";
 import { useContext, useState, forwardRef, useCallback } from "react";
+import dayjs from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ShiftContext from "../../context/shiftContext.js";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -13,6 +16,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import TextField from "@mui/material/TextField";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import UserContext from "../../context/userContext.js";
 
 const BootstrapDialogTitle = (props) => {
@@ -52,8 +57,15 @@ export default function ShiftItem2({ shift }) {
   const [open, setOpen] = useState(false);
   const [editor, setEditor] = useState(false);
   const [errorOpen, setErrorOpen] = useState(false);
-  const [newStart, setNewStart] = useState();
-  const [newEnd, setNewEnd] = useState();
+  const [newStart, setNewStart] = useState(dayjs(shift.start));
+  const [newEnd, setNewEnd] = useState(dayjs(shift.end));
+
+  const handleEndChange = (newValue) => {
+    setNewEnd(newValue);
+  };
+  const handleStartChange = (newValue) => {
+    setNewStart(newValue);
+  };
 
   const { deleteShift, updateShift } = useContext(ShiftContext);
   const { payment, currency } = useContext(UserContext);
@@ -176,26 +188,30 @@ export default function ShiftItem2({ shift }) {
       <tr>
         <td className={editor ? classes.open_td : undefined} data-label="Start">
           {editor ? (
-            <input
-              type="text"
-              onFocus={(e) => (e.target.type = "datetime-local")}
-              onChange={(e) => setNewStart(e.target.value)}
-              className={classes.editorInput}
-              placeholder={`${shift.start}`}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker
+                className={classes.editorInput}
+                label="Date&Time picker"
+                value={newStart}
+                onChange={handleStartChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
           ) : (
             shift.start
           )}
         </td>
         <td className={editor ? classes.open_td : undefined} data-label="End">
           {editor ? (
-            <input
-              type="text"
-              onFocus={(e) => (e.target.type = "datetime-local")}
-              onChange={(e) => setNewEnd(e.target.value)}
-              className={classes.editorInput}
-              placeholder={`${shift.end}`}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker
+                className={classes.editorInput}
+                label="Date&Time picker"
+                value={newEnd}
+                onChange={handleEndChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
           ) : (
             shift.end
           )}

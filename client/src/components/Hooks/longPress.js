@@ -1,19 +1,17 @@
 import { useRef } from "react";
 
-export default function UseLongPress(
-  {
-    shiftDetails,
-    updateShiftPaused,
-    updateShiftStart,
-    play,
-    isPlay,
-    seconds,
-    currentShift,
-    createNewShiftRef,
-    createCurrentShift,
-  },
-  clockRef
-) {
+export default function UseLongPress({
+  shiftDetails,
+  updateShiftPaused,
+  updateShiftStart,
+  play,
+  isPlay,
+  seconds,
+  currentShift,
+  createNewShiftRef,
+  createCurrentShift,
+}) {
+  const clockRef = useRef();
   const timeRef = useRef();
 
   function startToggleHandler() {
@@ -67,6 +65,7 @@ export default function UseLongPress(
     if (clockRef.current.className === "clock_circlePlay__t30qY") {
       clockRef.current.id = "stoppingShift";
     }
+    console.log(clockRef);
     timeRef.current = setTimeout(() => {
       clockRef.current.id = "";
       startToggleHandler();

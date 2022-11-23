@@ -1,4 +1,5 @@
 .btnContainer {
+  display: flex;
   padding: 1em;
 }
 .btn {
@@ -44,19 +45,12 @@
 }
 .editorInput {
   width: max-content;
-  margin: 0;
-  padding: 0.5em 0;
-  border-radius: 2em;
-  cursor: pointer;
-  border: 3px solid black;
-  transition: all 400ms ease-out;
 }
-input[type="datetime-local"] {
-  border-radius: 2em;
-  border: 3px solid black;
-  box-shadow: 0 0px 10px white;
-  transition: all 400ms ease-out;
+.editorInput > div,
+.editorInput > label {
+  color: white !important;
 }
+
 .saveEditBtn {
   background: linear-gradient(120deg, #1d61b9, #1dacb9);
   width: 4em;
@@ -119,5 +113,8 @@ input[type="datetime-local"] {
   }
   .open_td {
     display: flex;
+  }
+  .editorInput {
+    margin-left: 10em;
   }
 }

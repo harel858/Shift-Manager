@@ -43,6 +43,7 @@ function AllShifts() {
     "November",
     "December",
   ]);
+
   const [shiftList, setShiftList] = useState([]);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ function AllShifts() {
       }
       return shiftsOfMonth;
     });
+
     setShiftList(shiftsOfMonth);
     return setLoadingMonth(false);
   }, [counter, months, allShiftList]);
