@@ -1,6 +1,6 @@
 import classes from "./style/clock.module.css";
 import "./style/rotateAnimation.css";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import UseLongPress from "../Hooks/longPress.js";
 import { BiPlay } from "react-icons/bi";
 import { BsPause } from "react-icons/bs";
@@ -15,6 +15,8 @@ function Clock({
   createNewShiftRef,
   checked,
 }) {
+  const clockRef = useRef();
+
   const {
     createCurrentShift,
     currentShift,
@@ -36,7 +38,7 @@ function Clock({
     createCurrentShift,
   };
 
-  const { handlers, clockRef } = UseLongPress({ ...dependency });
+  const { handlers } = UseLongPress({ ...dependency }, clockRef);
 
   return (
     <Zoom in={checked} style={{ transitionDelay: checked ? "400ms" : "0ms" }}>
