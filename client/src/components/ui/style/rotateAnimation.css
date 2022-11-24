@@ -11,6 +11,7 @@
   background: conic-gradient(transParent, #ffff) !important;
   width: 150% !important;
   height: 150% !important;
+  border-radius: 50% !important;
   position: absolute !important;
   animation: rotate 4s linear infinite !important;
 }
@@ -45,6 +46,7 @@
   background: conic-gradient(transParent, #ffff);
   width: 150%;
   height: 150%;
+  border-radius: 50% !important;
   position: absolute;
   animation: rotate 4s linear infinite;
 }
@@ -79,6 +81,7 @@
   background: conic-gradient(transParent, #ffff);
   width: 150%;
   height: 150%;
+  border-radius: 50% !important;
   position: absolute;
   animation: rotate 4s linear infinite;
 }
