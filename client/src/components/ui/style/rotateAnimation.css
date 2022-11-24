@@ -1,20 +1,20 @@
 #startShift {
-  box-shadow: inset black 0 10px 60px 40px !important;
-  box-shadow: black 0 10px 60px 40px !important;
+  box-shadow: inset black 0 10px 60px 40px;
+  box-shadow: black 0 10px 60px 40px;
   overflow: hidden !important;
-  border: 3px solid black !important;
-  border-radius: 50% !important;
-  transition: all 200ms ease-in-out !important;
+  border: 3px solid black;
+  border-radius: 50%;
+  transition: all 200ms ease-in-out;
 }
 
 #startShift::before {
-  content: "" !important;
-  background: conic-gradient(transParent, #ffff) !important;
-  width: 150% !important;
-  height: 150% !important;
-  border-radius: 50% !important;
-  position: absolute !important;
-  animation: rotate 4s linear infinite !important;
+  content: "";
+  background: conic-gradient(transParent, #ffff);
+  width: 150%;
+  height: 150%;
+  border-radius: 50%;
+  position: absolute;
+  animation: rotate 4s linear infinite;
 }
 #startShift::after {
   content: "Starting Shift...";
@@ -35,11 +35,11 @@
 }
 
 #stoppingShift {
-  box-shadow: inset black 0 10px 60px 40px !important;
-  box-shadow: black 0 10px 60px 40px !important;
-  overflow: hidden;
+  box-shadow: inset black 0 10px 60px 40px;
+  box-shadow: black 0 10px 60px 40px;
+  overflow: hidden !important;
   border: 3px solid black;
-  border-radius: 50% !important;
+  border-radius: 50%;
   transition: all 200ms ease-in-out;
 }
 
@@ -48,7 +48,7 @@
   background: conic-gradient(transParent, #ffff);
   width: 150%;
   height: 150%;
-  border-radius: 50% !important;
+  border-radius: 50%;
   position: absolute;
   animation: rotate 4s linear infinite;
 }
@@ -71,11 +71,11 @@
 }
 
 #continueShift {
-  box-shadow: inset black 0 10px 60px 40px !important;
-  box-shadow: black 0 10px 60px 20px !important;
-  overflow: hidden;
+  box-shadow: inset black 0 10px 60px 40px;
+  box-shadow: black 0 10px 60px 20px;
+  overflow: hidden !important;
   border: 3px solid black;
-  border-radius: 50% !important;
+  border-radius: 50%;
   transition: all 200ms ease-in-out;
 }
 
@@ -84,7 +84,7 @@
   background: conic-gradient(transParent, #ffff);
   width: 150%;
   height: 150%;
-  border-radius: 50% !important;
+  border-radius: 50%;
   position: absolute;
   animation: rotate 4s linear infinite;
 }
@@ -109,10 +109,12 @@
 @keyframes rotate {
   from {
     opacity: 0.8;
+    border-radius: 50%;
     transform: rotate(0deg);
   }
   to {
     opacity: 1;
+    border-radius: 50%;
     transform: rotate(360deg);
   }
 }
