@@ -113,14 +113,17 @@ function ShiftPayment({ shiftDetails, seconds, checked, setSeconds, setOpen }) {
         onClick={play === false ? saveHandler : null}
       >
         {play && (
-          <h3 className={classes.text}>
-            Current Payment: {currentPayment.current.toFixed(2)}
-            <span className={classes.currencyLabel}>{currency.label}</span>
-          </h3>
+          <h2 className={classes.text}>
+            Current Payment:
+            <span className={classes.currencyLabel}>
+              {currentPayment.current.toFixed(2)}
+              {currency.label}
+            </span>
+          </h2>
         )}
         {play === false && (
           <button className={classes.save}>
-            Save Shift {shiftDetails?.current?.totalProfit}
+            Save Shift: {shiftDetails?.current?.totalProfit}
             <span className={classes.currencyLabel}>{currency.label}</span>
           </button>
         )}

@@ -123,7 +123,7 @@
     padding: 9em;
     border: 3px solid white;
     border-radius: 50%;
-    background-color: #b91d1d;
+    background-color: linear-gradient(360deg, #003c8a, #1d66b9);
     color: white;
     cursor: pointer;
     transition: all 200ms ease-in-out !important;
