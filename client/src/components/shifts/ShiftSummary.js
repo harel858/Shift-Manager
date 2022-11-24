@@ -7,12 +7,13 @@ import UseSummary from "../Hooks/useSummary";
 export default function ShiftSummary({ checked, shiftList }) {
   const { summary, incomeTax } = UseSummary(shiftList);
   const { currency } = useContext(UserContext);
-  /*  const summaryListItems = () => {
+
+  const summaryListItems = () => {
     const items = [
       {
         liClassName: classes.summaryEarning,
         title: `Net Earning:`,
-        valueClassName: `classes.net`,
+        valueClassName: classes.net,
         value: (summary.totalProfit - incomeTax).toFixed(2),
         spanClassName: classes.currencyLabel,
         spanValue: currency.label,
@@ -20,7 +21,7 @@ export default function ShiftSummary({ checked, shiftList }) {
       {
         liClassName: classes.summaryEarning,
         title: `Gross Earning:`,
-        valueClassName: `classes.gross`,
+        valueClassName: classes.gross,
         value: summary.totalProfit,
         spanClassName: classes.currencyLabel,
         spanValue: currency.label,
@@ -45,77 +46,53 @@ export default function ShiftSummary({ checked, shiftList }) {
         liClassName: classes.tax,
         title: `Income Tax:`,
         valueClassName: ``,
-        value: -{ incomeTax },
+        value: `-${incomeTax}`,
         spanClassName: classes.currencyLabel,
         spanValue: currency.label,
       },
+      {
+        liClassName: classes.summaryContent,
+        title: `Total Time Spending:`,
+        value: summary.totalTimeSpending,
+      },
+      {
+        liClassName: classes.summaryContent,
+        title: `Amount Of Shifts:`,
+        value: summary.amountOfShifts,
+      },
     ];
 
-    return items.map((item) => {
-      const {
-        liClassName,
-        title,
-        valueClassName,
-        value,
-        spanClassName,
-        spanValue,
-      } = item;
+    return (
+      <ul className={classes.summaryContainer}>
+        {items.map((item, i) => {
+          const {
+            liClassName,
+            title,
+            valueClassName,
+            value,
+            spanClassName,
+            spanValue,
+          } = item;
 
-      <li className={liClassName}>
-        <h5>{title}</h5>
-        <h5 className={valueClassName}>{value}</h5>
-        <span className={spanClassName}>{spanValue}</span>
-      </li>;
-    });
-  }; */
+          return (
+            <li key={i} className={liClassName}>
+              <h5>{title}</h5>
+              <h5 className={valueClassName ? valueClassName : ""}>
+                {value}
+                {spanClassName && (
+                  <span className={spanClassName}>{spanValue}</span>
+                )}
+              </h5>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
 
   return (
     <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
-      <ul className={classes.summaryContainer}>
-        <li className={classes.summaryEarning}>
-          <h5>Net Earning:</h5>
-          <h5 className={classes.net}>
-            {(summary.totalProfit - incomeTax).toFixed(2)}
-            <span className={classes.currencyLabel}>{currency.label}</span>
-          </h5>
-        </li>
-        <li className={classes.summaryEarning}>
-          <h5>Gross Earning:</h5>
-          <h5 className={classes.gross}>
-            {summary.totalProfit}
-            <span className={classes.currencyLabel}>{currency.label}</span>
-          </h5>
-        </li>
-        <li className={classes.summaryEarning}>
-          <h5>125% Earning:</h5>
-          <h5>
-            {summary.firstOvertime}
-            <span className={classes.currencyLabel}>{currency.label}</span>
-          </h5>
-        </li>
-        <li className={classes.summaryEarning}>
-          <h5>150% Earning:</h5>
-          <h5>
-            {summary.overtimeEarn}
-            <span className={classes.currencyLabel}>{currency.label}</span>
-          </h5>
-        </li>
-        <li className={classes.tax}>
-          <h5>Income Tax:</h5>
-          <h5>
-            -{incomeTax}
-            <span className={classes.currencyLabel}>{currency.label}</span>
-          </h5>
-        </li>
-        <li className={classes.summaryContent}>
-          <h5>Total Work Time:</h5>
-          <h5>{summary.totalTimeSpending}</h5>
-        </li>
-        <li className={classes.summaryContent}>
-          <h5> Amount Of Shifts:</h5>
-          <h5>{summary.amountOfShifts}</h5>
-        </li>
-      </ul>
+      {summaryListItems()}
     </Slide>
   );
 }
