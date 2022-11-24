@@ -82,8 +82,8 @@
 #continueShift::before {
   content: "";
   background: conic-gradient(transParent, #ffff);
-  width: 150%;
-  height: 150%;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   position: absolute;
   animation: rotate 4s linear infinite;
@@ -109,12 +109,12 @@
 @keyframes rotate {
   from {
     opacity: 0.8;
-    border-radius: 50%;
+    border-radius: 50% !important;
     transform: rotate(0deg);
   }
   to {
     opacity: 1;
-    border-radius: 50%;
+    border-radius: 50% !important;
     transform: rotate(360deg);
   }
 }
