@@ -7,6 +7,67 @@ import UseSummary from "../Hooks/useSummary";
 export default function ShiftSummary({ checked, shiftList }) {
   const { summary, incomeTax } = UseSummary(shiftList);
   const { currency } = useContext(UserContext);
+  const summaryListItems = () => {
+    const items = [
+      {
+        liClassName: classes.summaryEarning,
+        title: `Net Earning:`,
+        valueClassName: `classes.net`,
+        value: (summary.totalProfit - incomeTax).toFixed(2),
+        spanClassName: classes.currencyLabel,
+        spanValue: currency.label,
+      },
+      {
+        liClassName: classes.summaryEarning,
+        title: `Gross Earning:`,
+        valueClassName: `classes.gross`,
+        value: summary.totalProfit,
+        spanClassName: classes.currencyLabel,
+        spanValue: currency.label,
+      },
+      {
+        liClassName: classes.summaryEarning,
+        title: `125% Earning:`,
+        valueClassName: ``,
+        value: summary.firstOvertime,
+        spanClassName: classes.currencyLabel,
+        spanValue: currency.label,
+      },
+      {
+        liClassName: classes.summaryEarning,
+        title: `150% Earning:`,
+        valueClassName: ``,
+        value: summary.overtimeEarn,
+        spanClassName: classes.currencyLabel,
+        spanValue: currency.label,
+      },
+      {
+        liClassName: classes.tax,
+        title: `Income Tax:`,
+        valueClassName: ``,
+        value: -{ incomeTax },
+        spanClassName: classes.currencyLabel,
+        spanValue: currency.label,
+      },
+    ];
+
+    return items.map((item) => {
+      const {
+        liClassName,
+        title,
+        valueClassName,
+        value,
+        spanClassName,
+        spanValue,
+      } = item;
+
+      <li className={liClassName}>
+        <h5>{title}</h5>
+        <h5 className={valueClassName}>{value}</h5>
+        <span className={spanClassName}>{spanValue}</span>
+      </li>;
+    });
+  };
 
   return (
     <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
