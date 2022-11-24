@@ -40,7 +40,7 @@
   width: 16rem;
   border: 3px solid white;
   border-radius: 50%;
-  background-color: #b91d1d;
+  background: linear-gradient(100deg, rgb(255, 0, 0), #841c1c);
   color: white;
   cursor: pointer;
   transition: all 200ms ease-in-out !important;
