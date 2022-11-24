@@ -34,6 +34,7 @@ export default function UseLongPress({
         shiftDetails.current.startAgain + Math.floor(nowInSeconds / 1000);
       updateShiftStart(shiftDetails.current);
     }
+
     setIsPressed(false);
 
     return isPlay((prev) => !prev);
