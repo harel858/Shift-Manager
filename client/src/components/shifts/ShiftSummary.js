@@ -7,7 +7,7 @@ import UseSummary from "../Hooks/useSummary";
 export default function ShiftSummary({ checked, shiftList }) {
   const { summary, incomeTax } = UseSummary(shiftList);
   const { currency } = useContext(UserContext);
-  const summaryListItems = () => {
+  /*  const summaryListItems = () => {
     const items = [
       {
         liClassName: classes.summaryEarning,
@@ -67,7 +67,7 @@ export default function ShiftSummary({ checked, shiftList }) {
         <span className={spanClassName}>{spanValue}</span>
       </li>;
     });
-  };
+  }; */
 
   return (
     <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
