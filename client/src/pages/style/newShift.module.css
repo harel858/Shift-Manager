@@ -15,7 +15,7 @@
   justify-content: flex-start;
   flex-direction: column;
   position: relative;
-  top: 1rem;
+  top: 0.9rem;
 }
 .clockSection header {
   display: flex;
