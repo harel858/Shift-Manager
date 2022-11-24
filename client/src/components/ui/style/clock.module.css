@@ -60,6 +60,7 @@
   cursor: pointer;
   transition: all 200ms ease-in-out !important;
 }
+
 .circlePlay:hover .pause {
   transform: scale(1.5);
 }

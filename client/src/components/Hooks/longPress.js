@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function UseLongPress({
   shiftDetails,
@@ -11,11 +11,10 @@ export default function UseLongPress({
   createNewShiftRef,
   createCurrentShift,
 }) {
-  const clockRef = useRef();
+  const [isPressed, setIsPressed] = useState(false);
   const timeRef = useRef();
 
   function startToggleHandler() {
-    clockRef.current.id = "";
     if (!play && seconds <= 0 && !currentShift) {
       createNewShiftRef();
       createCurrentShift(shiftDetails.current);
@@ -35,39 +34,29 @@ export default function UseLongPress({
         shiftDetails.current.startAgain + Math.floor(nowInSeconds / 1000);
       updateShiftStart(shiftDetails.current);
     }
+    setIsPressed(false);
 
     return isPlay((prev) => !prev);
   }
 
   const onMouseUp = () => {
     clearTimeout(timeRef.current);
-    clockRef.current.id = "";
+    setIsPressed(false);
   };
   const onMouseDown = () => {
     startPressTimer();
-    console.log(clockRef.current.id);
   };
   const onTouchStart = () => {
     startPressTimer();
   };
   const onTouchEnd = () => {
     clearTimeout(timeRef.current);
-    clockRef.current.id = "";
+    setIsPressed(false);
   };
 
   function startPressTimer() {
-    if (clockRef.current.className === "clock_circleContinue__+FTJ4") {
-      clockRef.current.id = "continueShift";
-    }
-    if (clockRef.current.className === "clock_circle__dIn9H") {
-      clockRef.current.id = "startShift";
-    }
-    if (clockRef.current.className === "clock_circlePlay__t30qY") {
-      clockRef.current.id = "stoppingShift";
-    }
-    console.log(clockRef);
+    setIsPressed(true);
     timeRef.current = setTimeout(() => {
-      clockRef.current.id = "";
       startToggleHandler();
     }, 4000);
   }
@@ -79,6 +68,6 @@ export default function UseLongPress({
       onTouchStart,
       onTouchEnd,
     },
-    clockRef,
+    isPressed,
   };
 }

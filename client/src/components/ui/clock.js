@@ -36,13 +36,31 @@ function Clock({
     createCurrentShift,
   };
 
-  const { handlers, clockRef } = UseLongPress({ ...dependency });
+  const { handlers, isPressed } = UseLongPress({
+    ...dependency,
+  });
+  console.log(play);
+
+  const setClockId = () => {
+    let id;
+    if (play && isPressed) {
+      id = "stoppingShift";
+    }
+    if (play === false && isPressed) {
+      id = "continueShift";
+    }
+    if (play === null && isPressed) {
+      id = "startShift";
+    }
+    return id;
+  };
+  const clockId = setClockId();
 
   return (
     <Zoom in={checked} style={{ transitionDelay: checked ? "400ms" : "0ms" }}>
       <div
         {...handlers}
-        ref={clockRef}
+        id={clockId}
         className={
           play
             ? classes.circlePlay
