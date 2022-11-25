@@ -101,6 +101,14 @@
 }
 
 @media screen and (max-width: 600px) {
+  .startEnd {
+    padding: 1em;
+    font-size: 1em;
+    font-weight: 400;
+  }
+  .startEnd::before {
+    font-weight: 600 !important;
+  }
   .btnContainer {
     display: block;
   }

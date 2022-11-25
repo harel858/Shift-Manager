@@ -186,7 +186,10 @@ export default function ShiftItem2({ shift }) {
   return (
     <>
       <tr>
-        <td className={editor ? classes.open_td : undefined} data-label="Start">
+        <td
+          className={editor ? classes.open_td : classes.startEnd}
+          data-label="Start:"
+        >
           {editor ? (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
@@ -201,7 +204,10 @@ export default function ShiftItem2({ shift }) {
             shift.start
           )}
         </td>
-        <td className={editor ? classes.open_td : undefined} data-label="End">
+        <td
+          className={editor ? classes.open_td : classes.startEnd}
+          data-label="End:"
+        >
           {editor ? (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
@@ -216,16 +222,16 @@ export default function ShiftItem2({ shift }) {
             shift.end
           )}
         </td>
-        <td data-label="Time Spend">
+        <td data-label="Time Spend:">
           <p>{`${shift.timeSpend}`}</p>
         </td>
-        <td data-label="Total Earning">
+        <td data-label="Total Earning:">
           <p className={classes.money}>
             {shift.totalProfit}
             <span className={classes.currencyLabel}>{currency.label}</span>
           </p>
         </td>
-        <td data-label="Action" className={classes.btnContainer}>
+        <td data-label="Actions:" className={classes.btnContainer}>
           {editor ? (
             <button onClick={saveChanges} className={classes.saveEditBtn}>
               save
