@@ -48,11 +48,11 @@
 .text {
   font-size: 1.5em;
   text-align: center;
-  font-weight: 00;
+  font-weight: 400;
   padding: 0.5em;
 }
 .currencyLabel {
   font-size: 1.1em;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-weight: 600;
+  font-weight: 550;
 }

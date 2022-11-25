@@ -56,7 +56,7 @@
   width: 12rem;
   border: 3px solid black;
   border-radius: 50%;
-  background: linear-gradient(120deg, #ff8c00, #d5ff18);
+  background: linear-gradient(100deg, #fffc36, #fffb00);
   cursor: pointer;
   transition: all 200ms ease-in-out !important;
 }
