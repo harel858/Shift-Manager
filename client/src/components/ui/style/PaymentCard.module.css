@@ -3,7 +3,11 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(133, 187, 101, 0.8);
+  background: linear-gradient(
+    120deg,
+    rgb(29, 97, 185, 0.8),
+    rgb(29, 172, 185, 0.8)
+  );
   padding: 2em 4em;
   margin: 1em;
   border: 3px solid black;
@@ -15,7 +19,11 @@
 .card3:hover {
   transform: scale(1.1) !important;
   box-shadow: 0 10px 50px 10px black;
-  background-color: rgb(133, 187, 101, 1);
+  background: linear-gradient(
+    120deg,
+    rgb(29, 97, 185, 0.8),
+    rgb(29, 172, 185, 0.8)
+  );
 }
 .card3:hover h2,
 .card3:hover h3,
@@ -35,7 +43,11 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(133, 187, 101, 1);
+  background: linear-gradient(
+    120deg,
+    rgb(29, 97, 185, 0.8),
+    rgb(29, 172, 185, 0.8)
+  );
   padding: 2em 6em;
   margin: 1em;
   border: 3px solid black;
@@ -108,7 +120,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(133, 187, 101, 1);
+    background-color: linear-gradient(
+      120deg,
+      rgb(29, 97, 185, 0.8),
+      rgb(29, 172, 185, 0.8)
+    );
     padding: 2em 6em;
     margin: 1em;
     border: 3px solid black;
