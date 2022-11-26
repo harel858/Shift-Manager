@@ -5,7 +5,6 @@ import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
 import UserContext from "../context/userContext.js";
-import CurrentShiftContext from "../context/currentShiftCtx.js";
 
 export default function Register() {
   const [userName, setUserName] = useState("");
@@ -17,7 +16,6 @@ export default function Register() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  /*  const { setCurrentShift } = useContext(CurrentShiftContext); */
   const { currency, payment, setLoginError, setUser, overTime } =
     useContext(UserContext);
 
@@ -50,7 +48,7 @@ export default function Register() {
         const user = await res.json();
         setError(null);
         setLoginError(null);
-        /*   setCurrentShift(null); */
+
         setUser({ ...user });
         navigate("/settings", { replace: true });
       } else {
