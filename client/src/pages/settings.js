@@ -55,17 +55,18 @@ function Settings() {
         <h1>Edit Your Settings</h1>
       </header>
       <div className={classes.btnContainer}>
-        <OvertimeCard
+        <PaymentCard
           checked={checked}
-          overTime={overTime}
-          cardRef={card1Ref}
+          cardRef={card3Ref}
+          card1Ref={card1Ref}
           card2Ref={card2Ref}
-          card3Ref={card3Ref}
-          card1Open={card1Open}
           setCard1Open={setCard1Open}
           setCard2Open={setCard2Open}
           setCard3Open={setCard3Open}
-          updateOvertime={updateOvertime}
+          card3Open={card3Open}
+          payment={payment}
+          currency={currency}
+          updatePayment={updatePayment}
         />
 
         <CurrencyCard
@@ -81,19 +82,17 @@ function Settings() {
           updateCurrency={updateCurrency}
           currencies={currencies}
         />
-
-        <PaymentCard
+        <OvertimeCard
           checked={checked}
-          cardRef={card3Ref}
-          card1Ref={card1Ref}
+          overTime={overTime}
+          cardRef={card1Ref}
           card2Ref={card2Ref}
+          card3Ref={card3Ref}
+          card1Open={card1Open}
           setCard1Open={setCard1Open}
           setCard2Open={setCard2Open}
           setCard3Open={setCard3Open}
-          card3Open={card3Open}
-          payment={payment}
-          currency={currency}
-          updatePayment={updatePayment}
+          updateOvertime={updateOvertime}
         />
       </div>
     </>
