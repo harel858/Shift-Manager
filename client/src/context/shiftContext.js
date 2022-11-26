@@ -41,7 +41,7 @@ export function ShiftContextProvider(props) {
         });
         if (res.ok) {
           const shifts = await res.json();
-          allShifts.push(...shifts);
+          return allShifts.push(...shifts);
         } else {
           const resError = await res.json();
           setLoginError(resError);

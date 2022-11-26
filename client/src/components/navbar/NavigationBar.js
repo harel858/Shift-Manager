@@ -1,9 +1,10 @@
 import classes from "./style/navigation.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiClock } from "react-icons/fi";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Squash as Hamburger } from "hamburger-react";
+import CurrentShiftContext from "../../context/currentShiftCtx";
 
 export default function NavigationBar() {
   const navigate = useNavigate();

@@ -26,6 +26,7 @@ export function CurrentShiftContextProvider(props) {
   const [loadingShift, setLoadingShift] = useState(false);
   const [shiftError, setShiftError] = useState("");
   const [play, isPlay] = useState(null);
+  console.count("chiftctx");
 
   useEffect(() => {
     setLoadingShift(true);
@@ -43,7 +44,7 @@ export function CurrentShiftContextProvider(props) {
           const [shift] = await res.json();
 
           setCurrentShift(shift);
-          isPlay(shift.isRunning);
+          return isPlay(shift.isRunning);
         } else {
           const resError = await res.json();
           console.log(resError);
