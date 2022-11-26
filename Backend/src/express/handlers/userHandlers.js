@@ -27,20 +27,6 @@ async function overtimeUpdateHandler(req, res) {
     console.log(err);
   }
 }
-//workPlace update
-async function updateWorkPlaces(req, res) {
-  try {
-    const { workPlaces } = req.body;
-    const { userId } = req;
-    const response = await operations.updateWorkPlaces(userId, workPlaces);
-    if (!response || response.acknowledged == false) {
-      return res.status(500).json(`someThing went wrong`);
-    }
-    return res.status(204).json(workPlaces);
-  } catch (err) {
-    console.log(err);
-  }
-}
 // update User Currency
 async function updateCurrencyHandler(req, res) {
   try {
@@ -55,16 +41,8 @@ async function updateCurrencyHandler(req, res) {
 
 //register Handler
 async function registerHandler(req, res) {
-  const {
-    name,
-    lastName,
-    workPlace,
-    email,
-    phone,
-    currency,
-    payment,
-    overTime,
-  } = req.body;
+  const { name, lastName, email, phone, currency, payment, overTime } =
+    req.body;
 
   const { password } = req;
 
@@ -83,7 +61,6 @@ async function registerHandler(req, res) {
     password,
     currency,
     payment,
-    workPlace,
     overTime,
   });
 
@@ -95,11 +72,9 @@ async function registerHandler(req, res) {
   if (
     !name ||
     !lastName ||
-    !workPlace ||
     !email ||
     !phone ||
     !password ||
-    !workPlace ||
     !currency ||
     !payment
   ) {
@@ -110,7 +85,6 @@ async function registerHandler(req, res) {
     const newUser = await operations.addUser({
       name,
       lastName,
-      workPlaces: [workPlace],
       email,
       phone,
       currency,
@@ -246,6 +220,5 @@ module.exports = {
   updateUserPayment,
   updateCurrencyHandler,
   overtimeUpdateHandler,
-  updateWorkPlaces,
   logOut,
 };

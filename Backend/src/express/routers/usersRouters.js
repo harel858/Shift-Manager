@@ -18,11 +18,7 @@ router.put(
   authenticateUser,
   userHandlers.overtimeUpdateHandler
 );
-router.put(
-  "/update-workplaces",
-  authenticateUser,
-  userHandlers.updateWorkPlaces
-);
+
 router.route("/logout").post(userHandlers.logOut);
 router.delete("/delete", authenticateUser, userHandlers.deleteUserHandler);
 router.route("/login").post(userHandlers.signIn);

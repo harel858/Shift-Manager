@@ -69,7 +69,6 @@ export function ShiftContextProvider(props) {
           },
 
           body: JSON.stringify({
-            workPlace: shift.workPlace,
             start: shift.start,
             end: shift.end,
             date: shift.date,
@@ -123,7 +122,6 @@ export function ShiftContextProvider(props) {
   const updateShiftHandler = async (
     index,
     _id,
-    workPlace,
     start,
     end,
     timeSpend,

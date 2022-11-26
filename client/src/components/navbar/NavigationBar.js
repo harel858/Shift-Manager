@@ -51,7 +51,7 @@ export default function NavigationBar() {
         className={!isOpen ? classes.brand : classes.brandActive}
         to="/newShift"
       >
-        Shift Manager <FiClock />
+        Your Shift <FiClock />
       </Link>
       <ul className={!isOpen ? classes.ul : classes.ulActive}>
         <li>

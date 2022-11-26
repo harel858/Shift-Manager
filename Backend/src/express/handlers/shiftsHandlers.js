@@ -20,7 +20,6 @@ async function getUserShifts(req, res) {
 async function createShift(req, res) {
   const { userId } = req;
   const {
-    workPlace,
     start,
     end,
     date,
@@ -32,7 +31,6 @@ async function createShift(req, res) {
     overTime,
   } = req.body;
   const newShift = await shiftsOperations.createShift({
-    workPlace,
     start,
     end,
     date,
@@ -66,7 +64,6 @@ async function updateShift(req, res) {
   const { userId } = req;
   const {
     _id,
-    workPlace,
     start,
     end,
     date,
@@ -84,7 +81,6 @@ async function updateShift(req, res) {
 
   let updatedShift = await shiftsOperations.updateShift(
     _id,
-    workPlace,
     start,
     end,
     date,

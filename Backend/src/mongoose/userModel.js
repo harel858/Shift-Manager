@@ -8,7 +8,6 @@ const schema = new mongoose.Schema({
   payment: String,
   overTime: Boolean,
   phone: String,
-  workPlaces: [{ type: String }],
   password: { type: String, require: true },
   isManager: Boolean,
 });

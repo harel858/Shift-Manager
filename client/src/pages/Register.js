@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import classes from "./style/register.module.css";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-import { TextField, Select, InputLabel } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
+import { TextField } from "@mui/material";
 import UserContext from "../context/userContext.js";
 
 export default function Register() {
@@ -12,22 +11,12 @@ export default function Register() {
   const [userLastName, setUserLastName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
-  const [workPlace, setWorkPlace] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const {
-    currency,
-    setCurrency,
-    payment,
-    setPayment,
-    setLoginError,
-    setUser,
-    currencies,
-    overTime,
-    setOvertime,
-  } = useContext(UserContext);
+  const { currency, payment, setLoginError, setUser, overTime } =
+    useContext(UserContext);
 
   async function registerHandler(e) {
     e.preventDefault();
@@ -42,7 +31,6 @@ export default function Register() {
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            workPlace,
             name: userName,
             lastName: userLastName,
             email: userEmail.toLocaleLowerCase(),
@@ -59,8 +47,9 @@ export default function Register() {
         const user = await res.json();
         setError(null);
         setLoginError(null);
+        console.log(user);
         setUser({ ...user });
-        navigate("/newShift", { replace: true });
+        navigate("/settings", { replace: true });
       } else {
         const response = await res.json();
         console.log(response);
@@ -68,32 +57,6 @@ export default function Register() {
       }
     } catch (err) {
       throw err;
-    }
-  }
-
-  const handleChange = (event) => {
-    const newCurrency = event.target.value;
-
-    setCurrency(newCurrency);
-  };
-
-  function savePaymentHandler(e) {
-    const value = e.target.value;
-
-    if (isNaN(+value) || +value <= 0) {
-      return setError("Payment must be a valid number");
-    }
-    if (!isNaN(+value)) {
-      setError("");
-      setPayment(+value);
-    }
-  }
-  function handleOverTime(e) {
-    if (e.target.value === "Calculated") {
-      return setOvertime(true);
-    }
-    if (e.target.value === "Not Calculated") {
-      return setOvertime(false);
     }
   }
 
@@ -143,58 +106,6 @@ export default function Register() {
             setUserPhone(e.target.value);
           }}
         />
-        <TextField
-          id="workPlace"
-          label="Enter your work place name"
-          required
-          variant="filled"
-          onChange={(e) => {
-            setWorkPlace(e.target.value);
-          }}
-          className={classes.inputContainer}
-        />
-        <TextField
-          id="payment"
-          label={`${payment}${currency.label} Per Hour`}
-          required
-          variant="filled"
-          onChange={savePaymentHandler}
-          className={classes.inputContainer}
-        />
-
-        <div className={classes.selectInputContainer}>
-          <InputLabel id="demo-simple-select-label">
-            OverTime Calculate
-          </InputLabel>
-          <Select
-            className={classes.selectInput}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={overTime ? "Calculated" : "Not Calculated"}
-            label="overTime Calculate"
-            onChange={handleOverTime}
-          >
-            <MenuItem value={"Calculated"}>Calculated</MenuItem>
-            <MenuItem value={"Not Calculated"}>Not Calculated</MenuItem>
-          </Select>
-        </div>
-        <div className={classes.selectInputContainer}>
-          <InputLabel id="outlined-select-currency">Select Currency</InputLabel>
-          <TextField
-            className={classes.inputContainer}
-            id="outlined-select-currency"
-            select
-            value={currency}
-            onChange={handleChange}
-            helperText="Please select your currency"
-          >
-            {currencies.map((option) => (
-              <MenuItem key={option.value} value={option}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
 
         <TextField
           className={classes.inputContainer}

@@ -52,7 +52,7 @@ function Settings() {
   return (
     <>
       <header className={classes.headerSettings}>
-        <h1>Edit Settings</h1>
+        <h1>Edit Your Settings</h1>
       </header>
       <div className={classes.btnContainer}>
         <OvertimeCard

@@ -36,7 +36,6 @@ async function createShift(shiftDetails) {
 //update shift
 async function updateShift(
   _id,
-  workPlace,
   start,
   end,
   date,
@@ -52,7 +51,6 @@ async function updateShift(
       { _id: _id },
       {
         $set: {
-          workPlace: workPlace,
           start: start,
           end: end,
           date: date,

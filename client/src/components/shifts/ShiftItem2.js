@@ -169,7 +169,6 @@ export default function ShiftItem2({ shift }) {
     updateShift(
       shift.index,
       shift._id,
-      shift.workPlace,
       newShift.start,
       newShift.end,
       newShift.timeSpend,

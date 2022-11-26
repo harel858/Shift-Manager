@@ -26,7 +26,7 @@ export function UserContextProvider(props) {
     value: "USD",
     label: "$",
   });
-  const [overTime, setOvertime] = useState();
+  const [overTime, setOvertime] = useState(true);
   const [currencies] = useState([
     {
       value: "USD",

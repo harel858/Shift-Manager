@@ -8,7 +8,6 @@ const schema = joi.object({
   currency: joi.object().required(),
   payment: joi.required(),
   overTime: joi.boolean(),
-  workPlace: joi.string().required(),
   password: joi.string().required(),
 });
 
