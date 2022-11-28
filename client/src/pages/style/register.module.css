@@ -26,13 +26,13 @@
   grid-template-rows: 5em 5em 5em;
   gap: 1em;
 }
-h1::after {
+.main h1::after {
   content: "";
   display: block;
   position: absolute;
   background: linear-gradient(120deg, #1d61b9, #1dacb9);
   height: 0.1em;
-  width: 5em;
+  width: 5em !important;
   margin-top: 5px;
   transform: scale(0);
   transform-origin: left;

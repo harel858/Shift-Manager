@@ -32,7 +32,7 @@ form h1::after {
   position: absolute;
   background: linear-gradient(120deg, #1d61b9, #1dacb9);
   height: 0.1em;
-  width: 7em;
+  width: 6em !important;
   margin-top: 5px;
   transform: scale(0);
   transform-origin: left;
