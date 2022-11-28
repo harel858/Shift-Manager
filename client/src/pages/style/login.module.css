@@ -23,7 +23,7 @@ form h1 {
   font-size: 3em;
   margin-bottom: 1em;
   color: white;
-  font-family: "Abril Fatface", cursive;
+  font-family: "Montserrat", sans-serif;
   width: max-content;
 }
 form h1::after {

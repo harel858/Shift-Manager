@@ -15,7 +15,7 @@
 .main h1 {
   font-size: 3em;
   margin: 1em 0;
-  font-family: "Abril Fatface", cursive;
+  font-family: "Montserrat", sans-serif;
   color: white;
 }
 .form {
@@ -31,7 +31,7 @@ h1::after {
   position: absolute;
   background: linear-gradient(120deg, #1d61b9, #1dacb9);
   height: 0.1em;
-  width: 6em;
+  width: 5em;
   margin-top: 5px;
   transform: scale(0);
   transform-origin: left;
