@@ -1,10 +1,10 @@
 const joi = require("joi");
 
 const schema = joi.object({
-  name: joi.string().max(20).required(),
-  lastName: joi.string().max(20).required(),
+  name: joi.string().min(2).max(20).required(),
+  lastName: joi.string().min(2).max(20).required(),
   email: joi.string().email().required(),
-  phone: joi.string().required(),
+  phone: joi.string().min(6).max(14).required(),
   currency: joi.object().required(),
   payment: joi.required(),
   overTime: joi.boolean(),
