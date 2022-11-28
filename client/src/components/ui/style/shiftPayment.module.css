@@ -38,7 +38,6 @@
 .containerPlay {
   margin-top: 1rem;
   width: 20rem;
-  z-index: 9;
   background: #1db954;
   color: black !important;
   border-radius: 2em;
