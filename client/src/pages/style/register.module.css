@@ -81,7 +81,7 @@ input {
 }
 input[value] {
   color: white;
-  font-size: larger;
+  font-size: 1.7em;
 }
 
 .main:hover h1::after {
