@@ -23,7 +23,7 @@ form h1 {
   font-size: 3em;
   margin-bottom: 1em;
   color: white;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Times New Roman", Times, serif;
   width: max-content;
 }
 form h1::after {
