@@ -49,7 +49,7 @@ export default function Register() {
   return (
     <div className={classes.main}>
       <form className={classes.loginForm}>
-        <h1>login user</h1>
+        <h1>Shift Manager</h1>
         <TextField
           className={classes.inputContainer}
           id="email"
