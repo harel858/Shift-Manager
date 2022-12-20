@@ -6,7 +6,7 @@ const app = express();
 const userRouter = require("./routers/usersRouters");
 const shiftRouter = require("./routers/shiftRouters");
 const currentShiftRouter = require("./routers/currentShiftRouter.js");
-console.log(`${process.env.CLIENT}`);
+
 app.use(
   cors({
     credentials: true,

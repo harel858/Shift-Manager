@@ -39,7 +39,6 @@ function Clock({
   const { handlers, isPressed } = UseLongPress({
     ...dependency,
   });
-  console.log(play);
 
   const setClockId = () => {
     let id;

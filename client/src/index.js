@@ -8,8 +8,7 @@ import { CurrentShiftContextProvider } from "./context/currentShiftCtx";
 import { UserContextProvider } from "./context/userContext.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-console.log(process.env.REACT_APP_API_KEY);
-console.log(process.env);
+
 root.render(
   <UserContextProvider>
     <CurrentShiftContextProvider>

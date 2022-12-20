@@ -58,8 +58,6 @@ async function updatePausedSeconds(
 }
 //update shift startSeconds
 async function updateStartSeconds(_id, startAgain) {
-  console.log(typeof startAgain);
-
   try {
     let update = await currentShiftModel.findOneAndUpdate(
       { _id: _id },

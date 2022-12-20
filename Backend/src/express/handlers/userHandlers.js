@@ -93,7 +93,7 @@ async function registerHandler(req, res) {
       password,
       isManager: false,
     });
-    console.log(newUser);
+
     const token = jwt.sign(
       { userId: newUser._id },
       `${process.env.SECRET_KEY}`

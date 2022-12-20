@@ -53,7 +53,7 @@ async function createShift(req, res) {
   if (!newShift) {
     return res.status(500).json(`something went wrong`);
   }
-  console.log(newShift);
+
   res.status(201).json(newShift);
 }
 
@@ -73,7 +73,7 @@ async function updatePausedSeconds(req, res) {
 
   if (!userShift || userShift.length <= 0)
     return res.status(500).send(`shift has not found`);
-  console.log(userShift);
+
   const { _id } = userShift;
   let updatedShift = await operations.updatePausedSeconds(
     _id,
@@ -86,7 +86,6 @@ async function updatePausedSeconds(req, res) {
     overTimePay
   );
 
-  console.log(updatedShift);
   if (!updatedShift || updatedShift.acknowledged == false) {
     return res.status(500).json(`someThing went wrong`);
   }
@@ -99,15 +98,14 @@ async function updateStartSeconds(req, res) {
   const { userId } = req;
   const { startAgain } = req.body;
   const [userShift] = await operations.getUserCurrentShift(userId);
-  console.log(startAgain);
+
   if (!userShift || userShift.length <= 0)
     return res.status(500).send(`shift has not found`);
 
-  console.log(`userShift:${userShift}`);
   const { _id } = userShift;
-  console.log(`_id:${_id}`);
+
   let updatedShift = await operations.updateStartSeconds(_id, startAgain);
-  console.log(`updatedShift:${updatedShift}`);
+
   if (!updatedShift || updatedShift.acknowledged == false) {
     return res.status(500).json(`someThing went wrong`);
   }
